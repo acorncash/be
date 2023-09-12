@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +36,7 @@ public class UserService {
                 User user = new User();
 
                 user.setName(joinRequest.getName());
-                user.setPoint(0);
+                user.setDotoli(0);
                 user.setCreateDate(new Date());
                 user.setUpdateDate(new Date());
                 user.setDelYN("N");
