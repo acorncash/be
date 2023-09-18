@@ -24,7 +24,7 @@ public class UserController {
         List<User> users = userService.getAll();
         model.addAttribute("users", users);
 
-        return "member/memberList";
+        return "users/ground";
     }
 
     @GetMapping("new")

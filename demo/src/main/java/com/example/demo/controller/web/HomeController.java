@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("")
-    public String memberList() {
-        return "/member/memberList";
+    public String home() {
+        return "home";
     }
 }
