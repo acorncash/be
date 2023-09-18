@@ -1,12 +1,11 @@
 package com.example.demo.service;
 
-import com.example.demo.domain.Member;
-import com.example.demo.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.example.demo.domain.Member;
+import com.example.demo.repository.MemoryMemberRepository;
 
 class MemberServiceTest {
 

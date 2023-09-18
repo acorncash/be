@@ -1,21 +1,28 @@
-package com.example.demo.controller;
+package com.example.demo.controller.api;
 
-import com.example.demo.DTO.DTO;
-import com.example.demo.Entity.User;
-import com.example.demo.service.UserService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.util.StringUtils;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.thymeleaf.util.StringUtils;
+
+import com.example.demo.DTO.DTO;
+import com.example.demo.model.entity.User;
+import com.example.demo.model.form.UserFormRequest;
+import com.example.demo.service.UserService;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/api/user")
+public class UserApiController {
     private final UserService userService;
 
     @GetMapping("")
@@ -23,7 +30,7 @@ public class UserController {
         return userService.getAll();
     }
 
-    @GetMapping("/login/{socialKey}/{userMail}")
+    @GetMapping("login/{socialKey}/{userMail}")
     public Optional<User> login(@PathVariable String socialKey, @PathVariable String userMail) {
         System.out.println(socialKey + userMail);
         if(StringUtils.isEmpty(socialKey) || StringUtils.isEmpty(userMail)){
@@ -33,8 +40,8 @@ public class UserController {
         return userService.getUserBySocialKeyAndUserMail(socialKey, userMail);
     }
 
-    @PostMapping("/join")
-    public DTO.JoinResponse Join(@Valid @RequestBody final DTO.JoinRequest joinRequest) {
+    @PostMapping("join")
+    public DTO.JoinResponse Join(@Valid UserFormRequest joinRequest) {
         System.out.println(joinRequest.getName());
         return userService.Join(joinRequest);
     }

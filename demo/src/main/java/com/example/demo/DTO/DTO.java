@@ -1,15 +1,12 @@
 package com.example.demo.DTO;
 
-import com.example.demo.Entity.User;
+import com.example.demo.model.entity.User;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 public class DTO {
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter @Setter
-    @Builder
-    @ToString
+    @Data
     public static class JoinRequest {
         @NotNull
         private String name;

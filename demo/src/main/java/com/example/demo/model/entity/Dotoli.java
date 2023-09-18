@@ -1,6 +1,9 @@
-package com.example.demo.Entity;
+package com.example.demo.model.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,8 +17,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "withdraw")
-public class  Withdraw {
+@Entity(name = "dotoli")
+public class Dotoli {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,19 +28,21 @@ public class  Withdraw {
     private Integer userSeq;
 
     @NotNull
-    private Integer dotoli;
+    private Integer missionSeq;
 
     @NotNull
-    private Integer bankAccountNumber;
+    private String missionTitle;
 
     @NotNull
-    private String bankAccountName;
+    private Integer missionDotoli;
+
+    @NotNull
+    private Integer userDotoli;
+
+    @NotNull
+    private Integer afterDotoli;
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
-
-    @NotNull
-    @Column(length = 1)
-    private String withdrawYN;
 }
