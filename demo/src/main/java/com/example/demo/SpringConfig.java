@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 import com.example.demo.repository.JdbcMemberRepository;
 import com.example.demo.repository.MemberRepository;
@@ -30,5 +31,10 @@ public class SpringConfig {
         return new JdbcMemberRepository(dataSource);
     }
 
+    @Bean
+    public HiddenHttpMethodFilter httpMethodFilter() {
+        HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
+        return hiddenHttpMethodFilter;
+    }
 
 }

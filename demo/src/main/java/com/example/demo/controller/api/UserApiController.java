@@ -3,10 +3,11 @@ package com.example.demo.controller.api;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.util.StringUtils;
@@ -41,8 +42,18 @@ public class UserApiController {
     }
 
     @PostMapping("join")
-    public DTO.JoinResponse Join(@Valid UserFormRequest joinRequest) {
-        System.out.println(joinRequest.getName());
-        return userService.Join(joinRequest);
+    public DTO.JoinResponse Join(@Valid UserFormRequest formRequest) {
+        System.out.println(formRequest.getName());
+        return userService.Join(formRequest);
+    }
+
+    @PutMapping("{id}")
+    public void update(@PathVariable Long id, @Valid UserFormRequest formRequest) {
+        userService.update(id, formRequest);
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id) {
+        userService.deleteById(id);
     }
 }

@@ -12,6 +12,7 @@ import com.example.demo.model.entity.User.UserBuilder;
 import com.example.demo.model.form.UserFormRequest;
 import com.example.demo.repository.UserInterface;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -23,24 +24,28 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
+    }
+
     public Optional<User> getUserBySocialKeyAndUserMail(String socialKey, String userMail){
         return userRepository.findBySocialKeyAndUserMail(socialKey, userMail);
     }
 
-    public DTO.JoinResponse Join(UserFormRequest request) {
+    public DTO.JoinResponse Join(UserFormRequest form) {
         DTO.JoinResponse joinResponse = new DTO.JoinResponse();
         try{
-            List<User> duplicateUserName = userRepository.findByName(request.getName());
+            List<User> duplicateUserName = userRepository.findByName(form.getName());
 
             System.out.println(duplicateUserName);
 
             if (duplicateUserName.isEmpty()) {
                 UserBuilder builder = User.builder();
 
-                User user = builder.name(request.getName())
-                                .nickname(request.getNickName())
-                                .phoneNumber(request.getPhoneNumber())
-                                .userMail(request.getEmail())
+                User user = builder.name(form.getName())
+                                .nickname(form.getNickname())
+                                .phoneNumber(form.getPhoneNumber())
+                                .userMail(form.getEmail())
                                 .dotoli(0)
                                 .createDate(new Date())
                                 .updateDate(new Date())
@@ -62,5 +67,26 @@ public class UserService {
 
             return joinResponse;
         }
+    }
+
+    public void update(Long id, UserFormRequest form) {
+        try {
+            Optional<User> userOptional = userRepository.findById(id);
+
+            userOptional.ifPresent(user -> {
+                user.setName(form.getName());
+                user.setNickname(form.getNickname());
+                user.setUserMail(form.getEmail());
+                user.setPhoneNumber(form.getPhoneNumber());
+
+                userRepository.save(user);
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
     }
 }

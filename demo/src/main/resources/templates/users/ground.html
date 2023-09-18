@@ -1,5 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+  <script>
+    async function deleteUser(id) {
+      if (confirm("삭제하시겠습니까?")) {
+        let response = await fetch(`/api/user/${id}`, {
+          method: "delete",
+          cache: 'no-cache',
+          credentials: "same-origin",
+        })
+      }
+    }
+  </script>
 <body>
 <div class="container">
   <div>
@@ -8,12 +19,15 @@
       <tr>
         <th>#</th>
         <th>이름</th>
+        <th colspan="2"></th>
       </tr>
       </thead>
       <tbody>
       <tr th:each="user : ${users}">
         <td th:text="${user.seq}"></td>
         <td th:text="${user.name}"></td>
+        <td><a th:href="@{/users/{seq}(seq = ${user.seq})}">수정</a></td>
+        <td><button th:onclick="deleteUser([[${user.seq}]])">삭제</button></td>
       </tr>
       </tbody>
     </table>
