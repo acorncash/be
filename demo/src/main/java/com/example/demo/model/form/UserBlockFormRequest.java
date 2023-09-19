@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class UserBlockFormRequest {
     @NotNull
-    Set<Integer> blockList;
+    private Set<Integer> blockList;
     @NotBlank
-    String blockStatus;
+    private String blockStatus;
 }
