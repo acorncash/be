@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,8 +46,6 @@ public class UserService {
                                 .phoneNumber(form.getPhoneNumber())
                                 .userMail(form.getEmail())
                                 .dotoli(0)
-                                .createDate(new Date())
-                                .updateDate(new Date())
                                 .delYN("N")
                                 .build();
 
