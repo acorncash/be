@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,23 @@ public class UserService {
 
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+
+    public Long getAllUserCount() {
+        return userRepository.count();
+    }
+
+    public Long getTodayRegisterUserCount() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        return userRepository.countByCreateAtGreaterThanEqual(calendar.getTime());
+    }
+
+    public Long getBlackUserCount() {
+        return userRepository.countByBlackYn("Y");
     }
 
     public User findById(Long id) {
@@ -46,7 +64,8 @@ public class UserService {
                                 .phoneNumber(form.getPhoneNumber())
                                 .userMail(form.getEmail())
                                 .dotoli(0)
-                                .delYN("N")
+                                .delYn("N")
+                                .blackYn("N")
                                 .build();
 
                 userRepository.save(user);

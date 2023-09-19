@@ -121,15 +121,15 @@
                     <ul>
                         <li>
                             <strong>총회원수</strong>
-                            <span id="totalCnt"></span>
+                            <span id="totalCnt" th:text="${allUserCount}"></span>
                         </li>
                         <li>
                             <strong>오늘 신규가입자</strong>
-                            <span id="newCnt"></span>
+                            <span id="newCnt" th:text="${todayRegisterUserCount}"></span>
                         </li>
                         <li>
                             <strong>차단</strong>
-                            <span id="blockCnt"></span>
+                            <span id="blockCnt" th:text="${blackUserCount}"></span>
                         </li>
                     </ul>
                 </div>
@@ -221,7 +221,7 @@
         								<td th:text="${user.dotoli}"></td>
         								<td th:text="${user.socialKey}"></td>
         								<td th:text="${user.createAt}"></td>
-        								<td th:text="${user.delYn}"></td>
+        								<td th:text="${user.blackYn}"></td>
 									</tr>
 		                        </tbody>
 		                    </table>
