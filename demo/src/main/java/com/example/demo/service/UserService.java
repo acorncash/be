@@ -11,6 +11,7 @@ import com.example.demo.model.entity.User;
 import com.example.demo.model.entity.User.UserBuilder;
 import com.example.demo.model.form.UserBlockFormRequest;
 import com.example.demo.model.form.UserFormRequest;
+import com.example.demo.model.form.UserUpdateFormRequest;
 import com.example.demo.repository.UserInterface;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -42,7 +43,7 @@ public class UserService {
         return userRepository.countByBlockYn("Y");
     }
 
-    public User findById(Long id) {
+    public User findById(Integer id) {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
     }
 
@@ -86,7 +87,7 @@ public class UserService {
         }
     }
 
-    public void update(Long id, UserFormRequest form) {
+    public void update(Integer id, UserUpdateFormRequest form) {
         try {
             Optional<User> userOptional = userRepository.findById(id);
 
@@ -109,7 +110,7 @@ public class UserService {
         }
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         userRepository.deleteById(id);
     }
 }

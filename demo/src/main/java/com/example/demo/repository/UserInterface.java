@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Repository
-public interface UserInterface extends JpaRepository<User, Long> {
+public interface UserInterface extends JpaRepository<User, Integer> {
     Long countByCreateAtGreaterThanEqual(Date currentDate);
     Long countByBlockYn(String blockYn);
     List<User> findByName(String name);

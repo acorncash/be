@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public String updateFrom(@PathVariable Long id, Model model) {
+    public String updateFrom(@PathVariable Integer id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("user", user);
 

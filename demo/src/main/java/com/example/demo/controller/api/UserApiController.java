@@ -4,6 +4,7 @@ import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.form.UserBlockFormRequest;
 import com.example.demo.model.form.UserFormRequest;
+import com.example.demo.model.form.UserUpdateFormRequest;
 import com.example.demo.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,7 @@ public class UserApiController {
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable Long id, @Valid @RequestBody UserFormRequest formRequest) {
+    public void update(@PathVariable Integer id, @Valid UserUpdateFormRequest formRequest) {
         userService.update(id, formRequest);
     }
 
@@ -51,7 +52,7 @@ public class UserApiController {
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         userService.deleteById(id);
     }
 }
