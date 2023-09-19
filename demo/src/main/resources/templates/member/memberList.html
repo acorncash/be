@@ -200,16 +200,29 @@
 		                                <th>회원번호</th>
 		                                <th>ID</th>
 		                                <th>이름</th>
-		                                <th>나이</th>
-		                                <th>성별</th>
-		                                <th>전공과목</th>
+		                                <th>별명</th>
 		                                <th>전화번호</th>
-		                                <th>상세정보 입력여부</th>
+		                                <th>이메일</th>
+		                                <th>도토리</th>
+		                                <th>소셜키</th>
 		                                <th>가입일</th>
-		                                <th>회원상태</th>
+		                                <th>차단여부</th>
 		                            </tr>
 		                        </thead>
 		                        <tbody id="MC_01_tbody">
+									<tr th:each="user : ${users}">
+										<td><input type="checkbox" id="MC_01_selectAll" onclick="javascript:$('.MC_01_chk').prop('checked',this.checked);"></td>
+										<td th:text="${user.seq}"></td>
+										<td th:text="${user.id}"></td>
+        								<td th:text="${user.name}"></td>
+        								<td th:text="${user.nickname}"></td>
+        								<td th:text="${user.phoneNumber}"></td>
+        								<td th:text="${user.userMail}"></td>
+        								<td th:text="${user.dotoli}"></td>
+        								<td th:text="${user.socialKey}"></td>
+        								<td th:text="${user.createAt}"></td>
+        								<td th:text="${user.delYn}"></td>
+									</tr>
 		                        </tbody>
 		                    </table>
 		                </div>

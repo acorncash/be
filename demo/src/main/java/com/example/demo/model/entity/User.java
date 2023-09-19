@@ -48,5 +48,5 @@ public class User {
     private Date updateAt;
     @NotNull
     @Column(length = 1)
-    private String delYN;
+    private String delYn;
 }
