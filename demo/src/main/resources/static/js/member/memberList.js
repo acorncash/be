@@ -331,7 +331,7 @@
 // }
 
 async function blockUser() {
-    if($(".MC_01_chk:checked").length && confirm('선택된 항목을 삭제하시겠습니까?')) {  
+    if($(".MC_01_chk:checked").length && confirm('선택된 사용자를 차단하시겠습니까?')) {  
         const blockList = [];
 
         $($(".MC_01_chk:checked")).each((idx, item) => {
