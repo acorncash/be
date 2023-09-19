@@ -49,4 +49,7 @@ public class User {
     @NotNull
     @Column(length = 1)
     private String delYn;
+    @NotNull
+    @Column(length = 1)
+    private String blackYn;
 }

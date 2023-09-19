@@ -23,6 +23,9 @@ public class UserController {
     public String list(Model model) {
         List<User> users = userService.getAll();
         model.addAttribute("users", users);
+        model.addAttribute("allUserCount", userService.getAllUserCount());
+        model.addAttribute("todayRegisterUserCount", userService.getTodayRegisterUserCount());
+        model.addAttribute("blackUserCount", userService.getBlackUserCount());
 
         return "member/memberList";
     }
