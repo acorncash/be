@@ -129,7 +129,7 @@
                         </li>
                         <li>
                             <strong>차단</strong>
-                            <span id="blockCnt" th:text="${blackUserCount}"></span>
+                            <span id="blockCnt" th:text="${blockUserCount}"></span>
                         </li>
                     </ul>
                 </div>
@@ -173,7 +173,7 @@
                     <div class="right">
                     	<button id="registBtn" type="button" class="btn btn-info" onclick="pageMove('/member/hosRegister');" style="display:none;">신규</button>
                         <button type="button" class="btn btn-primary" onclick="saveMember();">저장</button>
-                        <button type="button" class="btn btn-dark" onclick="removeMember();">삭제</button>
+                        <button type="button" class="btn btn-dark" onclick="blockUser();">차단</button>
                     </div>
                 </div>
 				<div class="tab-content">
@@ -211,8 +211,8 @@
 		                        </thead>
 		                        <tbody id="MC_01_tbody">
 									<tr th:each="user : ${users}">
-										<td><input type="checkbox" id="MC_01_selectAll" onclick="javascript:$('.MC_01_chk').prop('checked',this.checked);"></td>
-										<td th:text="${user.seq}"></td>
+										<td><input type="checkbox" class="MC_01_chk"></td>
+										<td class="userSeq" th:text="${user.seq}"></td>
 										<td th:text="${user.id}"></td>
         								<td th:text="${user.name}"></td>
         								<td th:text="${user.nickname}"></td>
@@ -221,7 +221,7 @@
         								<td th:text="${user.dotoli}"></td>
         								<td th:text="${user.socialKey}"></td>
         								<td th:text="${user.createAt}"></td>
-        								<td th:text="${user.blackYn}"></td>
+        								<td th:text="${user.blockYn}"></td>
 									</tr>
 		                        </tbody>
 		                    </table>

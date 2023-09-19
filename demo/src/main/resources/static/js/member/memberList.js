@@ -329,3 +329,34 @@
 // 		}
 // 	}
 // }
+
+async function blockUser() {
+    if($(".MC_01_chk:checked").length && confirm('선택된 항목을 삭제하시겠습니까?')) {  
+        const blockList = [];
+
+        $($(".MC_01_chk:checked")).each((idx, item) => {
+            const userSeq = $(item).parent().parent().find(".userSeq").text()
+            blockList.push(userSeq);
+        });
+
+        const data = {
+            blockList: blockList,
+            blockStatus: "Y"
+        };
+
+        let response = await fetch(`/api/user/block`, {
+            method: "put",
+            cache: 'no-cache',
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+          }).then(() => {
+            alert("차단되었습니다.")
+            location.reload()
+          }).catch(() => {
+            alert("오류가 발생하였습니다.")
+          })
+    }
+}

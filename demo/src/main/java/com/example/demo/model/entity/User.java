@@ -51,5 +51,5 @@ public class User {
     private String delYn;
     @NotNull
     @Column(length = 1)
-    private String blackYn;
+    private String blockYn;
 }

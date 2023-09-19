@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.entity.User.UserBuilder;
+import com.example.demo.model.form.UserBlockFormRequest;
 import com.example.demo.model.form.UserFormRequest;
 import com.example.demo.repository.UserInterface;
 
@@ -37,8 +38,8 @@ public class UserService {
         return userRepository.countByCreateAtGreaterThanEqual(calendar.getTime());
     }
 
-    public Long getBlackUserCount() {
-        return userRepository.countByBlackYn("Y");
+    public Long getBlockUserCount() {
+        return userRepository.countByBlockYn("Y");
     }
 
     public User findById(Long id) {
@@ -65,7 +66,7 @@ public class UserService {
                                 .userMail(form.getEmail())
                                 .dotoli(0)
                                 .delYn("N")
-                                .blackYn("N")
+                                .blockYn("N")
                                 .build();
 
                 userRepository.save(user);
@@ -99,6 +100,12 @@ public class UserService {
             });
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void blockUser(UserBlockFormRequest request) {
+        if (!request.getBlockList().isEmpty()) {
+            userRepository.updateBlockStatus(request.getBlockList(), request.getBlockStatus());
         }
     }
 
