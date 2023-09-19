@@ -25,7 +25,7 @@ public class UserController {
         model.addAttribute("users", users);
         model.addAttribute("allUserCount", userService.getAllUserCount());
         model.addAttribute("todayRegisterUserCount", userService.getTodayRegisterUserCount());
-        model.addAttribute("blackUserCount", userService.getBlackUserCount());
+        model.addAttribute("blockUserCount", userService.getBlockUserCount());
 
         return "member/memberList";
     }
