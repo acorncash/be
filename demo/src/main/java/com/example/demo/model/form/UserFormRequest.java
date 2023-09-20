@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class UserFormRequest {
     private String id;
-    private String passwprd;
+    private String password;
     private String name;
     private String nickname;
     private String phoneNumber;

@@ -17,7 +17,6 @@ import com.example.demo.model.form.UserUpdateFormRequest;
 import com.example.demo.repository.UserInterface;
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -64,13 +63,13 @@ public class UserService {
             if (duplicateUserName.isEmpty()) {
                 UserBuilder builder = User.builder();
 
-                User user = builder.name(form.getName())
+                User user = builder.id(form.getId())
+                                .password(form.getPassword())
+                                .name(form.getName())
                                 .nickname(form.getNickname())
                                 .phoneNumber(form.getPhoneNumber())
                                 .userMail(form.getEmail())
                                 .dotoli(0)
-                                .delYn("N")
-                                .blockYn("N")
                                 .build();
 
                 userRepository.save(user);
@@ -82,7 +81,7 @@ public class UserService {
             joinResponse.setStatus("Success");
             return joinResponse;
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             joinResponse.setStatus("Fail");
             joinResponse.setMessage(e.getMessage());
 
