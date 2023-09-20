@@ -360,3 +360,35 @@ async function blockUser() {
           })
     }
 }
+
+async function updateUsers() {
+  if($(".MC_01_chk:checked").length && confirm('선택된 사용자를 수정하시겠습니까?')) {
+    const data = new Map();
+
+    $($(".MC_01_chk:checked")).each((idx, item) => {
+      const row = $(item).parent().parent();
+      const value = {}
+
+      row.find('input[type=text]').each((vIdx, vItem) => {
+        value[$(vItem).attr('class')] = $(vItem).val()
+      })
+      
+      data.set(row.find('.userSeq').text(), value)
+    });
+
+    let response = await fetch(`/api/user/rows`, {
+      method: "put",
+      cache: 'no-cache',
+      credentials: "same-origin",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Object.fromEntries(data))
+    }).then(() => {
+      alert("차단되었습니다.")
+      location.reload()
+    }).catch(() => {
+      alert("오류가 발생하였습니다.")
+    })
+  }
+}
