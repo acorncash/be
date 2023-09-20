@@ -35,7 +35,7 @@ public class  Withdraw {
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createDate;
+    private Date createAt;
 
     @NotNull
     @Column(length = 1)
