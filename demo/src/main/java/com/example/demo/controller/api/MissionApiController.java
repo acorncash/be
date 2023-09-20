@@ -28,7 +28,7 @@ public class MissionApiController {
     }
 
     @PostMapping("")
-    public DTO.Response addMission(@RequestBody @Valid MissionFormRequest formRequest) {
+    public DTO.Response addMission(@Valid @RequestBody MissionFormRequest formRequest) {
         System.out.println(formRequest.getMissionType());
         System.out.println(formRequest.getTitle());
         System.out.println(formRequest.getDescription());
@@ -39,7 +39,7 @@ public class MissionApiController {
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable Long id, @Valid MissionFormRequest formRequest) {
+    public void update(@PathVariable Long id, @Valid @RequestBody MissionFormRequest formRequest) {
         missionService.updateMission(id, formRequest);
     }
 

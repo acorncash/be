@@ -35,13 +35,13 @@ public class UserApiController {
     }
 
     @PostMapping("join")
-    public DTO.JoinResponse Join(@RequestBody @Valid UserFormRequest formRequest) {
+    public DTO.JoinResponse Join(@Valid @RequestBody UserFormRequest formRequest) {
         System.out.println(formRequest.getName());
         return userService.Join(formRequest);
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable Long id, @Valid UserFormRequest formRequest) {
+    public void update(@PathVariable Long id, @Valid @RequestBody UserFormRequest formRequest) {
         userService.update(id, formRequest);
     }
 
