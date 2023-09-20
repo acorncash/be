@@ -52,7 +52,7 @@ public class UserApiController {
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable Integer id, @Valid UserUpdateFormRequest formRequest) {
+    public void update(@PathVariable Integer id, @Valid @RequestBody UserUpdateFormRequest formRequest) {
         userService.update(id, formRequest);
     }
 
