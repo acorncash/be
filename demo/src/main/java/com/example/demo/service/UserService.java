@@ -2,8 +2,10 @@ package com.example.demo.service;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.DTO;
@@ -15,6 +17,7 @@ import com.example.demo.model.form.UserUpdateFormRequest;
 import com.example.demo.repository.UserInterface;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -87,18 +90,24 @@ public class UserService {
         }
     }
 
+    public void updateRows(Map<Integer, UserUpdateFormRequest> form) {
+        form.keySet().forEach(k -> {
+            update(k, form.get(k));
+        });
+    }
+
+    @Modifying(clearAutomatically = true)
     public void update(Integer id, UserUpdateFormRequest form) {
         try {
-            Optional<User> userOptional = userRepository.findById(id);
+            User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
+            
+            user.setName(form.getName());
+            user.setNickname(form.getNickname());
+            user.setUserMail(form.getEmail());
+            user.setPhoneNumber(form.getPhoneNumber());
+            user.setSocialKey(form.getSocialKey());
 
-            userOptional.ifPresent(user -> {
-                user.setName(form.getName());
-                user.setNickname(form.getNickname());
-                user.setUserMail(form.getEmail());
-                user.setPhoneNumber(form.getPhoneNumber());
-
-                userRepository.save(user);
-            });
+            userRepository.save(user);
         } catch (Exception e) {
             e.printStackTrace();
         }
