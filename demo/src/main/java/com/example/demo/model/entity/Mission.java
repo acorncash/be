@@ -2,18 +2,16 @@ package com.example.demo.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "mission")
 public class Mission {
 
@@ -30,29 +28,23 @@ public class Mission {
     @NotNull
     private String description;
 
-    @NotNull
     private String image;
 
     @NotNull
     private Integer dotoli;
 
-    @NotNull
-    private Integer answer;
+    private String answer;
 
     @NotNull
     private Integer attendCnt;
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date endDate;
+    private Date createAt;
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createDate;
-
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date updateDate;
+    private Date updateAt;
 
     @NotNull
     @Column(length = 1)

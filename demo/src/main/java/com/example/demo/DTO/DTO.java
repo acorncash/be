@@ -21,4 +21,13 @@ public class DTO {
         private String message;
         private User userDate;
     }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter @Setter
+    @Builder
+    public static class Response {
+        private String status;
+        private String message;
+    }
 }

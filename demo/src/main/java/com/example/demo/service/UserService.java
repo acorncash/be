@@ -78,7 +78,7 @@ public class UserService {
             joinResponse.setStatus("Success");
             return joinResponse;
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             joinResponse.setStatus("Fail");
             joinResponse.setMessage(e.getMessage());
 

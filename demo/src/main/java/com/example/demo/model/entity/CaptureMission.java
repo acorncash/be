@@ -1,9 +1,6 @@
 package com.example.demo.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,9 +14,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "dotoli")
-public class Dotoli {
-
+@Entity(name = "captureMission")
+public class CaptureMission {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer seq;
@@ -31,18 +27,21 @@ public class Dotoli {
     private Integer missionSeq;
 
     @NotNull
-    private String missionTitle;
-
-    @NotNull
-    private Integer missionDotoli;
-
-    @NotNull
-    private Integer userDotoli;
-
-    @NotNull
-    private Integer afterDotoli;
+    private String image;
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createAt;
+
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date confirmAt;
+
+    @NotNull
+    @Column(length = 1)
+    private String confirmYn;
+
+    @NotNull
+    @Column(length = 1)
+    private String delYn;
 }

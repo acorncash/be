@@ -27,28 +27,40 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer seq;
+
     @NotNull
     private String id;
+
     @NotNull
     private String password;
+
     @NotNull
     private String name;
+
     private String nickname;
+
     private String socialKey;
+
     @NotNull
     private String userMail;
+
     private String phoneNumber;
+
     @NotNull
     private Integer dotoli;
+
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createAt;
+
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateAt;
+
     @NotNull
     @Column(length = 1)
     private String delYn;
+
     @NotNull
     @Column(length = 1)
     private String blockYn;
