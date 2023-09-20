@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("")
+    @GetMapping("user")
     public String list(Model model) {
         List<User> users = userService.getAll();
         model.addAttribute("users", users);
@@ -41,5 +41,10 @@ public class UserController {
         model.addAttribute("user", user);
 
         return "users/update";
+    }
+
+    @GetMapping("visitor")
+    public String visitorList(Model model) {
+        return "member/visitorList";
     }
 }
