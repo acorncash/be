@@ -17,17 +17,17 @@ import java.util.Optional;
 public class MissionApiController {
     private final MissionService missionService;
 
-    @GetMapping("{type}")
+    @GetMapping("list/{type}")
     public List<Mission> getMissionList(@PathVariable String type) {
         return missionService.getMissionByMissionType(type);
     }
 
     @GetMapping("{missionSeq}")
-    public Optional<Mission> getMission(@PathVariable Long missionSeq) {
+    public Optional<Mission> getMission(@PathVariable Integer missionSeq) {
         return missionService.getMissionByMissionSeq(missionSeq);
     }
 
-    @PostMapping("")
+    @PostMapping("addMission")
     public DTO.Response addMission(@Valid @RequestBody MissionFormRequest formRequest) {
         System.out.println(formRequest.getMissionType());
         System.out.println(formRequest.getTitle());
@@ -36,6 +36,22 @@ public class MissionApiController {
         System.out.println(formRequest.getDotoli());
         System.out.println(formRequest.getAnswer());
         return missionService.addMission(formRequest);
+    }
+
+    @PostMapping("answerMission/{missionSeq}/{userSeq}/{answer}")
+    public DTO.Response answerMission(@PathVariable Integer missionSeq, @PathVariable Integer userSeq, @PathVariable String answer) {
+        System.out.println(missionSeq);
+        System.out.println(userSeq);
+        System.out.println(answer);
+        return missionService.answerMission(missionSeq, userSeq, answer);
+    }
+
+    @PostMapping("captureMission/{missionSeq}/{userSeq}/{image}")
+    public DTO.Response captureMission(@PathVariable Integer missionSeq, @PathVariable Integer userSeq, @PathVariable String image) {
+        System.out.println(missionSeq);
+        System.out.println(userSeq);
+        System.out.println(image);
+        return missionService.captureMission(missionSeq, userSeq, image);
     }
 
     @PutMapping("{id}")

@@ -47,7 +47,12 @@ public class UserApiController {
 
     @PostMapping("join")
     public DTO.JoinResponse Join(@Valid @RequestBody UserFormRequest formRequest) {
+        System.out.println(formRequest.getId());
+        System.out.println(formRequest.getPassword());
         System.out.println(formRequest.getName());
+        System.out.println(formRequest.getNickname());
+        System.out.println(formRequest.getPhoneNumber());
+        System.out.println(formRequest.getEmail());
         return userService.Join(formRequest);
     }
 

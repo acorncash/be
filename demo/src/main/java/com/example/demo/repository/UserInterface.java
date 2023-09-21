@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -22,6 +23,7 @@ public interface UserInterface extends JpaRepository<User, Integer> {
     List<User> findByName(String name);
 
     Optional<User> findBySocialKeyAndUserMail(String socialKey, String userMail);
+    Optional<User> findBySeqAndDelYn(Integer seq, @NotNull String delYn);
 
     @Transactional
     @Modifying(clearAutomatically = true)
