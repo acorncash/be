@@ -39,15 +39,18 @@ public class Mission {
     private Integer attendCnt;
 
     @NotNull
+    @Builder.Default
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createAt;
+    private Date createAt = new Date();
 
     @NotNull
+    @Builder.Default
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date updateAt;
+    private Date updateAt = new Date();
 
     @NotNull
+    @Builder.Default
     @Column(length = 1)
-    private String delYN;
+    private String delYn = "N";
 
 }

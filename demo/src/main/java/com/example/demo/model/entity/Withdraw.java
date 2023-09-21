@@ -39,5 +39,5 @@ public class  Withdraw {
 
     @NotNull
     @Column(length = 1)
-    private String withdrawYN;
+    private String withdrawYn;
 }
