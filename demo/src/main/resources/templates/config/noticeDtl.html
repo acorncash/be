@@ -100,78 +100,79 @@
 	</div>
 </div>
 <article>
-    <div class="content-page">
-        <section>
-            <div class="page-tit">
-                <h3>공지사항 관리</h3>
-            </div>
+	<div class="content-page">
+		<section>
+			<div class="page-tit">
+				<h3>공지사항 상세</h3>
+			</div>
 			<div class="contents">
-				<div class="search-condition">
-					<h4 class="skip">검색조건</h4>
-					<div class="wrap">
-						<div class="div">
-							<div class="form-group">
-								<div class="tit">구분</div>
-								<div class="flex">
-									<select class="form-control w-md" id="searchSe">
-										<option value="title">제목</option>
-										<option value="contents">내용</option>
-										<option value="all">제목+내용</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="tit">검색어</div>
-								<div class="flex autosize">
-									<input type="text" class="form-control w-lg" id="searchContent">
-									<button type="button" class="btn btn-primary" onclick="boardSearch();">검색</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="utility">
-					<div class="left"><div class="txt count"></div></div>
-					<div class="right">
-						<button type="button" class="btn btn-primary" onclick="pageMove('/settings/noticeDtl')">등록</button>
-					</div>
-				</div>
-
-				<div class="col-table">
-					<table class="table" id="boardListTable">
+				<div class="row-table">
+					<table class="table">
 						<caption></caption>
 						<colgroup>
-							<col style="width: 60px;">
-							<col style="width: 430px;">
-							<col style="width: 100px;">
-							<col style="width: 100px;">
-							<col style="width: 60px;">
-							<col style="width: 60px;">
-							<col style="width: 100px;">
-							<col style="width: 100px;">
+							<col style="width: 130px;">
+							<col style="width: 220px;">
+							<col style="width: 130px;">
+							<col style="width: 220px;">
+							<col style="width: 130px;">
+							<col style="width: 220px;">
+							<col style="width: 130px;">
+							<col style="width: 220px;">
 						</colgroup>
-						<thead>
+						<tbody>
 						<tr>
-							<th>번호</th>
-							<th>제목</th>
 							<th>게시시작일</th>
+							<td colspan="2">
+								<input type="date" class="form-control w-md required" onkeydown="event.preventDefault();" id="startDt" placeholder="게시시작일을 입력하세요.">
+							</td>
 							<th>게시종료일</th>
-							<th>게시상태</th>
+							<td colspan="2">
+								<input type="date" class="form-control w-md required" onkeydown="event.preventDefault();" id="endDt" placeholder="게시종료일을 입력하세요.">
+							</td>
 							<th>상단게시여부</th>
-							<th>등록일</th>
-							<th>작성자</th>
+							<td>
+								<input type="checkbox" class="form-control w-sm" id="flagYn">
+							</td>
 						</tr>
-						</thead>
-						<tbody></tbody>
+						<tr>
+							<th>제목</th>
+							<td colspan="7">
+								<input type="text" class="form-control required" id="title" placeholder="제목을 입력하세요." maxlength="50">
+							</td>
+						</tr>
+						<tr class="min-h">
+							<th>내용</th>
+							<td colspan="7">
+								<textarea class="form-control required" rows="10" id="contents" placeholder="내용을 입력하세요."></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th>첨부파일</th>
+							<td colspan="7">
+								<div class="file-upload w-full">
+									<input type="hidden" id="fileKey" value="N">
+									<input type="text" readonly="readonly" value="*파일 첨부시 드래그를 통해 파일을 여러개 등록할 수 있습니다.">
+									<label>파일첨부<input id="fileList" type="file" multiple="multiple" onchange="fileSet(this);"></label>
+								</div>
+								<ul class="upload-file">
+								</ul>
+							</td>
+						</tr>
+						</tbody>
 					</table>
 				</div>
 
-				<div class="pagination">
-					<ul class="pc-num"></ul>
+				<div class="action-btn-group">
+					<div class="center">
+						<button type="button" class="btn btn-light btn-lg min-w" onclick="pageMove('/settings/noticeList');">취소</button>
+						<button id="insertBtn" type="button" class="btn btn-primary btn-lg min-w" style="display:none;">등록</button>
+						<button id="updateBtn" type="button" class="btn btn-primary btn-lg min-w" style="display:none;">수정</button>
+						<button id="removeBtn" type="button" class="btn btn-dark btn-lg min-w" style="display:none;">삭제</button>
+					</div>
 				</div>
 			</div>
-        </section>
-    </div>
+		</section>
+	</div>
 </article>
 
 </body>

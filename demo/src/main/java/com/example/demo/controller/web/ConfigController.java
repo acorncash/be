@@ -18,6 +18,11 @@ public class ConfigController {
         return "config/noticeList";
     }
 
+    @GetMapping("noticeDtl")
+    public String noticeDtlList(Model model) {
+        return "config/noticeDtl";
+    }
+
     @GetMapping("withdraw")
     public String withdrawList(Model model) {
         return "config/withdrawList";
