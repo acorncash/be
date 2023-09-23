@@ -103,7 +103,7 @@
     <div class="content-page">
         <section>
             <div class="page-tit">
-                <h3>회원관리</h3>
+                <h3>출금 요청</h3>
             </div>
             <div class="contents">
                 <div class="tab-wrap">
@@ -120,15 +120,15 @@
                 <div class="application-status">
                     <ul>
                         <li>
-                            <strong>총회원수</strong>
+                            <strong>총 출금요청 수</strong>
                             <span id="totalCnt" th:text="${allUserCount}"></span>
                         </li>
                         <li>
-                            <strong>오늘 신규가입자</strong>
+                            <strong>출금완료 수</strong>
                             <span id="newCnt" th:text="${todayRegisterUserCount}"></span>
                         </li>
                         <li>
-                            <strong>차단</strong>
+                            <strong>출금대기 수</strong>
                             <span id="blockCnt" th:text="${blockUserCount}"></span>
                         </li>
                     </ul>
@@ -177,7 +177,7 @@
                     </div>
                 </div>
 				<div class="tab-content">
-			        <div class="tab-pane" id="tab1">
+			        <div class="tab-pane active" id="tab1">
 			        	<div class="col-table">
 		                    <table class="table">
 		                        <caption></caption>
@@ -204,9 +204,9 @@
 		                                <th>전화번호</th>
 		                                <th>이메일</th>
 		                                <th>도토리</th>
-		                                <th>소셜키</th>
-		                                <th>가입일</th>
-		                                <th>차단여부</th>
+		                                <th>출금</th>
+		                                <th>계좌번호</th>
+		                                <th>출금여부</th>
 		                            </tr>
 		                        </thead>
 		                        <tbody id="MC_01_tbody">
@@ -223,39 +223,6 @@
         								<td th:text="${user.createAt}"></td>
         								<td th:text="${user.blockYn}"></td>
 									</tr>
-		                        </tbody>
-		                    </table>
-		                </div>
-			        </div>
-			        <div class="tab-pane" id="tab2">
-			        	<div class="col-table">
-		                    <table class="table">
-		                        <caption></caption>
-		                        <colgroup>
-		                            <col style="width: 60px;">
-		                            <col style="width: 60px;">
-		                            <col style="width: 150px;">
-		                            <col style="width: 200px;">
-		                            <col style="width: 150px;">
-		                            <col style="width: 100px;">
-		                            <col style="width: 130px;">
-		                            <col style="width: 100px;">
-		                            <col style="width: 100px;">
-		                        </colgroup>
-		                        <thead>
-		                            <tr>
-		                                <th><input type="checkbox" id="MC_02_selectAll" onclick="javascript:$('.MC_02_chk').prop('checked',this.checked);"></th>
-		                                <th>회원번호</th>
-		                                <th>ID</th>
-		                                <th>병원명</th>
-		                                <th>지역</th>
-		                                <th>기관유형</th>
-		                                <th>전화번호</th>
-		                                <th>가입일</th>
-		                                <th>회원상태</th>
-		                            </tr>
-		                        </thead>
-		                        <tbody id="MC_02_tbody">
 		                        </tbody>
 		                    </table>
 		                </div>

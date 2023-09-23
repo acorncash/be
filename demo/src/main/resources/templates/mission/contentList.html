@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>도토리 캐쉬 관리자 페이지</title>
-    <meta name="title" content="도토리 캐쉬, 관리자 페이지"/>
-    <meta name="author" content=""/>
-    <meta name="keywords" content=""/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>도토리 캐쉬 관리자 페이지</title>
+	<meta name="title" content="도토리 캐쉬, 관리자 페이지"/>
+	<meta name="author" content=""/>
+	<meta name="keywords" content=""/>
 	<link href="/images/favicon.ico" rel="shortcut icon" >
 	<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -42,15 +42,15 @@
 			<div class="gnb">
 				<h2 class="skip">메인메뉴</h2>
 				<ul>
-<!--					<li><a type="button"  onclick="targetMove('client')" ><span>홈페이지</span></a></li>-->
+					<!--					<li><a type="button"  onclick="targetMove('client')" ><span>홈페이지</span></a></li>-->
 					<li class="active"><a type="button"  onclick="pageMove('/member/memberList')" ><span>관리자페이지</span></a></li>
-<!--					<li><a type="button"  onclick="targetMove('intra')"><span>인트라넷</span></a></li>-->
+					<!--					<li><a type="button"  onclick="targetMove('intra')"><span>인트라넷</span></a></li>-->
 				</ul>
 			</div>
 		</nav>
 		<div class="utility">
 			<span class="username"></span>
-<!--			<button type="button" onclick="pageMove('/settings/managerDtl');" class="btn btn-outline-secondary btn-rounded">회원정보수정</button>-->
+			<!--			<button type="button" onclick="pageMove('/settings/managerDtl');" class="btn btn-outline-secondary btn-rounded">회원정보수정</button>-->
 			<a href="/logout" class="btn btn-outline-secondary btn-rounded">로그아웃</a>
 		</div>
 	</div>
@@ -67,14 +67,6 @@
 							<li id="visitorList" class="menu visitorList"><a href="/users/visitor">적립내역</a></li>
 						</ul>
 					</li>
-<!--					<li class="upperMenu">-->
-<!--						<a href="javascript: void(0);" aria-expanded="true"><span></span></a>-->
-<!--						<ul aria-expanded="false">-->
-<!--							<li  id="publicList" class="menu publicList"><a href="#" onclick="pageMove('/announcement/publicList')">Public 공고 목록</a></li>-->
-<!--							<li  id="piList" class="menu piList piListWrite piListUpdate"><a href="#" onclick="pageMove('/announcement/piList')">탭 1</a></li>-->
-<!--							<li  id="docPiList" class="menu docPiList docPiListWrite"><a href="#" onclick="pageMove('/announcement/docPiList')">탭 2</a></li>-->
-<!--						</ul>-->
-<!--					</li>-->
 					<li class="upperMenu">
 						<a href="javascript: void(0);" aria-expanded="true"><span>미션 관리</span></a>
 						<ul aria-expanded="false">
@@ -89,9 +81,6 @@
 						<ul aria-expanded="false">
 							<li id="noticeList" class="menu noticeList noticeDtl"><a href="/config/notice">공지사항 관리</a></li>
 							<li id="questionList" class="menu questionList questionDtl"><a href="/config/withdraw">출금 요청</a></li>
-<!--							<li id="managerList" class="menu managerList managerDtl"><a href="#" onclick="pageMove('/settings/managerList')">관리자 관리</a></li>-->
-<!--							<li id="counselingList" class="menu counselingList counselingDtl counselingWrite"><a href="#" onclick="pageMove('/settings/counselingList')">닥터카운슬링 관리</a></li>-->
-<!--							<li id="advrtList" class="menu advrtList advrtDtl"><a href="#" onclick="pageMove('/settings/advrtList')">광고 관리</a></li>-->
 						</ul>
 					</li>
 				</ul>
@@ -100,174 +89,130 @@
 	</div>
 </div>
 <article>
-    <div class="content-page">
-        <section>
-            <div class="page-tit">
-                <h3>회원관리</h3>
-            </div>
-            <div class="contents">
-                <div class="tab-wrap">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a id="doctorListTab" href="#tab1" data-toggle="tab" class="nav-link">탭 1</a>
-                        </li>
-                        <li class="nav-item">
-                           <a id="hosListTab" href="#tab2" data-toggle="tab" class="nav-link">탭 2</a>
-                        </li>
-                    </ul>
-                </div>
+	<div class="content-page">
+		<section>
+			<div class="page-tit">
+				<h3>수행미션</h3>
+			</div>
+			<div class="contents">
+				<div class="application-status">
+					<ul>
+						<li>
+							<strong>총회원수</strong>
+							<span id="totalCnt" th:text="${allUserCount}"></span>
+						</li>
+						<li>
+							<strong>오늘 신규가입자</strong>
+							<span id="newCnt" th:text="${todayRegisterUserCount}"></span>
+						</li>
+						<li>
+							<strong>차단</strong>
+							<span id="blockCnt" th:text="${blockUserCount}"></span>
+						</li>
+					</ul>
+				</div>
 
-                <div class="application-status">
-                    <ul>
-                        <li>
-                            <strong>총회원수</strong>
-                            <span id="totalCnt" th:text="${allUserCount}"></span>
-                        </li>
-                        <li>
-                            <strong>오늘 신규가입자</strong>
-                            <span id="newCnt" th:text="${todayRegisterUserCount}"></span>
-                        </li>
-                        <li>
-                            <strong>차단</strong>
-                            <span id="blockCnt" th:text="${blockUserCount}"></span>
-                        </li>
-                    </ul>
-                </div>
+				<div class="search-condition">
+					<h4 class="skip">검색조건</h4>
+					<div class="wrap">
+						<div class="div">
+							<div class="form-group">
+								<div class="tit">구분</div>
+								<div class="flex">
+									<select class="form-control w-md" id="searchSe" onchange="searchSeChange(this);">
+										<option value="00">선택</option>
+										<option value="01">회원 ID</option>
+										<option value="02">회원상태</option>
+										<option value="03">전공과목</option>
+										<option value="04">회원명</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="tit">검색어</div>
+								<div class="flex autosize">
+									<input type="text" class="form-control w-lg" id="searchContent">
+									<select class="form-control w-md" id="searchUseYn" style="display:none;">
+										<option value="">선택</option>
+										<option value="Y">정상</option>
+										<option value="N">차단</option>
+									</select>
+									<select class="form-control w-md" id="searchMajor" style="display:none;">
+									</select>
+									<button type="button" class="btn btn-primary" onclick="memberSearch();">검색</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                <div class="search-condition">
-                    <h4 class="skip">검색조건</h4>
-                    <div class="wrap">
-                        <div class="div">
-                            <div class="form-group">
-                                <div class="tit">구분</div>
-                                <div class="flex">
-                                    <select class="form-control w-md" id="searchSe" onchange="searchSeChange(this);">
-                                        <option value="00">선택</option>
-                                        <option value="01">회원 ID</option>
-                                        <option value="02">회원상태</option>
-                                        <option value="03">전공과목</option>
-                                        <option value="04">회원명</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="tit">검색어</div>
-                                <div class="flex autosize">
-                                	<input type="text" class="form-control w-lg" id="searchContent">
-                                	<select class="form-control w-md" id="searchUseYn" style="display:none;">
-                                		<option value="">선택</option>
-                                		<option value="Y">정상</option>
-                                		<option value="N">차단</option>
-                                	</select>
-                                	<select class="form-control w-md" id="searchMajor" style="display:none;">
-                                	</select>
-                                    <button type="button" class="btn btn-primary" onclick="memberSearch();">검색</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="utility">
-                    <div class="left"><div class="txt count"></div></div>
-                    <div class="right">
-                    	<button id="registBtn" type="button" class="btn btn-info" onclick="pageMove('/member/hosRegister');" style="display:none;">신규</button>
-                        <button type="button" class="btn btn-primary" onclick="saveMember();">저장</button>
-                        <button type="button" class="btn btn-dark" onclick="blockUser();">차단</button>
-                    </div>
-                </div>
+				<div class="utility">
+					<div class="left"><div class="txt count"></div></div>
+					<div class="right">
+						<button id="registBtn" type="button" class="btn btn-info" onclick="pageMove('/member/hosRegister');" style="display:none;">신규</button>
+						<button type="button" class="btn btn-primary" onclick="updateUsers();">저장</button>
+						<button type="button" class="btn btn-dark" onclick="blockUser();">차단</button>
+					</div>
+				</div>
 				<div class="tab-content">
-			        <div class="tab-pane" id="tab1">
-			        	<div class="col-table">
-		                    <table class="table">
-		                        <caption></caption>
-		                        <colgroup>
-		                            <col style="width: 60px;">
-		                            <col style="width: 60px;">
-		                            <col style="width: 150px;">
-		                            <col style="width: 100px;">
-		                            <col style="width: 60px;">
-		                            <col style="width: 60px;">
-		                            <col style="width: 130px;">
-		                            <col style="width: 130px;">
-		                            <col style="width: 80px;">
-		                            <col style="width: 100px;">
-		                            <col style="width: 100px;">
-		                        </colgroup>
-		                        <thead>
-		                            <tr>
-		                                <th><input type="checkbox" id="MC_01_selectAll" onclick="javascript:$('.MC_01_chk').prop('checked',this.checked);"></th>
-		                                <th>회원번호</th>
-		                                <th>ID</th>
-		                                <th>이름</th>
-		                                <th>별명</th>
-		                                <th>전화번호</th>
-		                                <th>이메일</th>
-		                                <th>도토리</th>
-		                                <th>소셜키</th>
-		                                <th>가입일</th>
-		                                <th>차단여부</th>
-		                            </tr>
-		                        </thead>
-		                        <tbody id="MC_01_tbody">
-									<tr th:each="user : ${users}">
-										<td><input type="checkbox" class="MC_01_chk"></td>
-										<td class="userSeq" th:text="${user.seq}"></td>
-										<td th:text="${user.id}"></td>
-        								<td th:text="${user.name}"></td>
-        								<td th:text="${user.nickname}"></td>
-        								<td th:text="${user.phoneNumber}"></td>
-        								<td th:text="${user.userMail}"></td>
-        								<td th:text="${user.dotoli}"></td>
-        								<td th:text="${user.socialKey}"></td>
-        								<td th:text="${user.createAt}"></td>
-        								<td th:text="${user.blockYn}"></td>
-									</tr>
-		                        </tbody>
-		                    </table>
-		                </div>
-			        </div>
-			        <div class="tab-pane" id="tab2">
-			        	<div class="col-table">
-		                    <table class="table">
-		                        <caption></caption>
-		                        <colgroup>
-		                            <col style="width: 60px;">
-		                            <col style="width: 60px;">
-		                            <col style="width: 150px;">
-		                            <col style="width: 200px;">
-		                            <col style="width: 150px;">
-		                            <col style="width: 100px;">
-		                            <col style="width: 130px;">
-		                            <col style="width: 100px;">
-		                            <col style="width: 100px;">
-		                        </colgroup>
-		                        <thead>
-		                            <tr>
-		                                <th><input type="checkbox" id="MC_02_selectAll" onclick="javascript:$('.MC_02_chk').prop('checked',this.checked);"></th>
-		                                <th>회원번호</th>
-		                                <th>ID</th>
-		                                <th>병원명</th>
-		                                <th>지역</th>
-		                                <th>기관유형</th>
-		                                <th>전화번호</th>
-		                                <th>가입일</th>
-		                                <th>회원상태</th>
-		                            </tr>
-		                        </thead>
-		                        <tbody id="MC_02_tbody">
-		                        </tbody>
-		                    </table>
-		                </div>
-			        </div>
-		        </div>
-                <div class="pagination">
-                    <ul class="pc-num">
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </div>
+					<div class="tab-pane active" id="tab1">
+						<div class="col-table">
+							<table class="table">
+								<caption></caption>
+								<colgroup>
+									<col style="width: 60px;">
+									<col style="width: 60px;">
+									<col style="width: 150px;">
+									<col style="width: 100px;">
+									<col style="width: 60px;">
+									<col style="width: 60px;">
+									<col style="width: 130px;">
+									<col style="width: 130px;">
+									<col style="width: 80px;">
+									<col style="width: 100px;">
+									<col style="width: 100px;">
+								</colgroup>
+								<thead>
+								<tr>
+									<th><input type="checkbox" id="MC_01_selectAll" onclick="javascript:$('.MC_01_chk').prop('checked',this.checked);"></th>
+									<th>번호</th>
+									<th>형태</th>
+									<th>제목</th>
+									<th>설명글</th>
+									<th>링크</th>
+									<th>제공포인트</th>
+									<th>갯수제한</th>
+									<th>시작시간</th>
+									<th>종료시간</th>
+									<th>수행횟수</th>
+								</tr>
+								</thead>
+								<tbody id="MC_01_tbody">
+								<tr>
+									<td><input type="checkbox" class="MC_01_chk"></td>
+									<td></td>
+									<td></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td>text 구현</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="pagination">
+					<ul class="pc-num">
+					</ul>
+				</div>
+			</div>
+		</section>
+	</div>
 </article>
 
 </body>

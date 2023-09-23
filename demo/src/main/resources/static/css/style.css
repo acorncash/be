@@ -183,7 +183,7 @@ select { -webkit-appearance: none; -moz-appearance: none; appearance: none; back
 .row-tit .right { margin-left: auto; }
 .row-table { margin-bottom: 20px; border-top: 1px solid #d9d9d9; }
 .row-table table th, .row-table table td { padding: .5rem; text-align: left; vertical-align: middle; border: 1px solid #d9d9d9; border-width: 0 0 1px 0; }
-.row-table table th { padding: .4rem .5rem; background-color: #ECF4F4; border-right: 1px solid #d9d9d9; text-align: left; color: #6A7D7E; font-weight: 500; }
+.row-table table th { padding: .4rem .5rem; border-right: 1px solid #d9d9d9; text-align: left; color: white; font-weight: 500; background-color: #ff5e00a6;}
 .row-table table th label { margin-bottom: 0; font-weight: 500; }
 .row-table table td .form-group { margin-bottom: 0; }
 .row-table table td .form-group > * { display: inline-block; }
