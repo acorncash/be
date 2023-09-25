@@ -1,15 +1,25 @@
 package com.example.demo.controller.api;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.Mission;
 import com.example.demo.model.form.MissionFormRequest;
 import com.example.demo.service.MissionService;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,11 +49,11 @@ public class MissionApiController {
     }
 
     @PostMapping("answerMission/{missionSeq}/{userSeq}/{answer}")
-    public DTO.Response answerMission(@PathVariable Integer missionSeq, @PathVariable Integer userSeq, @PathVariable String answer) {
+    public DTO.Response answerMission(@PathVariable Integer missionSeq, @PathVariable Integer userSeq, @PathVariable String answer, HttpServletRequest request) {
         System.out.println(missionSeq);
         System.out.println(userSeq);
         System.out.println(answer);
-        return missionService.answerMission(missionSeq, userSeq, answer);
+        return missionService.answerMission(missionSeq, userSeq, answer, request.getRemoteAddr());
     }
 
     @PostMapping("captureMission/{missionSeq}/{userSeq}/{image}")
