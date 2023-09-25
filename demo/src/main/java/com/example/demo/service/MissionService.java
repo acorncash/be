@@ -85,7 +85,6 @@ public class MissionService {
 
                     Dotoli dotoli = builder.userSeq(userSeq)
                             .missionSeq(mission.getSeq())
-                            .missionTitle(mission.getTitle())
                             .missionDotoli(mission.getDotoli())
                             .userDotoli(user.getDotoli())
                             .afterDotoli(user.getDotoli() + mission.getDotoli())

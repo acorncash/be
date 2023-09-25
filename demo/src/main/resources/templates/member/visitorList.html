@@ -149,6 +149,14 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <tr th:each="dotoli : ${dotolis}">
+                                <td th:text="${dotoli.mission.missionType}"></td>
+                                <td th:text="${dotoli.mission.title}"></td>
+                                <td th:text="${dotoli.user.name}"></td>
+                                <td th:text="${dotoli.missionDotoli} + '/' + ${dotoli.afterDotoli}"></td>
+                                <td th:text="${dotoli.ipAddress}"></td>
+                                <td th:text="${#dates.format(dotoli.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                            </tr>
                         <!-- <tr>
                             <td colspan="6"><div class="none">집계된 내역이 없습니다.</div></td>
                         </tr> -->
