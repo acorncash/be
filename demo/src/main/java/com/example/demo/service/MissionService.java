@@ -61,7 +61,7 @@ public class MissionService {
         }
     }
 
-    public DTO.Response answerMission(Integer missionSeq, Integer userSeq, String answer) {
+    public DTO.Response answerMission(Integer missionSeq, Integer userSeq, String answer, String ipAddress) {
         DTO.Response response = new DTO.Response();
         response.setStatus("Fail");
         try {
@@ -88,6 +88,7 @@ public class MissionService {
                             .missionDotoli(mission.getDotoli())
                             .userDotoli(user.getDotoli())
                             .afterDotoli(user.getDotoli() + mission.getDotoli())
+                            .ipAddress(ipAddress)
                             .build();
 
                     dotoliRepository.save(dotoli);
