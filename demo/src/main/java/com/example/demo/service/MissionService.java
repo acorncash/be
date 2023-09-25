@@ -69,6 +69,12 @@ public class MissionService {
             Optional<User> userOptional = userRepository.findBySeqAndDelYn(userSeq, "N");
 
             //이중으로 ifPresent를 쓰고 있어서 혹시 이럴 때 코드 정리하는 법 알고 계시면 알려주시면 감사하겠습니다 :)
+            /* 중첩이 많아진다면 이런식으로 풀어 쓰시면 될 겉 같은데 이중 중첩정도는 저렇게 쓰셔도 상관 없으실 것 같습니다.
+            if (missionOptional.isPresent() && userOptional.isPresent()) {
+                Mission mission = missionOptional.get();
+                User user = userOptional.get();
+                ....
+            } */
             missionOptional.ifPresent(mission -> userOptional.ifPresent(user -> {
                 if (Objects.equals(mission.getAnswer(), answer)) {
                     mission.setAttendCnt(+1);
