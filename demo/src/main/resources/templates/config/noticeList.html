@@ -162,7 +162,18 @@
 							<th>작성자</th>
 						</tr>
 						</thead>
-						<tbody></tbody>
+						<tbody>
+							<tr th:each="notice : ${noticeList}">
+								<td th:text="${notice.seq}"></td>
+								<td th:text="${notice.title}"></td>
+								<td th:text="${#dates.format(notice.postFrom, 'yyyy-MM-dd HH:mm:ss')}"></td>
+								<td th:text="${#dates.format(notice.postTo, 'yyyy-MM-dd HH:mm:ss')}"></td>
+								<td th:text="${notice.status}"></td>
+								<td th:text="${notice.topStatus}"></td>
+								<td th:text="${#dates.format(notice.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+								<td th:text="${notice.user.name}"></td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 
