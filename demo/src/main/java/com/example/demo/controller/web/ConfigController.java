@@ -2,6 +2,7 @@ package com.example.demo.controller.web;
 
 import com.example.demo.service.MissionService;
 import com.example.demo.service.NoticeService;
+import com.example.demo.service.WithdrawService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ConfigController {
     private final MissionService missionService;
     private final NoticeService noticeService;
+    private final WithdrawService withdrawService;
 
     @GetMapping("notice")
     public String noticeList(Model model) {
@@ -30,6 +32,8 @@ public class ConfigController {
 
     @GetMapping("withdraw")
     public String withdrawList(Model model) {
+        model.addAttribute("withdrawList", withdrawService.getAll());
+        
         return "config/withdrawList";
     }
 }

@@ -106,16 +106,6 @@
                 <h3>출금 요청</h3>
             </div>
             <div class="contents">
-                <div class="tab-wrap">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a id="doctorListTab" href="#tab1" data-toggle="tab" class="nav-link">탭 1</a>
-                        </li>
-                        <li class="nav-item">
-                           <a id="hosListTab" href="#tab2" data-toggle="tab" class="nav-link">탭 2</a>
-                        </li>
-                    </ul>
-                </div>
 
                 <div class="application-status">
                     <ul>
@@ -210,18 +200,18 @@
 		                            </tr>
 		                        </thead>
 		                        <tbody id="MC_01_tbody">
-									<tr th:each="user : ${users}">
+									<tr th:each="withdraw : ${withdrawList}">
 										<td><input type="checkbox" class="MC_01_chk"></td>
-										<td class="userSeq" th:text="${user.seq}"></td>
-										<td th:text="${user.id}"></td>
-        								<td th:text="${user.name}"></td>
-        								<td th:text="${user.nickname}"></td>
-        								<td th:text="${user.phoneNumber}"></td>
-        								<td th:text="${user.userMail}"></td>
-        								<td th:text="${user.dotoli}"></td>
-        								<td th:text="${user.socialKey}"></td>
-        								<td th:text="${user.createAt}"></td>
-        								<td th:text="${user.blockYn}"></td>
+										<td th:text="${withdraw.user.seq}"></td>
+										<td th:text="${withdraw.user.id}"></td>
+        								<td th:text="${withdraw.user.name}"></td>
+        								<td th:text="${withdraw.user.nickname}"></td>
+        								<td th:text="${withdraw.user.phoneNumber}"></td>
+        								<td th:text="${withdraw.user.userMail}"></td>
+        								<td th:text="${withdraw.user.dotoli}"></td>
+        								<td th:text="${withdraw.dotoli}"></td>
+        								<td th:text="${withdraw.bankAccountName} + ' ' + ${withdraw.bankAccountNumber}"></td>
+        								<td th:text="${withdraw.withdrawYn}"></td>
 									</tr>
 		                        </tbody>
 		                    </table>

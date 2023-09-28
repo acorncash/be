@@ -28,7 +28,7 @@ public class  Withdraw {
     private Integer dotoli;
 
     @NotNull
-    private Integer bankAccountNumber;
+    private String bankAccountNumber;
 
     @NotNull
     private String bankAccountName;
@@ -40,4 +40,8 @@ public class  Withdraw {
     @NotNull
     @Column(length = 1)
     private String withdrawYn;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userSeq", insertable = false, updatable = false)
+    private User user;
 }
