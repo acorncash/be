@@ -10,6 +10,7 @@ import com.example.demo.model.entity.Withdraw;
 
 @Repository
 public interface WithdrawRepository extends JpaRepository<Withdraw, Integer> {
+    Long countByWithdrawYn(String withdrawYn);
     @Override
     @EntityGraph(attributePaths = {"user"})
     List<Withdraw> findAll();

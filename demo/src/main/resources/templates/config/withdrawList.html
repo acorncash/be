@@ -111,15 +111,15 @@
                     <ul>
                         <li>
                             <strong>총 출금요청 수</strong>
-                            <span id="totalCnt" th:text="${allUserCount}"></span>
+                            <span id="totalCnt" th:text="${allWithdrawCount}"></span>
                         </li>
                         <li>
                             <strong>출금완료 수</strong>
-                            <span id="newCnt" th:text="${todayRegisterUserCount}"></span>
+                            <span id="newCnt" th:text="${doneWithdrawCount}"></span>
                         </li>
                         <li>
                             <strong>출금대기 수</strong>
-                            <span id="blockCnt" th:text="${blockUserCount}"></span>
+                            <span id="blockCnt" th:text="${waitingWithdrawCount}"></span>
                         </li>
                     </ul>
                 </div>

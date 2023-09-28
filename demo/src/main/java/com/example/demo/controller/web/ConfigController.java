@@ -33,7 +33,10 @@ public class ConfigController {
     @GetMapping("withdraw")
     public String withdrawList(Model model) {
         model.addAttribute("withdrawList", withdrawService.getAll());
-        
+        model.addAttribute("allWithdrawCount", withdrawService.getCount());
+        model.addAttribute("doneWithdrawCount", withdrawService.getCountByWithdraw("Y"));
+        model.addAttribute("waitingWithdrawCount", withdrawService.getCountByWithdraw("N"));
+
         return "config/withdrawList";
     }
 }

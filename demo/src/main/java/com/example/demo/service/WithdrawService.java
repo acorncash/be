@@ -17,4 +17,12 @@ public class WithdrawService {
     public List<Withdraw> getAll() {
         return withdrawRepository.findAll();
     }
+
+    public Long getCount() {
+        return withdrawRepository.count();
+    }
+
+    public Long getCountByWithdraw(String withdraw) {
+        return withdrawRepository.countByWithdrawYn(withdraw);
+    }
 }
