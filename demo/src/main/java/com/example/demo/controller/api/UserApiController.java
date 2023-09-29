@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.example.demo.model.entity.Mission;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,12 @@ public class UserApiController {
 
     @GetMapping("")
     public List<User> getAllUser() {
-        return userService.getAll();
+        return userService.getAllUser();
+    }
+
+    @GetMapping("{userSeq}")
+    public Optional<User> getUser(@PathVariable Integer userSeq) {
+        return userService.getUser(userSeq);
     }
 
     @GetMapping("login/{socialKey}/{userMail}")

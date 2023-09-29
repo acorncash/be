@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.example.demo.model.entity.Mission;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,12 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
     private final UserInterface userRepository;
 
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public List<User> getAllUser() {
+        return userRepository.findAllUserByDelYn("N");
+    }
+
+    public Optional<User> getUser(Integer userSeq) {
+        return userRepository.findUserBySeqAndDelYn(userSeq, "N");
     }
 
     public Long getAllUserCount() {

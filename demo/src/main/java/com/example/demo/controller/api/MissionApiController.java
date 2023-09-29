@@ -27,9 +27,9 @@ import lombok.RequiredArgsConstructor;
 public class MissionApiController {
     private final MissionService missionService;
 
-    @GetMapping("list/{type}")
-    public List<Mission> getMissionList(@PathVariable String type) {
-        return missionService.getMissionByMissionType(type);
+    @GetMapping("")
+    public List<Mission> getMissionAll() {
+        return missionService.getMissionAll();
     }
 
     @GetMapping("{missionSeq}")
@@ -37,11 +37,17 @@ public class MissionApiController {
         return missionService.getMissionByMissionSeq(missionSeq);
     }
 
+    @GetMapping("missionByType/{type}")
+    public List<Mission> getMissionByMissionType(@PathVariable String type) {
+        return missionService.getMissionByMissionType(type);
+    }
+
     @PostMapping("addMission")
     public DTO.Response addMission(@Valid @RequestBody MissionFormRequest formRequest) {
         System.out.println(formRequest.getMissionType());
         System.out.println(formRequest.getTitle());
         System.out.println(formRequest.getDescription());
+        System.out.println(formRequest.getUrl());
         System.out.println(formRequest.getImage());
         System.out.println(formRequest.getDotoli());
         System.out.println(formRequest.getAnswer());

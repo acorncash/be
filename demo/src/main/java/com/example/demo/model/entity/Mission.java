@@ -28,6 +28,8 @@ public class Mission {
     @NotNull
     private String description;
 
+    private String url;
+
     private String image;
 
     @NotNull

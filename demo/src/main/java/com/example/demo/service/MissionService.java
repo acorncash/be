@@ -25,12 +25,16 @@ public class MissionService {
     private final DotoliInterface dotoliRepository;
     private final CaptureMissionInterface captureMissionRepository;
 
-    public List<Mission> getMissionByMissionType(String type) {
-        return missionRepository.findByMissionTypeAndDelYn(type, "N");
+    public List<Mission> getMissionAll() {
+        return missionRepository.findAlLMissionByDelYn("N");
     }
 
     public Optional<Mission> getMissionByMissionSeq(Integer missionSeq) {
         return missionRepository.findBySeqAndDelYn(missionSeq, "N");
+    }
+
+    public List<Mission> getMissionByMissionType(String type) {
+        return missionRepository.findByMissionTypeAndDelYn(type, "N");
     }
 
     public DTO.Response addMission(MissionFormRequest form) {
@@ -41,6 +45,7 @@ public class MissionService {
             Mission mission = builder.missionType(form.getMissionType())
                     .title(form.getTitle())
                     .description(form.getDescription())
+                    .url(form.getUrl())
                     .image(form.getImage())
                     .dotoli(form.getDotoli())
                     .answer(form.getAnswer())
@@ -85,6 +90,7 @@ public class MissionService {
 
                     Dotoli dotoli = builder.userSeq(userSeq)
                             .missionSeq(mission.getSeq())
+                            .missionTitle(mission.getTitle())
                             .missionDotoli(mission.getDotoli())
                             .userDotoli(user.getDotoli())
                             .afterDotoli(user.getDotoli() + mission.getDotoli())
@@ -124,9 +130,8 @@ public class MissionService {
             if(captureMissionOptional.isPresent()){
                 throw new IllegalStateException("이미 신청한 미션입니다.");
             }
-            System.out.println("짜잔1");
+
             missionOptional.ifPresent(mission -> {
-                System.out.println("짜잔2");
                 CaptureMissionBuilder builder = CaptureMission.builder();
 
                 CaptureMission captureMission = builder.userSeq(userSeq)
@@ -156,6 +161,7 @@ public class MissionService {
             missionOptional.ifPresent(mission -> {
                 mission.setTitle(form.getTitle());
                 mission.setDescription(form.getDescription());
+                mission.setUrl(form.getUrl());
                 mission.setImage(form.getImage());
                 mission.setDotoli(form.getDotoli());
                 mission.setAnswer(form.getAnswer());

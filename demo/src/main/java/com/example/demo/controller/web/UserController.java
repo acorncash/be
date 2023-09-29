@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping("user")
     public String list(Model model) {
-        List<User> users = userService.getAll();
+        List<User> users = userService.getAllUser();
         model.addAttribute("users", users);
         model.addAttribute("allUserCount", userService.getAllUserCount());
         model.addAttribute("todayRegisterUserCount", userService.getTodayRegisterUserCount());
@@ -48,7 +48,7 @@ public class UserController {
 
     @GetMapping("visitor")
     public String visitorList(Model model) {
-        List<Dotoli> dotolis = dotoliService.getAll();
+        List<Dotoli> dotolis = dotoliService.getDotoliAll();
         model.addAttribute("dotolis", dotolis);
         
         return "member/visitorList";

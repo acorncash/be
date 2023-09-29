@@ -28,8 +28,12 @@ public class Dotoli {
     @NotNull
     private Integer userSeq;
 
-    @NotNull
     private Integer missionSeq;
+
+    private Integer withdrawSeq;
+
+    @NotNull
+    private String missionTitle;
 
     @NotNull
     private Integer missionDotoli;
