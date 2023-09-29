@@ -1,12 +1,14 @@
 package com.example.demo.controller.api;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.Mission;
+import com.example.demo.model.form.MissionAddFormRequest;
 import com.example.demo.model.form.MissionFormRequest;
 import com.example.demo.service.MissionService;
 
@@ -29,6 +31,16 @@ public class MissionApiController {
     @GetMapping("{missionSeq}")
     public Optional<Mission> getMission(@PathVariable Integer missionSeq) {
         return missionService.getMissionByMissionSeq(missionSeq);
+    }
+
+    @PostMapping("")
+    public void createMission(@Valid @RequestBody MissionAddFormRequest request) {
+        missionService.createMission(request);
+    }
+
+    @PutMapping("rows")
+    public void updateRows(@Valid @RequestBody Map<Long, MissionAddFormRequest> formRequest) {
+        missionService.updateRows(formRequest);
     }
 
     @GetMapping("missionByType/{type}")
