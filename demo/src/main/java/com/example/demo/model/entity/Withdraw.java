@@ -40,4 +40,8 @@ public class  Withdraw {
     @Builder.Default
     @Column(length = 1)
     private String withdrawYn = "N";
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userSeq", insertable = false, updatable = false)
+    private User user;
 }

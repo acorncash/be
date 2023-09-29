@@ -29,14 +29,22 @@ public class WithdrawService {
         return withdrawRepository.findById(withdrawSeq);
     }
 
+    public Long getCount() {
+        return withdrawRepository.count();
+    }
+
+    public Long getCountByWithdraw(String withdraw) {
+        return withdrawRepository.countByWithdrawYn(withdraw);
+    }
+
     public DTO.Response addWithdraw(WithdrawFromRequest form, String ipAddress) {
         DTO.Response response = new DTO.Response();
         response.setStatus("Fail");
-        try{
+        try {
             Optional<User> userOptional = userRepository.findBySeqAndDelYn(form.getUserSeq(), "N");
 
             userOptional.ifPresent(user -> {
-                if(!(user.getDotoli() >= form.getDotoli())){
+                if (!(user.getDotoli() >= form.getDotoli())) {
                     throw new IllegalStateException("보유한 도토리를 확인해주세요.");
                 }
 
