@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.entity.Mission;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -18,6 +19,9 @@ import java.util.Set;
 
 @Repository
 public interface UserInterface extends JpaRepository<User, Integer> {
+
+    List<User> findAllUserByDelYn(String delYn);
+    Optional<User> findUserBySeqAndDelYn(Integer Seq, String delYn);
     Long countByCreateAtGreaterThanEqual(Date currentDate);
     Long countByBlockYn(String blockYn);
     List<User> findByName(String name);

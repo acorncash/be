@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface MissionInterface extends JpaRepository<Mission, Long> {
+    List<Mission> findAlLMissionByDelYn(String delYn);
     List<Mission> findByMissionTypeAndDelYn(String missionType, String delYn);
     Optional<Mission> findBySeqAndDelYn(Integer seq, String delYn);
 }
