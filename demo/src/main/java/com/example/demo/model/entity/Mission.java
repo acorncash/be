@@ -37,6 +37,10 @@ public class Mission {
 
     private String answer;
 
+    private String url;
+
+    private Integer limitCnt;
+
     @NotNull
     private Integer attendCnt;
 
@@ -49,6 +53,16 @@ public class Mission {
     @Builder.Default
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateAt = new Date();
+
+    @NotNull
+    @Builder.Default
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date startAt = new Date();
+
+    @NotNull
+    @Builder.Default
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date endAt = new Date();
 
     @NotNull
     @Builder.Default
