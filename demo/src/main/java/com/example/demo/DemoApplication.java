@@ -27,8 +27,8 @@ public class DemoApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("*/*")
-						.allowedOrigins("http://localhost:8080", "http://14.7.33.34:8080")
+				registry.addMapping("/**")
+						.allowedOrigins("*")
 						.allowedMethods(
 								HttpMethod.GET.name(),
 								HttpMethod.HEAD.name(),
