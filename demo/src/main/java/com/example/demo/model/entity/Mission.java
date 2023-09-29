@@ -37,8 +37,6 @@ public class Mission {
 
     private String answer;
 
-    private String url;
-
     private Integer limitCnt;
 
     @NotNull
