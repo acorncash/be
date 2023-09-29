@@ -15,6 +15,8 @@ public class MissionController {
 
     @GetMapping("answer")
     public String answerList(Model model) {
+        model.addAttribute("missions", missionService.getMissionByMissionType("A"));
+
         return "mission/answerList";
     }
 
@@ -25,6 +27,8 @@ public class MissionController {
 
     @GetMapping("photo")
     public String photoList(Model model) {
+        model.addAttribute("missions", missionService.getMissionByMissionType("C"));
+
         return "mission/photoList";
     }
 
