@@ -68,7 +68,6 @@ public class MissionService {
         try {
             Mission mission = missionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("미션을 찾을 수 없습니다."));
             
-            mission.setMissionType(form.getMissionType());
             mission.setTitle(form.getTitle());
             mission.setDescription(form.getDescription());
             mission.setUrl(form.getUrl());
