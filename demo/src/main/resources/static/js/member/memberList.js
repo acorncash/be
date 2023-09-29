@@ -353,7 +353,7 @@ async function blockUser() {
             },
             body: JSON.stringify(data)
           }).then(() => {
-            alert("저장되었습니다.")
+            alert("차단되었습니다.")
             location.reload()
           }).catch(() => {
             alert("오류가 발생하였습니다.")
@@ -385,7 +385,7 @@ async function updateUsers() {
       },
       body: JSON.stringify(Object.fromEntries(data))
     }).then(() => {
-      alert("차단되었습니다.")
+      alert("수정되었습니다.")
       location.reload()
     }).catch(() => {
       alert("오류가 발생하였습니다.")

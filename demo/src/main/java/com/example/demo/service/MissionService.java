@@ -1,21 +1,30 @@
 package com.example.demo.service;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.stereotype.Service;
+
 import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.CaptureMission;
 import com.example.demo.model.entity.CaptureMission.CaptureMissionBuilder;
-import com.example.demo.model.entity.Mission;
-import com.example.demo.model.entity.Mission.MissionBuilder;
 import com.example.demo.model.entity.Dotoli;
 import com.example.demo.model.entity.Dotoli.DotoliBuilder;
+import com.example.demo.model.entity.Mission;
+import com.example.demo.model.entity.Mission.MissionBuilder;
 import com.example.demo.model.entity.User;
+import com.example.demo.model.form.MissionAddFormRequest;
 import com.example.demo.model.form.MissionFormRequest;
-import com.example.demo.repository.*;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.example.demo.repository.CaptureMissionInterface;
+import com.example.demo.repository.DotoliInterface;
+import com.example.demo.repository.MissionInterface;
+import com.example.demo.repository.UserInterface;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +40,46 @@ public class MissionService {
 
     public Optional<Mission> getMissionByMissionSeq(Integer missionSeq) {
         return missionRepository.findBySeqAndDelYn(missionSeq, "N");
+    }
+
+    public void createMission(MissionAddFormRequest form) {
+        Mission mission = Mission.builder()
+                .missionType(form.getMissionType())
+                .title(form.getTitle())
+                .description(form.getDescription())
+                .url(form.getUrl())
+                .dotoli(form.getDotoli())
+                .limitCnt(form.getLimitCount())
+                .startAt(form.getStartAt())
+                .endAt(form.getEndAt())
+                .build();
+
+        missionRepository.save(mission);
+    }
+
+    public void updateRows(Map<Long, MissionAddFormRequest> form) {
+        form.keySet().forEach(k -> {
+            update(k, form.get(k));
+        });
+    }
+
+    @Modifying(clearAutomatically = true)
+    public void update(Long id, MissionAddFormRequest form) {
+        try {
+            Mission mission = missionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("미션을 찾을 수 없습니다."));
+            
+            mission.setTitle(form.getTitle());
+            mission.setDescription(form.getDescription());
+            mission.setUrl(form.getUrl());
+            mission.setDotoli(form.getDotoli());
+            mission.setLimitCnt(form.getLimitCount());
+            mission.setStartAt(form.getStartAt());
+            mission.setEndAt(form.getEndAt());
+
+            missionRepository.save(mission);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Mission> getMissionByMissionType(String type) {
