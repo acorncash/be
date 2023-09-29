@@ -5,16 +5,14 @@ import com.example.demo.model.entity.Withdraw;
 import com.example.demo.service.DotoliService;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(originPatterns = "http://14.7.33.34:8080")
 @RequestMapping("/api/dotoli")
 public class DotoliApiController {
     private final DotoliService dotoliService;

@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(originPatterns = "http://14.7.33.34:8080")
 @RequestMapping("/api/withdraw")
 public class WithdrawApiController {
     private final WithdrawService withdrawService;
@@ -28,6 +29,11 @@ public class WithdrawApiController {
     @GetMapping("{withdrawSeq}")
     public Optional<Withdraw> getWithdraw(@PathVariable Integer withdrawSeq) {
         return withdrawService.getWithdrawByWithdrawSeq(withdrawSeq);
+    }
+
+    @GetMapping("withdrawByUser/{userSeq}")
+    public List<Withdraw> getWithdrawByUser(@PathVariable Integer userSeq) {
+        return withdrawService.getWithdrawByUser(userSeq);
     }
 
     @PostMapping("addWithdraw")

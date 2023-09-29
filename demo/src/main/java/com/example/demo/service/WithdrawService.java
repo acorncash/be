@@ -29,6 +29,10 @@ public class WithdrawService {
         return withdrawRepository.findById(withdrawSeq);
     }
 
+    public List<Withdraw> getWithdrawByUser(Integer userSeq) {
+        return withdrawRepository.findByUserSeq(userSeq);
+    }
+
     public Long getCount() {
         return withdrawRepository.count();
     }
