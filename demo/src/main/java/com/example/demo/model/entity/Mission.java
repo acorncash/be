@@ -54,12 +54,10 @@ public class Mission {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateAt = new Date();
 
-    @NotNull
     @Builder.Default
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startAt = new Date();
 
-    @NotNull
     @Builder.Default
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endAt = new Date();

@@ -188,19 +188,19 @@
 								</tr>
 								</thead>
 								<tbody id="MC_01_tbody">
-								<tr>
-									<td><input type="checkbox" class="MC_01_chk"></td>
-									<td></td>
-									<td></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td>text 구현</td>
-								</tr>
+									<tr th:each="mission : ${missions}">
+										<td><input type="checkbox" class="MC_01_chk"></td>
+										<td th:text="${mission.seq}"></td>
+										<td th:text="${mission.missionType}"></td>
+										<td><input type="text" th:value="${mission.title}"/></td>
+										<td><input type="text" th:value="${mission.description}"/></td>
+										<td><input type="text" th:value="${mission.url}"/></td>
+										<td><input type="text" th:value="${mission.dotoli}"/></td>
+										<td><input type="text" th:value="${mission.limitCnt}"/></td>
+										<td><input type="datetime" th:value="${mission.startAt}"/></td>
+										<td><input type="datetime" th:value="${mission.endAt}"/></td>
+										<td>text 구현</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
