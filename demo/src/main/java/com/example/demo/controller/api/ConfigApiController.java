@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = "http://14.7.33.34:8080")
 @RequestMapping("/api/config")
 public class ConfigApiController {
     private final NoticeService noticeService;

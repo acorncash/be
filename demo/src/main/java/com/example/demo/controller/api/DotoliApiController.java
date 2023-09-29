@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = "http://14.7.33.34:8080")
 @RequestMapping("/api/dotoli")
 public class DotoliApiController {
     private final DotoliService dotoliService;

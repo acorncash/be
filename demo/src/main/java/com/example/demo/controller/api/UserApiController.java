@@ -20,7 +20,6 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = "http://14.7.33.34:8080")
 @RequestMapping("/api/user")
 public class UserApiController {
     private final UserService userService;

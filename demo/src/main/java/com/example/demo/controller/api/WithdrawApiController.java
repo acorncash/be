@@ -16,7 +16,6 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = "http://14.7.33.34:8080")
 @RequestMapping("/api/withdraw")
 public class WithdrawApiController {
     private final WithdrawService withdrawService;
