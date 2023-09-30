@@ -3,33 +3,29 @@ async function updateMissions() {
         const data = new Map();
 
         $($(".MC_01_chk:checked")).each((idx, item) => {
-        const row = $(item).parent().parent();
-        const value = {}
+            const row = $(item).parent().parent();
+            const value = {}
 
-        row.find('input[type=text], input[type=datetime-local]').each((vIdx, vItem) => {
-            value[$(vItem).attr('class')] = $(vItem).val()
-        })
-
-        debugger
-        
-        data.set(row.find('.missionSeq').text(), value)
+            row.find('input[type=text], input[type=datetime]').each((vIdx, vItem) => {
+                value[$(vItem).attr('class')] = $(vItem).val()
+            })
+            
+            data.set(row.find('.missionSeq').text(), value)
         });
 
-        console.log(data)
-
-        /* let response = await fetch(`/api/mission/rows`, {
-        method: "put",
-        cache: 'no-cache',
-        credentials: "same-origin",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(Object.fromEntries(data))
+        let response = await fetch(`/api/mission/rows`, {
+            method: "put",
+            cache: 'no-cache',
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(Object.fromEntries(data))
         }).then(() => {
-        alert("수정되었습니다.")
-        location.reload()
+            alert("수정되었습니다.")
+            location.reload()
         }).catch(() => {
-        alert("오류가 발생하였습니다.")
-        }) */
+            alert("오류가 발생하였습니다.")
+        })
     }
 }
