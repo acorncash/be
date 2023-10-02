@@ -40,7 +40,8 @@ public class Mission {
     private Integer limitCnt;
 
     @NotNull
-    private Integer attendCnt;
+    @Builder.Default
+    private Integer attendCnt = 0;
 
     @NotNull
     @Builder.Default

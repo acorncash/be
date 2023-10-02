@@ -29,3 +29,22 @@ async function updateMissions() {
         })
     }
 }
+
+function createMission(type) {
+    const lastSeq = parseInt($('#MC_01_tbody').find('tr').last().find('.missionSeq').text()) + 1
+    const row = $('<tr>' 
+    + '<td><input type="checkbox" class="MC_01_chk"></td>'
+    + `<td class="missionSeq">${lastSeq}</td>`
+    + `<td><input type="text" class="missionType" style="width:20px" value="${type}" readonly></td>`
+    + '<td><input type="text" class="title"/></td>'
+    + '<td><input type="text" class="description"/></td>'
+    + '<td><input type="text" class="url"/></td>'
+    + '<td><input type="text" class="dotoli"/></td>'
+    + '<td><input type="text" class="limitCount"/></td>'
+    + '<td><input type="datetime" class="startAt"/></td>'
+    + '<td><input type="datetime" class="endAt"/></td>'
+    + '<td>0</td>'
+    + '</tr>')
+
+    $('#MC_01_tbody').append(row)
+}
