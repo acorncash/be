@@ -28,20 +28,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer seq;
 
-    @NotNull
     private String id;
 
-    @NotNull
     private String password;
-
-    @NotNull
-    private String name;
-
-    private String nickname;
 
     private String socialKey;
 
+    private String refreshToken;
+
+    private String name;
+
     @NotNull
+    private String nickname;
+
     private String userMail;
 
     private String phoneNumber;

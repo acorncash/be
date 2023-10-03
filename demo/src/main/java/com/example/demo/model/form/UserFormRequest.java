@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class UserFormRequest {
+    private String socialKey;
+    private String refreshToken;
     private String id;
     private String password;
     private String name;

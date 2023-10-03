@@ -55,7 +55,7 @@ public class UserService {
     }
 
     public Optional<User> getUserBySocialKeyAndUserMail(String socialKey, String userMail){
-        return userRepository.findBySocialKeyAndUserMail(socialKey, userMail);
+        return userRepository.findBySocialKey(socialKey);
     }
 
     public DTO.JoinResponse Join(UserFormRequest form) {
@@ -68,7 +68,9 @@ public class UserService {
             if (duplicateUserName.isEmpty()) {
                 UserBuilder builder = User.builder();
 
-                User user = builder.id(form.getId())
+                User user = builder.socialKey(form.getSocialKey())
+                                .refreshToken(form.getRefreshToken())
+                                .id(form.getId())
                                 .password(form.getPassword())
                                 .name(form.getName())
                                 .nickname(form.getNickname())

@@ -26,7 +26,7 @@ public interface UserInterface extends JpaRepository<User, Integer> {
     Long countByBlockYn(String blockYn);
     List<User> findByName(String name);
 
-    Optional<User> findBySocialKeyAndUserMail(String socialKey, String userMail);
+    Optional<User> findBySocialKey(String socialKey);
     Optional<User> findBySeqAndDelYn(Integer seq, @NotNull String delYn);
 
     @Transactional
