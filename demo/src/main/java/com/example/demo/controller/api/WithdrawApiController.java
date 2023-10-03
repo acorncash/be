@@ -43,4 +43,9 @@ public class WithdrawApiController {
         System.out.println(formRequest.getBankAccountName());
         return withdrawService.addWithdraw(formRequest, request.getRemoteAddr());
     }
+
+    @PutMapping("{seq}/status/{withdrawYn}")
+    public void changeWithdrawYn(@PathVariable Integer seq, @PathVariable String withdrawYn) {
+        withdrawService.changeWithdrawYn(seq, withdrawYn);
+    }
 }

@@ -7,6 +7,8 @@ import com.example.demo.model.entity.Withdraw;
 import com.example.demo.model.form.WithdrawFromRequest;
 import com.example.demo.repository.*;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -93,5 +95,16 @@ public class WithdrawService {
 
             return response;
         }
+    }
+
+    @Modifying(clearAutomatically = true)
+    public void changeWithdrawYn(Integer seq, String withdrawYn) {
+        Optional<Withdraw> withdrawOptional = withdrawRepository.findById(seq);
+
+        withdrawOptional.ifPresent(withdraw -> {
+            withdraw.setWithdrawYn(withdrawYn);
+
+            withdrawRepository.save(withdraw);
+        });
     }
 }

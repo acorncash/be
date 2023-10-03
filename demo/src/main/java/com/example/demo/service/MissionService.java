@@ -59,15 +59,17 @@ public class MissionService {
 
     public void updateRows(Map<Long, MissionAddFormRequest> form) {
         form.keySet().forEach(k -> {
-            update(k, form.get(k));
+            Optional<Mission> missOptional = missionRepository.findById(k);
+            if (missOptional.isPresent())
+                update(missOptional.get(), form.get(k));
+            else
+                createMission(form.get(k));
         });
     }
 
     @Modifying(clearAutomatically = true)
-    public void update(Long id, MissionAddFormRequest form) {
+    public void update(Mission mission, MissionAddFormRequest form) {
         try {
-            Mission mission = missionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("미션을 찾을 수 없습니다."));
-            
             mission.setTitle(form.getTitle());
             mission.setDescription(form.getDescription());
             mission.setUrl(form.getUrl());

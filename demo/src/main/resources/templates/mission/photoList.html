@@ -149,7 +149,7 @@
 				<div class="utility">
 					<div class="left"><div class="txt count"></div></div>
 					<div class="right">
-						<button id="registBtn" type="button" class="btn btn-info" onclick="pageMove('/member/hosRegister');" style="display:none;">신규</button>
+						<button id="registBtn" type="button" class="btn btn-info" onclick="createMission('C');">신규</button>
 						<button type="button" class="btn btn-primary" onclick="updateMissions();">저장</button>
 					</div>
 				</div>
@@ -175,10 +175,10 @@
 								<tr>
 									<th><input type="checkbox" id="MC_01_selectAll" onclick="javascript:$('.MC_01_chk').prop('checked',this.checked);"></th>
 									<th>번호</th>
-									<th>ID</th>
-									<th>미션구분</th>
-									<th>미션명</th>
-									<th>제공포인트</th>
+									<th>형태</th>
+									<th>제목</th>
+									<th>설명글</th>
+									<th>링크</th>
 									<th>제공포인트</th>
 									<th>갯수제한</th>
 									<th>시작시간</th>
@@ -198,7 +198,7 @@
 										<td><input type="text" class="limitCount" th:value="${mission.limitCnt}"/></td>
 										<td><input type="datetime" class="startAt" th:value="${mission.startAt}"/></td>
 										<td><input type="datetime" class="endAt" th:value="${mission.endAt}"/></td>
-										<td>text 구현</td>
+										<td th:text="${mission.attendCnt}"></td>
 									</tr>
 								</tbody>
 							</table>

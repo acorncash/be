@@ -28,7 +28,7 @@
 
 	<script src="/js/componenet/apiComponent.js"></script>
 	<script src="/js/componenet/pagingComponent.js"></script>
-	<script src="/js/member/memberList.js"></script>
+	<script src="/js/config/withdrawList.js"></script>
 	<script src="/js/common/header.js"></script>
 </head>
 
@@ -200,7 +200,7 @@
 		                            </tr>
 		                        </thead>
 		                        <tbody id="MC_01_tbody">
-									<tr th:each="withdraw : ${withdrawList}">
+									<tr th:each="withdraw : ${withdrawList}" th:data-seq="${withdraw.seq}">
 										<td><input type="checkbox" class="MC_01_chk"></td>
 										<td th:text="${withdraw.user.seq}"></td>
 										<td th:text="${withdraw.user.id}"></td>
@@ -211,7 +211,10 @@
         								<td th:text="${withdraw.user.dotoli}"></td>
         								<td th:text="${withdraw.dotoli}"></td>
         								<td th:text="${withdraw.bankAccountName} + ' ' + ${withdraw.bankAccountNumber}"></td>
-        								<td th:text="${withdraw.withdrawYn}"></td>
+        								<td>
+											<label><input th:name="withdrawYn + ${withdraw.seq}" class="withdrawYn" type="radio" value="Y" th:checked="${withdraw.withdrawYn == 'Y'}"/>Y</label>
+											<label><input th:name="withdrawYn + ${withdraw.seq}" class="withdrawYn" type="radio" value="N" th:checked="${withdraw.withdrawYn == 'N'}">N</label>
+										</td>
 									</tr>
 		                        </tbody>
 		                    </table>
