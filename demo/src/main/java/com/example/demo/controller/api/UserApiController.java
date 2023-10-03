@@ -41,18 +41,17 @@ public class UserApiController {
         return userService.getUser(userSeq);
     }
 
-    @GetMapping("login/{socialKey}/{userMail}")
-    public Optional<User> login(@PathVariable String socialKey, @PathVariable String userMail) {
-        System.out.println(socialKey + userMail);
-        if(StringUtils.isEmpty(socialKey) || StringUtils.isEmpty(userMail)){
-            throw new IllegalStateException("아이디와 비밀번호를 확인해주세요.");
-        }
+    @GetMapping("login/{socialKey}/{refreshToken}")
+    public Optional<User> login(@PathVariable String socialKey, @PathVariable String refreshToken) {
+        System.out.println(socialKey + refreshToken);
 
-        return userService.getUserBySocialKeyAndUserMail(socialKey, userMail);
+        return userService.getUserBySocialKeyAndUserMail(socialKey, refreshToken);
     }
 
     @PostMapping("join")
     public DTO.JoinResponse Join(@Valid @RequestBody UserFormRequest formRequest) {
+        System.out.println(formRequest.getSocialKey());
+        System.out.println(formRequest.getRefreshToken());
         System.out.println(formRequest.getId());
         System.out.println(formRequest.getPassword());
         System.out.println(formRequest.getName());
