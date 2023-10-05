@@ -61,29 +61,20 @@ public class UserService {
     public DTO.JoinResponse Join(UserFormRequest form) {
         DTO.JoinResponse joinResponse = new DTO.JoinResponse();
         try{
-            List<User> duplicateUserName = userRepository.findByName(form.getName());
+            UserBuilder builder = User.builder();
 
-            System.out.println(duplicateUserName);
+            User user = builder.socialKey(form.getSocialKey())
+                            .refreshToken(form.getRefreshToken())
+                            .id(form.getId())
+                            .password(form.getPassword())
+                            .name(form.getName())
+                            .nickname(form.getNickname())
+                            .phoneNumber(form.getPhoneNumber())
+                            .userMail(form.getEmail())
+                            .dotoli(0)
+                            .build();
 
-            if (duplicateUserName.isEmpty()) {
-                UserBuilder builder = User.builder();
-
-                User user = builder.socialKey(form.getSocialKey())
-                                .refreshToken(form.getRefreshToken())
-                                .id(form.getId())
-                                .password(form.getPassword())
-                                .name(form.getName())
-                                .nickname(form.getNickname())
-                                .phoneNumber(form.getPhoneNumber())
-                                .userMail(form.getEmail())
-                                .dotoli(0)
-                                .build();
-
-                userRepository.save(user);
-            }
-            else{
-                throw new IllegalStateException("중복된 이름 입니다.");
-            }
+            userRepository.save(user);
 
             joinResponse.setStatus("Success");
             return joinResponse;
