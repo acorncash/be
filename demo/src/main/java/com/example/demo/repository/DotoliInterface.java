@@ -16,4 +16,6 @@ public interface DotoliInterface extends JpaRepository<Dotoli, Long> {
     List<Dotoli> findAll();
 
     List<Dotoli> findByUserSeq(Integer userSeq);
+
+    List<Dotoli> findByMissionSeqAndIpAddress(Integer missionSeq, String ipAddress);
 }

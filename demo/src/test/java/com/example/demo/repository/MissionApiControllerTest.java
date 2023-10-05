@@ -51,16 +51,16 @@ public class MissionApiControllerTest {
         formRequest.setDotoli(1000);
         formRequest.setAnswer("정답은answer");
 
-        response = missionService.addMission(formRequest);
-        System.out.println("Status : " + response.getStatus());
-        System.out.println("Message : " + response.getMessage());
+//        response = missionService.addMission(formRequest);
+//        System.out.println("Status : " + response.getStatus());
+//        System.out.println("Message : " + response.getMessage());
 
         response = missionService.answerMission(502, 703, "답", "0:0:0:0:0:0:0:1");
         System.out.println("Status : " + response.getStatus());
         System.out.println("Message : " + response.getMessage());
 
-        response = missionService.captureMission(503, 703, "답");
-        System.out.println("Status : " + response.getStatus());
-        System.out.println("Message : " + response.getMessage());
+//        response = missionService.captureMission(503, 703, "답");
+//        System.out.println("Status : " + response.getStatus());
+//        System.out.println("Message : " + response.getMessage());
     }
 }

@@ -123,6 +123,11 @@ public class MissionService {
         try {
             Optional<Mission> missionOptional = missionRepository.findBySeqAndDelYn(missionSeq, "N");
             Optional<User> userOptional = userRepository.findBySeqAndDelYn(userSeq, "N");
+            List<Dotoli> dotoliList = dotoliRepository.findByMissionSeqAndIpAddress(missionSeq, ipAddress);
+
+            if(!dotoliList.isEmpty()){
+                throw new IllegalStateException("해당 IP로 이미 미션을 수행한 이력이 있습니다.");
+            }
 
             //이중으로 ifPresent를 쓰고 있어서 혹시 이럴 때 코드 정리하는 법 알고 계시면 알려주시면 감사하겠습니다 :)
             /* 중첩이 많아진다면 이런식으로 풀어 쓰시면 될 겉 같은데 이중 중첩정도는 저렇게 쓰셔도 상관 없으실 것 같습니다.
