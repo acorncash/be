@@ -2,6 +2,7 @@ package com.example.demo.model.form;
 
 import java.util.Date;
 
+import com.example.demo.model.enums.SnsType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
@@ -20,4 +21,5 @@ public class MissionAddFormRequest {
     private Date startAt;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date endAt;
+    private SnsType snsType;
 }

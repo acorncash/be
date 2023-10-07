@@ -6,7 +6,7 @@ async function updateMissions() {
             const row = $(item).parent().parent();
             const value = {}
 
-            row.find('input[type=text], input[type=datetime]').each((vIdx, vItem) => {
+            row.find('input[type=text], input[type=datetime], input[type=hidden], input[type=radio]:checked').each((vIdx, vItem) => {
                 value[$(vItem).attr('class')] = $(vItem).val()
             })
             
@@ -33,9 +33,9 @@ async function updateMissions() {
 function createMission(type) {
     const lastSeq = parseInt($('#MC_01_tbody').find('tr').last().find('.missionSeq').text()) + 1
     const row = $('<tr>' 
-    + '<td><input type="checkbox" class="MC_01_chk"></td>'
+    + `<input type="hidden" class="missionType" value="${type}" readonly>`
+    + '<td><input type="checkbox" class="MC_01_chk" checked></td>'
     + `<td class="missionSeq">${lastSeq}</td>`
-    + `<td><input type="text" class="missionType" style="width:20px" value="${type}" readonly></td>`
     + '<td><input type="text" class="title"/></td>'
     + '<td><input type="text" class="description"/></td>'
     + '<td><input type="text" class="url"/></td>'
@@ -43,6 +43,12 @@ function createMission(type) {
     + '<td><input type="text" class="limitCount"/></td>'
     + '<td><input type="datetime" class="startAt"/></td>'
     + '<td><input type="datetime" class="endAt"/></td>'
+    + `<td>
+        <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0001" checked/>네이버</label>
+        <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0002">인스타</label>
+        <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0003">카카오</label>
+        <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0004">무신사</label>
+    </td>`
     + '<td>0</td>'
     + '</tr>')
 
