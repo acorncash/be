@@ -169,7 +169,6 @@
 								<colgroup>
 									<col style="width: 60px;">
 									<col style="width: 60px;">
-									<col style="width: 150px;">
 									<col style="width: 100px;">
 									<col style="width: 60px;">
 									<col style="width: 60px;">
@@ -177,13 +176,12 @@
 									<col style="width: 130px;">
 									<col style="width: 80px;">
 									<col style="width: 100px;">
-									<col style="width: 100px;">
+									<col>
 								</colgroup>
 								<thead>
 								<tr>
 									<th><input type="checkbox" id="MC_01_selectAll" onclick="javascript:$('.MC_01_chk').prop('checked',this.checked);"></th>
 									<th>번호</th>
-									<th>형태</th>
 									<th>제목</th>
 									<th>설명글</th>
 									<th>링크</th>
@@ -191,6 +189,7 @@
 									<th>갯수제한</th>
 									<th>시작시간</th>
 									<th>종료시간</th>
+									<th>sns종류</th>
 									<th>수행횟수</th>
 								</tr>
 								</thead>
@@ -198,7 +197,6 @@
 								<tr th:each="mission : ${missions}">
 									<td><input type="checkbox" class="MC_01_chk"></td>
 									<td class="missionSeq" th:text="${mission.seq}"></td>
-									<td th:text="${mission.missionType}"></td>
 									<td><input type="text" class="title" th:value="${mission.title}"/></td>
 									<td><input type="text" class="description" th:value="${mission.description}"/></td>
 									<td><input type="text" class="url" th:value="${mission.url}"/></td>
@@ -206,6 +204,12 @@
 									<td><input type="text" class="limitCount" th:value="${mission.limitCnt}"/></td>
 									<td><input type="datetime" class="startAt" th:value="${mission.startAt}"/></td>
 									<td><input type="datetime" class="endAt" th:value="${mission.endAt}"/></td>
+									<td>
+										<label><input th:name="snsType + ${mission.seq}" class="snsType" type="radio" value="0001" th:checked="${mission.snsType == '0001'}"/>네이버</label>
+										<label><input th:name="snsType + ${mission.seq}" class="snsType" type="radio" value="0002" th:checked="${mission.snsType == '0002'}">인스타</label>
+										<label><input th:name="snsType + ${mission.seq}" class="snsType" type="radio" value="0003" th:checked="${mission.snsType == '0003'}">카카오</label>
+										<label><input th:name="snsType + ${mission.seq}" class="snsType" type="radio" value="0004" th:checked="${mission.snsType == '0004'}">무신사</label>
+									</td>
 									<td th:text="${mission.attendCnt}"></td>
 								</tr>
 								</tbody>

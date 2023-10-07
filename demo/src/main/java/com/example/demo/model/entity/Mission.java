@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.example.demo.model.enums.SnsType;
+
 import java.util.Date;
 
 @Getter
@@ -66,4 +68,7 @@ public class Mission {
     @Column(length = 1)
     private String delYn = "N";
 
+    @NotNull
+    @Builder.Default
+    private String snsType = SnsType.NAVER.getCode();
 }

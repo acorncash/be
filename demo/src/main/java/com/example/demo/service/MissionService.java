@@ -23,7 +23,6 @@ import com.example.demo.repository.DotoliInterface;
 import com.example.demo.repository.MissionInterface;
 import com.example.demo.repository.UserInterface;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -52,6 +51,7 @@ public class MissionService {
                 .limitCnt(form.getLimitCount())
                 .startAt(form.getStartAt())
                 .endAt(form.getEndAt())
+                .snsType(form.getSnsType().getCode())
                 .build();
 
         missionRepository.save(mission);
@@ -77,6 +77,7 @@ public class MissionService {
             mission.setLimitCnt(form.getLimitCount());
             mission.setStartAt(form.getStartAt());
             mission.setEndAt(form.getEndAt());
+            mission.setSnsType(form.getSnsType().getCode());
 
             missionRepository.save(mission);
         } catch (Exception e) {
