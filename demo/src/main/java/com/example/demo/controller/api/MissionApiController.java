@@ -1,9 +1,13 @@
 package com.example.demo.controller.api;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.example.demo.model.form.CaptureMissionFormRequest;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.DTO;
@@ -15,6 +19,7 @@ import com.example.demo.service.MissionService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -67,12 +72,12 @@ public class MissionApiController {
         return missionService.answerMission(missionSeq, userSeq, answer, request.getRemoteAddr());
     }
 
-    @PostMapping("captureMission/{missionSeq}/{userSeq}/{image}")
-    public DTO.Response captureMission(@PathVariable Integer missionSeq, @PathVariable Integer userSeq, @PathVariable String image) {
-        System.out.println(missionSeq);
-        System.out.println(userSeq);
-        System.out.println(image);
-        return missionService.captureMission(missionSeq, userSeq, image);
+    @PostMapping("captureMission")
+    public DTO.Response captureMission(@Valid CaptureMissionFormRequest formRequest) {
+        System.out.println(formRequest.getMissionSeq());
+        System.out.println(formRequest.getUserSeq());
+        System.out.println(formRequest.getImage());
+        return missionService.captureMission(formRequest.getMissionSeq(), formRequest.getUserSeq(), formRequest.getImage());
     }
 
     @PutMapping("{id}")

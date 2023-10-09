@@ -1,9 +1,9 @@
 package com.example.demo.service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
@@ -24,6 +24,7 @@ import com.example.demo.repository.MissionInterface;
 import com.example.demo.repository.UserInterface;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -137,6 +138,7 @@ public class MissionService {
                 User user = userOptional.get();
                 ....
             } */
+
             missionOptional.ifPresent(mission -> userOptional.ifPresent(user -> {
                 if (Objects.equals(mission.getAnswer(), answer)) {
                     mission.setAttendCnt(+1);
@@ -177,12 +179,19 @@ public class MissionService {
         }
     }
 
-    public DTO.Response captureMission(Integer missionSeq, Integer userSeq, String image) {
+    public DTO.Response captureMission(Integer missionSeq, Integer userSeq, MultipartFile image) {
         DTO.Response response = new DTO.Response();
         response.setStatus("Fail");
         try {
             Optional<Mission> missionOptional = missionRepository.findBySeqAndDelYn(missionSeq, "N");
             Optional<CaptureMission> captureMissionOptional = captureMissionRepository.findByMissionSeqAndDelYn(missionSeq, "Y");
+
+            Base64.Encoder encoder = Base64.getEncoder();
+
+            byte[] photoEncode = encoder.encode(image.getBytes());
+            String strImg = new String(photoEncode, "UTF8");
+            System.out.println(strImg);
+
 
             if(captureMissionOptional.isPresent()){
                 throw new IllegalStateException("이미 신청한 미션입니다.");
@@ -193,7 +202,7 @@ public class MissionService {
 
                 CaptureMission captureMission = builder.userSeq(userSeq)
                         .missionSeq(missionSeq)
-                        .image(image)
+                        .image(strImg)
                         .build();
 
                 captureMissionRepository.save(captureMission);

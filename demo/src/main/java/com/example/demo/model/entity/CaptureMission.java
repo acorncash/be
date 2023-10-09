@@ -25,6 +25,7 @@ public class CaptureMission {
     private Integer missionSeq;
 
     @NotNull
+    @Column(columnDefinition = "LONGTEXT")
     private String image;
 
     @NotNull
