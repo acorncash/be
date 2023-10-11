@@ -30,6 +30,32 @@ async function updateMissions() {
     }
 }
 
+async function uploadImage(seq, input) {
+    let file = input.files[0]
+    let data = new FormData()
+    data.append("image", file);
+
+    let reader = new FileReader(); 
+    reader.onload = function(e) {
+
+        $(input).prev('img').attr("src", e.target.result);
+    }
+
+    reader.readAsDataURL(file);
+
+    let response = await fetch(`/api/mission/${seq}/image`, {
+        method: "put",
+        cache: 'no-cache',
+        credentials: "same-origin",
+        body: data
+    }).then(() => {
+        alert("사진이 변경되었습니다.")
+        location.reload()
+    }).catch(() => {
+        alert("오류가 발생하였습니다.")
+    })
+}
+
 function createMission(type) {
     const lastSeq = parseInt($('#MC_01_tbody').find('tr').last().find('.missionSeq').text()) + 1
     const row = $('<tr>' 
@@ -51,6 +77,10 @@ function createMission(type) {
     </td>`
     + '<td>0</td>'
     + '</tr>')
+
+    if (type === 'C') {
+        row.append(`<td>저장 후 사진선택이 가능합니다.</td>`)
+    }
 
     $('#MC_01_tbody').append(row)
 }

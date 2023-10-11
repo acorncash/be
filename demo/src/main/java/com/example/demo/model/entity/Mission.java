@@ -32,6 +32,7 @@ public class Mission {
 
     private String url;
 
+    @Column(columnDefinition = "LONGTEXT")
     private String image;
 
     @NotNull

@@ -30,6 +30,12 @@
 	<script src="/js/componenet/pagingComponent.js"></script>
 	<script src="/js/mission/missionList.js"></script>
 	<script src="/js/common/header.js"></script>
+	<style>
+		.preview {
+			max-width: 9em;
+			max-height: 9em;
+		}
+	</style>
 </head>
 
 <body>
@@ -169,6 +175,8 @@
 									<col style="width: 80px;">
 									<col style="width: 100px;">
 									<col>
+									<col>
+									<col style="width: 120px;">
 								</colgroup>
 								<thead>
 								<tr>
@@ -183,6 +191,7 @@
 									<th>종료시간</th>
 									<th>sns종류</th>
 									<th>지급현황</th>
+									<th>예시사진</th>
 								</tr>
 								</thead>
 								<tbody id="MC_01_tbody">
@@ -203,6 +212,7 @@
 											<label><input th:name="snsType + ${mission.seq}" class="snsType" type="radio" value="0004" th:checked="${mission.snsType == '0004'}">무신사</label>
 										</td>
 										<td th:text="${mission.attendCnt}"></td>
+										<td><img class="preview" th:src="'data:image;base64,' + ${mission.image}"><label><input type="file" class="image" th:onchange="uploadImage([[${mission.seq}]], this)" style="display: none;">파일선택</label></td>
 									</tr>
 								</tbody>
 							</table>

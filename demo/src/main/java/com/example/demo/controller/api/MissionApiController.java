@@ -1,17 +1,23 @@
 package com.example.demo.controller.api;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.example.demo.model.form.CaptureMissionFormRequest;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.Mission;
+import com.example.demo.model.form.CaptureMissionFormRequest;
 import com.example.demo.model.form.MissionAddFormRequest;
 import com.example.demo.model.form.MissionFormRequest;
 import com.example.demo.service.MissionService;
@@ -19,7 +25,6 @@ import com.example.demo.service.MissionService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,6 +50,11 @@ public class MissionApiController {
     @PutMapping("rows")
     public void updateRows(@Valid @RequestBody Map<Long, MissionAddFormRequest> formRequest) {
         missionService.updateRows(formRequest);
+    }
+
+    @PutMapping("{seq}/image")
+    public void uploadImage(@PathVariable Long seq, @RequestPart(value = "image", required = false) MultipartFile image) {
+        missionService.uploadImage(seq, image);
     }
 
     @GetMapping("missionByType/{type}")

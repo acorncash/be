@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -34,6 +35,8 @@ public class MissionService {
     private final DotoliInterface dotoliRepository;
     private final CaptureMissionInterface captureMissionRepository;
 
+    Base64.Encoder encoder = Base64.getEncoder();
+
     public List<Mission> getMissionAll() {
         return missionRepository.findAlLMissionByDelYn("N");
     }
@@ -65,6 +68,15 @@ public class MissionService {
                 update(missOptional.get(), form.get(k));
             else
                 createMission(form.get(k));
+        });
+    }
+
+    public void uploadImage(Long seq, MultipartFile image) {
+        missionRepository.findById(seq).ifPresent(mission -> {
+            String strImg = convertImageToBase64(image).orElse("");
+            mission.setImage(strImg);
+
+            missionRepository.save(mission);
         });
     }
 
@@ -185,16 +197,14 @@ public class MissionService {
         try {
             Optional<Mission> missionOptional = missionRepository.findBySeqAndDelYn(missionSeq, "N");
             Optional<CaptureMission> captureMissionOptional = captureMissionRepository.findByMissionSeqAndDelYn(missionSeq, "Y");
-
-            Base64.Encoder encoder = Base64.getEncoder();
-
-            byte[] photoEncode = encoder.encode(image.getBytes());
-            String strImg = new String(photoEncode, "UTF8");
-            System.out.println(strImg);
-
+            Optional<String> imageOptional = convertImageToBase64(image);
 
             if(captureMissionOptional.isPresent()){
                 throw new IllegalStateException("이미 신청한 미션입니다.");
+            }
+
+            if (imageOptional.isEmpty()) {
+                throw new FileNotFoundException("이미지를 찾을 수 없습니다.");
             }
 
             missionOptional.ifPresent(mission -> {
@@ -202,7 +212,7 @@ public class MissionService {
 
                 CaptureMission captureMission = builder.userSeq(userSeq)
                         .missionSeq(missionSeq)
-                        .image(strImg)
+                        .image(imageOptional.get())
                         .build();
 
                 captureMissionRepository.save(captureMission);
@@ -241,5 +251,22 @@ public class MissionService {
 
     public void deleteById(Long id) {
         missionRepository.deleteById(id);
+    }
+
+    private Optional<String> convertImageToBase64(MultipartFile image) {
+        Optional<String> result;
+        try {
+            if (image != null) {
+                byte[] photoEncode = encoder.encode(image.getBytes());
+                result = Optional.of(new String(photoEncode, "UTF8"));
+            } else
+                result = Optional.empty();
+        } catch (Exception e) {
+            result = Optional.empty();
+            System.out.println("이미지 변환중 오류가 발생했습니다.");
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }
