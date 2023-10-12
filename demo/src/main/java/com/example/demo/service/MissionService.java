@@ -52,7 +52,8 @@ public class MissionService {
                 .description(form.getDescription())
                 .url(form.getUrl())
                 .dotoli(form.getDotoli())
-                .limitCnt(form.getLimitCount())
+                .resetCnt(form.getResetCnt())
+                .limitCnt(form.getLimitCnt())
                 .startAt(form.getStartAt())
                 .endAt(form.getEndAt())
                 .snsType(form.getSnsType().getCode())
@@ -87,7 +88,8 @@ public class MissionService {
             mission.setDescription(form.getDescription());
             mission.setUrl(form.getUrl());
             mission.setDotoli(form.getDotoli());
-            mission.setLimitCnt(form.getLimitCount());
+            mission.setResetCnt(form.getResetCnt());
+            mission.setLimitCnt(form.getLimitCnt());
             mission.setStartAt(form.getStartAt());
             mission.setEndAt(form.getEndAt());
             mission.setSnsType(form.getSnsType().getCode());
@@ -100,6 +102,24 @@ public class MissionService {
 
     public List<Mission> getMissionByMissionType(String type) {
         return missionRepository.findByMissionTypeAndDelYn(type, "N");
+    }
+
+    public List<Mission> getMissionByMissionType(Integer userSeq, String type) {
+        List<Mission> missionList = missionRepository.findByMissionTypeAndDelYn(type, "N");
+        List<Mission> returnMissionList = new ArrayList<>();
+
+        for (Mission mission : missionList) {
+            System.out.println(userSeq);
+            System.out.println(mission.getSeq());
+            System.out.println(mission.getResetCnt());
+
+            Optional<Dotoli> dotoli = dotoliRepository.findTopByUserSeqAndMissionSeqOrderByCreatAtAsc(userSeq, mission.getSeq(), mission.getResetCnt());
+            if(dotoli.isPresent()){
+                returnMissionList.add(mission);
+            }
+        }
+
+        return returnMissionList;
     }
 
     public DTO.Response addMission(MissionFormRequest form) {

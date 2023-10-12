@@ -60,7 +60,7 @@ public class WithdrawService {
                         .userSeq(form.getUserSeq())
                         .dotoli(form.getDotoli())
                         .bankAccountNumber(form.getBankAccountNumber())
-                        .bankAccountName(form.getBankAccountNumber())
+                        .bankAccountName(form.getBankAccountName())
                         .withdrawYn("N")
                         .build();
 

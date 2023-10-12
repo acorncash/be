@@ -46,6 +46,10 @@ public class Mission {
 
     @NotNull
     @Builder.Default
+    private Integer resetCnt = 0;
+
+    @NotNull
+    @Builder.Default
     private Integer attendCnt = 0;
 
     @NotNull

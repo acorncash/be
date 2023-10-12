@@ -57,9 +57,11 @@ public class MissionApiController {
         missionService.uploadImage(seq, image);
     }
 
-    @GetMapping("missionByType/{type}")
-    public List<Mission> getMissionByMissionType(@PathVariable String type) {
-        return missionService.getMissionByMissionType(type);
+    @GetMapping("missionByType/{userSeq}/{type}")
+    public List<Mission> getMissionByMissionType(@PathVariable Integer userSeq, @PathVariable String type) {
+        System.out.println(userSeq);
+        System.out.println(type);
+        return missionService.getMissionByMissionType(userSeq, type);
     }
 
     @PostMapping("addMission")
