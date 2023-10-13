@@ -1,5 +1,6 @@
 package com.example.demo.controller.web;
 
+import com.example.demo.service.CaptureMissionService;
 import com.example.demo.service.MissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MissionController {
     private final MissionService missionService;
+    private final CaptureMissionService captureMissionService;
 
     @GetMapping("answer")
     public String answerList(Model model) {
@@ -34,6 +36,8 @@ public class MissionController {
 
     @GetMapping("content")
     public String contentList(Model model) {
+        model.addAttribute("captureMissions", captureMissionService.getAll());
+        
         return "mission/contentList";
     }
 }

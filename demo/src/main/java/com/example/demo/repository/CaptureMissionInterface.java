@@ -1,12 +1,17 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.entity.CaptureMission;
-import com.example.demo.model.entity.Mission;
-import jakarta.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import com.example.demo.model.entity.CaptureMission;
 
 public interface CaptureMissionInterface extends JpaRepository<CaptureMission, Long> {
     Optional<CaptureMission> findByMissionSeqAndDelYn(Integer missionSeq, String delYn);
+
+    @Override
+    @EntityGraph(attributePaths = {"user", "mission"})
+    List<CaptureMission> findAll();
 }
