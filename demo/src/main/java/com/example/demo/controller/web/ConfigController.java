@@ -1,5 +1,6 @@
 package com.example.demo.controller.web;
 
+import com.example.demo.model.entity.Notice;
 import com.example.demo.service.MissionService;
 import com.example.demo.service.NoticeService;
 import com.example.demo.service.WithdrawService;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequiredArgsConstructor
@@ -25,8 +27,17 @@ public class ConfigController {
         return "config/noticeList";
     }
 
-    @GetMapping("noticeDtl")
+    @GetMapping("noticeDtl/new")
     public String noticeDtlList(Model model) {
+        model.addAttribute("notice", new Notice());
+        
+        return "config/noticeDtl";
+    }
+
+    @GetMapping("noticeDtl/{seq}")
+    public String noticeDtlList(Model model, @PathVariable Integer seq) {
+        model.addAttribute("notice", noticeService.findById(seq));
+        
         return "config/noticeDtl";
     }
 
