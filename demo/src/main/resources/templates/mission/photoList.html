@@ -73,7 +73,7 @@
 							<li  id="svcApplyList" class="menu svcApplyList"><a  href="/mission/answer">정답미션</a></li>
 							<li  id="svcDocApplyList" class="menu svcDocApplyList"><a  href="/mission/doit">수행미션</a></li>
 							<li  id="inquiry" class="menu inquiry"><a href="/mission/photo">캡쳐미션</a></li>
-							<li  id="docInquiry" class="menu docInquiry"><a href="/mission/content">컨텐츠 등록 및 현황</a></li>
+							<li  id="docInquiry" class="menu docInquiry"><a href="/mission/content">미션수행 관리</a></li>
 						</ul>
 					</li>
 					<li class="upperMenu">
@@ -94,23 +94,6 @@
 			<div class="page-tit">
 				<h3>캡쳐미션</h3>
 			</div>
-			<div class="contents">
-				<div class="application-status">
-					<ul>
-						<li>
-							<strong>총회원수</strong>
-							<span id="totalCnt" th:text="${allUserCount}"></span>
-						</li>
-						<li>
-							<strong>오늘 신규가입자</strong>
-							<span id="newCnt" th:text="${todayRegisterUserCount}"></span>
-						</li>
-						<li>
-							<strong>차단</strong>
-							<span id="blockCnt" th:text="${blockUserCount}"></span>
-						</li>
-					</ul>
-				</div>
 
 				<div class="search-condition">
 					<h4 class="skip">검색조건</h4>
