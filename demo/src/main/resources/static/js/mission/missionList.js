@@ -84,3 +84,21 @@ function createMission(type) {
 
     $('#MC_01_tbody').append(row)
 }
+
+async function confirmMission(confirmYn, missionSeq) {
+    if (confirm(`선택된 미션을 ${confirmYn === 'Y' ? '승인' : '거절'}하시겠습니까?`)) {
+        let response = await fetch(`/api/mission/capture/${missionSeq}/confirm?confirmYn=${confirmYn}`, {
+            method: "put",
+            cache: 'no-cache',
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then(() => {
+            alert("처리 되었습니다.")
+            location.reload()
+        }).catch(() => {
+            alert("오류가 발생하였습니다.")
+        })
+    }
+}

@@ -45,7 +45,8 @@ public class Notice {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date postTo = new Date();
     @NotNull
-    private String status;
+    @Builder.Default
+    private String status = "1";
     @NotNull
     private Boolean topStatus;
     @NotNull

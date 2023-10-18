@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,7 @@ import com.example.demo.model.entity.Mission;
 import com.example.demo.model.form.CaptureMissionFormRequest;
 import com.example.demo.model.form.MissionAddFormRequest;
 import com.example.demo.model.form.MissionFormRequest;
+import com.example.demo.service.CaptureMissionService;
 import com.example.demo.service.MissionService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/mission")
 public class MissionApiController {
     private final MissionService missionService;
+    private final CaptureMissionService captureMissionService;
 
     @GetMapping("")
     public List<Mission> getMissionAll() {
@@ -90,6 +93,11 @@ public class MissionApiController {
         System.out.println(formRequest.getUserSeq());
         System.out.println(formRequest.getImage());
         return missionService.captureMission(formRequest.getMissionSeq(), formRequest.getUserSeq(), formRequest.getImage());
+    }
+
+    @PutMapping("capture/{seq}/confirm")
+    public void confirmCaptureMission(@PathVariable Long seq, @RequestParam String confirmYn) {
+        captureMissionService.confirmMission(seq, confirmYn);
     }
 
     @PutMapping("{id}")

@@ -46,4 +46,14 @@ public class CaptureMission {
     @Builder.Default
     @Column(length = 1)
     private String delYn = "N";
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Builder.Default
+    @JoinColumn(name = "userSeq", insertable = false, updatable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)
+    private User user = new User();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Builder.Default
+    @JoinColumn(name = "missionSeq", insertable = false, updatable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)
+    private Mission mission = new Mission();
 }

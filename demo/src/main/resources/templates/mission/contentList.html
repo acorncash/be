@@ -28,7 +28,7 @@
 
 	<script src="/js/componenet/apiComponent.js"></script>
 	<script src="/js/componenet/pagingComponent.js"></script>
-	<script src="/js/member/memberList.js"></script>
+	<script src="/js/mission/missionList.js"></script>
 	<script src="/js/common/header.js"></script>
 </head>
 
@@ -73,7 +73,7 @@
 							<li  id="svcApplyList" class="menu svcApplyList"><a  href="/mission/answer">정답미션</a></li>
 							<li  id="svcDocApplyList" class="menu svcDocApplyList"><a  href="/mission/doit">수행미션</a></li>
 							<li  id="inquiry" class="menu inquiry"><a href="/mission/photo">캡쳐미션</a></li>
-							<li  id="docInquiry" class="menu docInquiry"><a href="/mission/content">컨텐츠 등록 및 현황</a></li>
+							<li  id="docInquiry" class="menu docInquiry"><a href="/mission/content">미션수행 관리</a></li>
 						</ul>
 					</li>
 					<li class="upperMenu">
@@ -95,23 +95,6 @@
 				<h3>수행미션</h3>
 			</div>
 			<div class="contents">
-				<div class="application-status">
-					<ul>
-						<li>
-							<strong>총회원수</strong>
-							<span id="totalCnt" th:text="${allUserCount}"></span>
-						</li>
-						<li>
-							<strong>오늘 신규가입자</strong>
-							<span id="newCnt" th:text="${todayRegisterUserCount}"></span>
-						</li>
-						<li>
-							<strong>차단</strong>
-							<span id="blockCnt" th:text="${blockUserCount}"></span>
-						</li>
-					</ul>
-				</div>
-
 				<div class="search-condition">
 					<h4 class="skip">검색조건</h4>
 					<div class="wrap">
@@ -168,38 +151,31 @@
 									<col style="width: 60px;">
 									<col style="width: 130px;">
 									<col style="width: 130px;">
-									<col style="width: 80px;">
-									<col style="width: 100px;">
-									<col style="width: 100px;">
 								</colgroup>
 								<thead>
 								<tr>
-									<th><input type="checkbox" id="MC_01_selectAll" onclick="javascript:$('.MC_01_chk').prop('checked',this.checked);"></th>
 									<th>번호</th>
-									<th>형태</th>
-									<th>제목</th>
-									<th>설명글</th>
-									<th>링크</th>
-									<th>제공포인트</th>
-									<th>갯수제한</th>
-									<th>시작시간</th>
-									<th>종료시간</th>
-									<th>수행횟수</th>
+									<th>미션명</th>
+									<th>사용자</th>
+									<th>등록일</th>
+									<th>사진</th>
+									<th>승인여부</th>
+									<th>승인일시</th>
+									<th>처리</th>
 								</tr>
 								</thead>
 								<tbody id="MC_01_tbody">
-								<tr>
-									<td><input type="checkbox" class="MC_01_chk"></td>
-									<td></td>
-									<td></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td>text 구현</td>
+								<tr th:each="capture : ${captureMissions}">
+									<td th:text="${capture.seq}"></td>
+									<td th:text="${capture.mission.title}"></td>
+									<td th:text="${capture.user.name}"></td>
+									<td th:text="${#dates.format(capture.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+									<td th:if="${capture.image != null && capture.image != ''}"><img th:src="'data:image;base64,' + ${capture.image}"></td>
+									<td th:if="${capture.image == null || capture.image == ''}">등록된 이미지가 없습니다.</td>
+									<td th:text="${capture.confirmYn}"></td>
+									<td th:text="${#dates.format(capture.confirmAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+									<td th:if="${capture.confirmYn == ''}"><button th:onclick="confirmMission('Y', [[${capture.seq}]])">승인</button>/<button th:onclick="confirmMission('N', [[${capture.seq}]])">거절</button></td>
+									<td th:if="${capture.confirmYn != ''}"></td>
 								</tr>
 								</tbody>
 							</table>

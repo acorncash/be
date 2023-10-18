@@ -28,7 +28,7 @@
 
 	<script src="/js/componenet/apiComponent.js"></script>
 	<script src="/js/componenet/pagingComponent.js"></script>
-	<script src="/js/member/memberList.js"></script>
+	<script src="/js/config/noticeDtl.js"></script>
 	<script src="/js/common/header.js"></script>
 </head>
 
@@ -81,7 +81,7 @@
 							<li  id="svcApplyList" class="menu svcApplyList"><a  href="/mission/answer">정답미션</a></li>
 							<li  id="svcDocApplyList" class="menu svcDocApplyList"><a  href="/mission/doit">수행미션</a></li>
 							<li  id="inquiry" class="menu inquiry"><a href="/mission/photo">캡쳐미션</a></li>
-							<li  id="docInquiry" class="menu docInquiry"><a href="/mission/content">컨텐츠 등록 및 현황</a></li>
+							<li  id="docInquiry" class="menu docInquiry"><a href="/mission/content">미션수행 관리</a></li>
 						</ul>
 					</li>
 					<li class="upperMenu">
@@ -106,70 +106,72 @@
 				<h3>공지사항 상세</h3>
 			</div>
 			<div class="contents">
-				<div class="row-table">
-					<table class="table">
-						<caption></caption>
-						<colgroup>
-							<col style="width: 130px;">
-							<col style="width: 220px;">
-							<col style="width: 130px;">
-							<col style="width: 220px;">
-							<col style="width: 130px;">
-							<col style="width: 220px;">
-							<col style="width: 130px;">
-							<col style="width: 220px;">
-						</colgroup>
-						<tbody>
-						<tr>
-							<th>게시시작일</th>
-							<td colspan="2">
-								<input type="date" class="form-control w-md required" onkeydown="event.preventDefault();" id="startDt" placeholder="게시시작일을 입력하세요.">
-							</td>
-							<th>게시종료일</th>
-							<td colspan="2">
-								<input type="date" class="form-control w-md required" onkeydown="event.preventDefault();" id="endDt" placeholder="게시종료일을 입력하세요.">
-							</td>
-							<th>상단게시여부</th>
-							<td>
-								<input type="checkbox" class="form-control w-sm" id="flagYn">
-							</td>
-						</tr>
-						<tr>
-							<th>제목</th>
-							<td colspan="7">
-								<input type="text" class="form-control required" id="title" placeholder="제목을 입력하세요." maxlength="50">
-							</td>
-						</tr>
-						<tr class="min-h">
-							<th>내용</th>
-							<td colspan="7">
-								<textarea class="form-control required" rows="10" id="contents" placeholder="내용을 입력하세요."></textarea>
-							</td>
-						</tr>
-						<tr>
-							<th>첨부파일</th>
-							<td colspan="7">
-								<div class="file-upload w-full">
-									<input type="hidden" id="fileKey" value="N">
-									<input type="text" readonly="readonly" value="*파일 첨부시 드래그를 통해 파일을 여러개 등록할 수 있습니다.">
-									<label>파일첨부<input id="fileList" type="file" multiple="multiple" onchange="fileSet(this);"></label>
-								</div>
-								<ul class="upload-file">
-								</ul>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-
-				<div class="action-btn-group">
-					<div class="center">
-						<button type="button" class="btn btn-light btn-lg min-w" onclick="pageMove('/settings/noticeList');">취소</button>
-						<button id="insertBtn" type="button" class="btn btn-primary btn-lg min-w" style="display:none;">등록</button>
-						<button id="updateBtn" type="button" class="btn btn-primary btn-lg min-w" style="display:none;">수정</button>
-						<button id="removeBtn" type="button" class="btn btn-dark btn-lg min-w" style="display:none;">삭제</button>
+				<form th:action="@{/api/config/{seq}(seq = ${notice.seq == null ? 'new' : notice.seq})}" th:method="${notice.seq == null ? 'post' : 'put'}" th:object="${notice}">
+					<div class="row-table">
+						<table class="table">
+							<caption></caption>
+							<colgroup>
+								<col style="width: 130px;">
+								<col style="width: 220px;">
+								<col style="width: 130px;">
+								<col style="width: 220px;">
+								<col style="width: 130px;">
+								<col style="width: 220px;">
+								<col style="width: 130px;">
+								<col style="width: 220px;">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>게시시작일</th>
+									<td colspan="2">
+										<input type="datetime" class="form-control required" th:field="*{postFrom}" placeholder="게시시작일을 입력하세요.">
+									</td>
+									<th>게시종료일</th>
+									<td colspan="2">
+										<input type="datetime" class="form-control required" th:field="*{postTo}" placeholder="게시종료일을 입력하세요.">
+									</td>
+									<th>상단게시여부</th>
+									<td>
+										<input type="checkbox" class="form-control w-sm" th:field="*{topStatus}">
+									</td>
+								</tr>
+								<tr>
+									<th>제목</th>
+									<td colspan="7">
+										<input type="text" class="form-control required" th:field="*{title}" placeholder="제목을 입력하세요." maxlength="50">
+									</td>
+								</tr>
+								<tr class="min-h">
+									<th>내용</th>
+									<td colspan="7">
+										<textarea class="form-control required" rows="10" th:field="*{content}" placeholder="내용을 입력하세요."></textarea>
+									</td>
+								</tr>
+								<!-- <tr>
+									<th>첨부파일</th>
+									<td colspan="7">
+										<div class="file-upload w-full">
+											<input type="hidden" id="fileKey" value="N">
+											<input type="text" readonly="readonly" value="*파일 첨부시 드래그를 통해 파일을 여러개 등록할 수 있습니다.">
+											<label>파일첨부<input id="fileList" type="file" multiple="multiple" onchange="fileSet(this);"></label>
+										</div>
+										<ul class="upload-file">
+										</ul>
+									</td>
+								</tr> -->
+							</tbody>
+						</table>
 					</div>
-				</div>
+	
+					<div class="action-btn-group">
+						<div class="center">
+							<button th:if="${notice.seq == null}" id="insertBtn" type="submit" class="btn btn-primary btn-lg min-w">등록</button>
+							<button th:if="${notice.seq != null}" id="updateBtn" type="submit" class="btn btn-primary btn-lg min-w">수정</button>
+							<button th:if="${notice.seq != null}" id="removeBtn" type="button" th:onclick="removeNotice([[${notice.seq}]])" class="btn btn-dark btn-lg min-w">삭제</button>
+							<button type="button" class="btn btn-light btn-lg min-w" onclick="location.href = '/config/notice'">취소</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</section>
 	</div>
