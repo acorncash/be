@@ -114,7 +114,7 @@ public class MissionService {
             System.out.println(mission.getResetCnt());
 
             Optional<Dotoli> dotoli = dotoliRepository.findTopByUserSeqAndMissionSeqOrderByCreatAtAsc(userSeq, mission.getSeq(), mission.getResetCnt());
-            if(dotoli.isPresent()){
+            if(dotoli.isEmpty()){
                 returnMissionList.add(mission);
             }
         }

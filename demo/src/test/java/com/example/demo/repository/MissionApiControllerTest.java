@@ -24,15 +24,15 @@ public class MissionApiControllerTest {
 
     @Test
     void getSelectTest(){
-        List<Mission> missionList = missionService.getMissionAll();
-        for (Mission mission : missionList) {
-            System.out.println(mission.getSeq());
-        }
+//        List<Mission> missionList = missionService.getMissionAll();
+//        for (Mission mission : missionList) {
+//            System.out.println(mission.getSeq());
+//        }
+//
+//        Optional<Mission> missionByMissionSeq = missionService.getMissionByMissionSeq(502);
+//        System.out.println(missionByMissionSeq.get().getSeq());
 
-        Optional<Mission> missionByMissionSeq = missionService.getMissionByMissionSeq(502);
-        System.out.println(missionByMissionSeq.get().getSeq());
-
-        List<Mission> missionListByMissionType = missionService.getMissionByMissionType("A");
+        List<Mission> missionListByMissionType = missionService.getMissionByMissionType(809,"A");
         for (Mission mission : missionListByMissionType) {
             System.out.println(mission.getSeq());
         }

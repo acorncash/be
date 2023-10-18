@@ -22,6 +22,6 @@ public interface DotoliInterface extends JpaRepository<Dotoli, Long> {
 
     List<Dotoli> findByMissionSeqAndIpAddress(Integer missionSeq, String ipAddress);
 
-    @Query(" SELECT d FROM dotoli d WHERE d.userSeq = :userSeq AND d.missionSeq = :missionSeq AND SUBDATE(d.createAt, -:resetCnt) < NOW() ORDER BY d.createAt DESC LIMIT 1 ")
+    @Query(" SELECT d FROM dotoli d WHERE d.userSeq = :userSeq AND d.missionSeq = :missionSeq AND SUBDATE(d.createAt, -:resetCnt) >= date_format(NOW(), '%Y-%m-%d') ORDER BY d.createAt DESC LIMIT 1 ")
     Optional<Dotoli> findTopByUserSeqAndMissionSeqOrderByCreatAtAsc(@Param("userSeq") Integer userSeq, @Param("missionSeq") Integer missionSeq, @Param("resetCnt") Integer resetCnt);
 }
