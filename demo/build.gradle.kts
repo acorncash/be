@@ -31,7 +31,8 @@ dependencies {
 	implementation("javax.annotation:javax.annotation-api:1.3.2")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-
+	compileOnly("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok")
 }
 
 tasks.withType<Test> {
