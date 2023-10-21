@@ -87,6 +87,11 @@ public class MissionApiController {
         return missionService.answerMission(missionSeq, userSeq, answer, request.getRemoteAddr());
     }
 
+    @PostMapping("pressMission/{missionSeq}/{userSeq}")
+    public DTO.Response pressMission(@PathVariable Integer missionSeq, @PathVariable Integer userSeq, HttpServletRequest request) {
+        return missionService.pressMission(missionSeq, userSeq, request.getRemoteAddr());
+    }
+
     @PostMapping("captureMission")
     public DTO.Response captureMission(@Valid CaptureMissionFormRequest formRequest) {
         System.out.println(formRequest.getMissionSeq());

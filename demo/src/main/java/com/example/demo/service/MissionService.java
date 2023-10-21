@@ -211,6 +211,56 @@ public class MissionService {
         }
     }
 
+    public DTO.Response pressMission(Integer missionSeq, Integer userSeq, String ipAddress) {
+        DTO.Response response = new DTO.Response();
+        response.setStatus("Fail");
+        try {
+            Optional<Mission> missionOptional = missionRepository.findBySeqAndDelYn(missionSeq, "N");
+            Optional<User> userOptional = userRepository.findBySeqAndDelYn(userSeq, "N");
+            List<Dotoli> dotoliList = dotoliRepository.findByMissionSeqAndIpAddress(missionSeq, ipAddress);
+
+            if(!dotoliList.isEmpty()){
+                throw new IllegalStateException("해당 IP로 이미 미션을 수행한 이력이 있습니다.");
+            }
+
+            if (missionOptional.isPresent() && userOptional.isPresent()) {
+                Mission mission = missionOptional.get();
+                User user = userOptional.get();
+
+                mission.setAttendCnt(+1);
+
+                missionRepository.save(mission);
+
+                DotoliBuilder builder = Dotoli.builder();
+
+                    Dotoli dotoli = builder.userSeq(userSeq)
+                            .missionSeq(mission.getSeq())
+                            .missionTitle(mission.getTitle())
+                            .missionDotoli(mission.getDotoli())
+                            .userDotoli(user.getDotoli())
+                            .afterDotoli(user.getDotoli() + mission.getDotoli())
+                            .ipAddress(ipAddress)
+                            .build();
+
+                    dotoliRepository.save(dotoli);
+
+                    user.setDotoli(dotoli.getAfterDotoli());
+
+                    userRepository.save(user);
+
+                    response.setStatus("Success");
+            }
+
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus("Fail");
+            response.setMessage(e.getMessage());
+
+            return response;
+        }
+    }
+
     public DTO.Response captureMission(Integer missionSeq, Integer userSeq, MultipartFile image) {
         DTO.Response response = new DTO.Response();
         response.setStatus("Fail");
