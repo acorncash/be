@@ -54,6 +54,10 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
     }
 
+    public User findByEmail(String email) {
+        return userRepository.findByUserMail(email).orElseThrow(() -> new EntityNotFoundException("email"));
+    }
+
     public Optional<User> getUserBySocialKeyAndUserMail(String socialKey, String userMail){
         return userRepository.findBySocialKey(socialKey);
     }
