@@ -9,6 +9,8 @@ async function updateMissions() {
             row.find('input[type=text], input[type=datetime], input[type=hidden], input[type=radio]:checked').each((vIdx, vItem) => {
                 value[$(vItem).attr('class')] = $(vItem).val()
             })
+
+            value['attendCount'] = row.find('.attendCount').text()
             
             data.set(row.find('.missionSeq').text(), value)
         });
@@ -78,7 +80,7 @@ function createMission(type) {
         <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0003">카카오</label>
         <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0004">무신사</label>
     </td>`
-    + '<td>0</td>'
+    + '<td class="attendCount">0</td>'
     + '</tr>')
 
     if (type === 'C') {

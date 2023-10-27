@@ -194,7 +194,7 @@
 											<label><input th:name="snsType + ${mission.seq}" class="snsType" type="radio" value="0003" th:checked="${mission.snsType == '0003'}">카카오</label>
 											<label><input th:name="snsType + ${mission.seq}" class="snsType" type="radio" value="0004" th:checked="${mission.snsType == '0004'}">무신사</label>
 										</td>
-										<td th:text="${mission.attendCnt}"></td>
+										<td class="attendCount" th:text="${mission.attendCnt}"></td>
 										<td><img class="preview" th:src="'data:image;base64,' + ${mission.image}"><label><input type="file" class="image" th:onchange="uploadImage([[${mission.seq}]], this)" style="display: none;">파일선택</label></td>
 									</tr>
 								</tbody>

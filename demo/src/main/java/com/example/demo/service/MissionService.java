@@ -1,13 +1,16 @@
 package com.example.demo.service;
 
-import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.CaptureMission;
@@ -25,7 +28,6 @@ import com.example.demo.repository.MissionInterface;
 import com.example.demo.repository.UserInterface;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -52,8 +54,8 @@ public class MissionService {
                 .description(form.getDescription())
                 .url(form.getUrl())
                 .dotoli(form.getDotoli())
-                .resetCnt(form.getResetCnt())
-                .limitCnt(form.getLimitCnt())
+                .attendCnt(form.getAttendCount())
+                .limitCnt(form.getLimitCount())
                 .startAt(form.getStartAt())
                 .endAt(form.getEndAt())
                 .snsType(form.getSnsType().getCode())
@@ -88,8 +90,8 @@ public class MissionService {
             mission.setDescription(form.getDescription());
             mission.setUrl(form.getUrl());
             mission.setDotoli(form.getDotoli());
-            mission.setResetCnt(form.getResetCnt());
-            mission.setLimitCnt(form.getLimitCnt());
+            mission.setAttendCnt(form.getAttendCount());
+            mission.setLimitCnt(form.getLimitCount());
             mission.setStartAt(form.getStartAt());
             mission.setEndAt(form.getEndAt());
             mission.setSnsType(form.getSnsType().getCode());

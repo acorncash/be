@@ -1,5 +1,7 @@
 package com.example.demo.model.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public enum SnsType {
     NAVER("0001"), INSTAGRAM("0002"), KAKAO("0003"), MUSINSA("0004");
 
@@ -11,5 +13,16 @@ public enum SnsType {
 
     public String getCode() {
         return this.code;
+    }
+
+    @JsonCreator
+    public static SnsType parseEnum(String code) {
+        for (SnsType snsType : SnsType.values()) {
+            if (snsType.getCode().equals(code)) {
+                return snsType;
+            }
+        }
+
+        return null;
     }
 }

@@ -16,8 +16,8 @@ public class MissionAddFormRequest {
     private String description;
     private String url;
     private Integer dotoli;
-    private Integer limitCnt;
-    private Integer resetCnt;
+    private Integer limitCount;
+    private Integer attendCount;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date startAt;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
