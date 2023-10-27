@@ -57,7 +57,10 @@ async function uploadImage(seq, input) {
 }
 
 function createMission(type) {
-    const lastSeq = parseInt($('#MC_01_tbody').find('tr').last().find('.missionSeq').text()) + 1
+    const lastSeq = (parseInt($('#MC_01_tbody').find('tr').last().find('.missionSeq').text()) || 0) + 1
+    const date = new Date()
+    const currentDateTimeString = `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())} ${pad2(date.getHours())}:${pad2(date.getMinutes())}:${pad2(date.getSeconds())}`;
+
     const row = $('<tr>' 
     + `<input type="hidden" class="missionType" value="${type}" readonly>`
     + '<td><input type="checkbox" class="MC_01_chk" checked></td>'
@@ -67,8 +70,8 @@ function createMission(type) {
     + '<td><input type="text" class="url"/></td>'
     + '<td><input type="text" class="dotoli"/></td>'
     + '<td><input type="text" class="limitCount"/></td>'
-    + '<td><input type="datetime" class="startAt"/></td>'
-    + '<td><input type="datetime" class="endAt"/></td>'
+    + `<td><input type="datetime" class="startAt" value="${currentDateTimeString}"/></td>`
+    + `<td><input type="datetime" class="endAt" value="${currentDateTimeString}"/></td>`
     + `<td>
         <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0001" checked/>네이버</label>
         <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0002">인스타</label>
@@ -83,6 +86,10 @@ function createMission(type) {
     }
 
     $('#MC_01_tbody').append(row)
+}
+
+function pad2(n) {
+    return (n < 10 ? '0' : '') + n;
 }
 
 async function confirmMission(confirmYn, missionSeq) {
