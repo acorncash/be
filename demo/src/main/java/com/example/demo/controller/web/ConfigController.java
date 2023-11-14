@@ -19,6 +19,7 @@ public class ConfigController {
     private final MissionService missionService;
     private final NoticeService noticeService;
     private final WithdrawService withdrawService;
+    private final CompanyService companyService;
 
     @GetMapping("notice")
     public String noticeList(Model model) {
@@ -49,5 +50,12 @@ public class ConfigController {
         model.addAttribute("waitingWithdrawCount", withdrawService.getCountByWithdraw("N"));
 
         return "config/withdrawList";
+    }
+
+    @GetMapping("company")
+    public String companyList(Model model) {
+        model.addAttribute("companyList", noticeService.getAll());
+
+        return "config/companyList";
     }
 }
