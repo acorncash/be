@@ -80,4 +80,10 @@ public class Mission {
     @NotNull
     @Builder.Default
     private String snsType = SnsType.NAVER.getCode();
+
+    private String keyword;
+
+    private String price;
+
+    private String mall;
 }

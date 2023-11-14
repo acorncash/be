@@ -31,6 +31,7 @@ dependencies {
 	implementation("javax.annotation:javax.annotation-api:1.3.2")
 	implementation("commons-codec:commons-codec:1.16.0")
 	implementation("com.googlecode.json-simple:json-simple:1.1.1")
+	implementation("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")

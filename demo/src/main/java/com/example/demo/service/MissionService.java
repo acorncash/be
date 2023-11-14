@@ -52,6 +52,9 @@ public class MissionService {
                 .missionType(form.getMissionType())
                 .title(form.getTitle())
                 .description(form.getDescription())
+                .keyword(form.getKeyword())
+                .price(form.getPrice())
+                .mall(form.getMall())
                 .url(form.getUrl())
                 .dotoli(form.getDotoli())
                 .attendCnt(form.getAttendCount())
@@ -88,7 +91,9 @@ public class MissionService {
         try {
             mission.setTitle(form.getTitle());
             mission.setDescription(form.getDescription());
-            mission.setUrl(form.getUrl());
+            mission.setKeyword(form.getKeyword());
+            mission.setPrice(form.getPrice());
+            mission.setMall(form.getMall());
             mission.setDotoli(form.getDotoli());
             mission.setAttendCnt(form.getAttendCount());
             mission.setLimitCnt(form.getLimitCount());
@@ -132,7 +137,9 @@ public class MissionService {
             Mission mission = builder.missionType(form.getMissionType())
                     .title(form.getTitle())
                     .description(form.getDescription())
-                    .url(form.getUrl())
+                    .keyword(form.getKeyword())
+                    .price(form.getPrice())
+                    .mall(form.getMall())
                     .image(form.getImage())
                     .dotoli(form.getDotoli())
                     .answer(form.getAnswer())
@@ -309,7 +316,9 @@ public class MissionService {
             missionOptional.ifPresent(mission -> {
                 mission.setTitle(form.getTitle());
                 mission.setDescription(form.getDescription());
-                mission.setUrl(form.getUrl());
+                mission.setKeyword(form.getKeyword());
+                mission.setPrice(form.getPrice());
+                mission.setMall(form.getMall());
                 mission.setImage(form.getImage());
                 mission.setDotoli(form.getDotoli());
                 mission.setAnswer(form.getAnswer());

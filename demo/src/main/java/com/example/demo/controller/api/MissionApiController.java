@@ -72,7 +72,9 @@ public class MissionApiController {
         System.out.println(formRequest.getMissionType());
         System.out.println(formRequest.getTitle());
         System.out.println(formRequest.getDescription());
-        System.out.println(formRequest.getUrl());
+        System.out.println(formRequest.getKeyword());
+        System.out.println(formRequest.getPrice());
+        System.out.println(formRequest.getMall());
         System.out.println(formRequest.getImage());
         System.out.println(formRequest.getDotoli());
         System.out.println(formRequest.getAnswer());

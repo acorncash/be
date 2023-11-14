@@ -63,31 +63,55 @@ function createMission(type) {
     const date = new Date()
     const currentDateTimeString = `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())} ${pad2(date.getHours())}:${pad2(date.getMinutes())}:${pad2(date.getSeconds())}`;
 
-    const row = $('<tr>' 
-    + `<input type="hidden" class="missionType" value="${type}" readonly>`
-    + '<td><input type="checkbox" class="MC_01_chk" checked></td>'
-    + `<td class="missionSeq">${lastSeq}</td>`
-    + '<td><input type="text" class="title"/></td>'
-    + '<td><input type="text" class="description"/></td>'
-    + '<td><input type="text" class="url"/></td>'
-    + '<td><input type="text" class="dotoli"/></td>'
-    + '<td><input type="text" class="limitCount"/></td>'
-    + `<td><input type="datetime" class="startAt" value="${currentDateTimeString}"/></td>`
-    + `<td><input type="datetime" class="endAt" value="${currentDateTimeString}"/></td>`
-    + `<td>
-        <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0001" checked/>네이버</label>
-        <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0002">인스타</label>
-        <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0003">카카오</label>
-        <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0004">무신사</label>
-    </td>`
-    + '<td class="attendCount">0</td>'
-    + '</tr>')
-
+    if (type != 'C') {
+        const row = $('<tr>'
+        + `<input type="hidden" class="missionType" value="${type}" readonly>`
+        + '<td><input type="checkbox" class="MC_01_chk" checked></td>'
+        + `<td class="missionSeq">${lastSeq}</td>`
+        + '<td><input type="text" class="title"/></td>'
+        + '<td><input type="text" class="description"/></td>'
+        + '<td><input type="text" class="keyword"/></td>'
+        + '<td><input type="text" class="price"/></td>'
+        + '<td><input type="text" class="mall"/></td>'
+        + '<td><input type="text" class="dotoli"/></td>'
+        + '<td><input type="text" class="limitCount"/></td>'
+        + `<td><input type="datetime" class="startAt" value="${currentDateTimeString}"/></td>`
+        + `<td><input type="datetime" class="endAt" value="${currentDateTimeString}"/></td>`
+        + `<td>
+            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0001" checked/>네이버</label>
+            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0002">인스타</label>
+            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0003">카카오</label>
+            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0004">무신사</label>
+        </td>`
+        + '<td class="attendCount">0</td>'
+        + '</tr>')
+        $('#MC_01_tbody').append(row)
+    }
     if (type === 'C') {
+        const row = $('<tr>'
+        + `<input type="hidden" class="missionType" value="${type}" readonly>`
+        + '<td><input type="checkbox" class="MC_01_chk" checked></td>'
+        + `<td class="missionSeq">${lastSeq}</td>`
+        + '<td><input type="text" class="title"/></td>'
+        + '<td><input type="text" class="description"/></td>'
+        + '<td><input type="text" class="url"/></td>'
+        + '<td><input type="text" class="dotoli"/></td>'
+        + '<td><input type="text" class="limitCount"/></td>'
+        + `<td><input type="datetime" class="startAt" value="${currentDateTimeString}"/></td>`
+        + `<td><input type="datetime" class="endAt" value="${currentDateTimeString}"/></td>`
+        + `<td>
+            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0001" checked/>네이버</label>
+            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0002">인스타</label>
+            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0003">카카오</label>
+            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0004">무신사</label>
+        </td>`
+        + '<td class="attendCount">0</td>'
+        + '</tr>')
         row.append(`<td>저장 후 사진선택이 가능합니다.</td>`)
+        $('#MC_01_tbody').append(row)
     }
 
-    $('#MC_01_tbody').append(row)
+
 }
 
 function pad2(n) {

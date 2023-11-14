@@ -4,6 +4,7 @@ import com.example.demo.model.entity.Notice;
 import com.example.demo.service.MissionService;
 import com.example.demo.service.NoticeService;
 import com.example.demo.service.WithdrawService;
+import com.example.demo.service.CompanyService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -54,7 +55,7 @@ public class ConfigController {
 
     @GetMapping("company")
     public String companyList(Model model) {
-        model.addAttribute("companyList", noticeService.getAll());
+        model.addAttribute("companys", companyService.getCompanyAll());
 
         return "config/companyList";
     }

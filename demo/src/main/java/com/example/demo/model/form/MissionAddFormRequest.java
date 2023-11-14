@@ -14,7 +14,10 @@ public class MissionAddFormRequest {
     private String missionType;
     private String title;
     private String description;
+    private String keyword;
     private String url;
+    private String price;
+    private String mall;
     private Integer dotoli;
     private Integer limitCount;
     private Integer attendCount;
