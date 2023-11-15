@@ -40,8 +40,11 @@ public class MissionApiControllerTest {
 //        for (Mission mission : missionListByMissionType) {
 //            System.out.println(mission.getSeq());
 //        }
-
-        userService.deleteById(102);
+        List<Mission> missionListByMissionType = missionService.getMissionByMissionType(809, "A");
+        for (Mission mission : missionListByMissionType) {
+            System.out.println(mission.getSeq());
+        }
+//        userService.deleteById(102);
     }
 
     @Test

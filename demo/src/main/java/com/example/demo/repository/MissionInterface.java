@@ -19,6 +19,8 @@ public interface MissionInterface extends JpaRepository<Mission, Long> {
 
     Optional<Mission> findBySeqAndDelYn(Integer seq, String delYn);
 
+    List<Mission> findByMissionTypeAndDelYn(String missionType, String delYn);
+
     @Query("SELECT m FROM mission m WHERE m.missionType = :missionType AND m.delYn = :delYn AND NOW() BETWEEN m.startAt AND m.endAt AND m.limitCnt > m.attendCnt")
-    List<Mission> findByMissionTypeAndDelYn(@Param("missionType") String missionType, @Param("delYn") String delYn);
+    List<Mission> findByMissionType(@Param("missionType") String missionType, @Param("delYn") String delYn);
 }

@@ -107,7 +107,7 @@ public class MissionService {
     }
 
     public List<Mission> getMissionByMissionType(Integer userSeq, String type) {
-        List<Mission> missionList = missionRepository.findByMissionTypeAndDelYn(type, "N");
+        List<Mission> missionList = missionRepository.findByMissionType(type, "N");
         List<Mission> returnMissionList = new ArrayList<>();
 
         for (Mission mission : missionList) {
