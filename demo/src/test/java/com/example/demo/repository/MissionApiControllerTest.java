@@ -46,7 +46,7 @@ public class MissionApiControllerTest {
         formRequest.setMissionType("A");
         formRequest.setTitle("타이틀");
         formRequest.setDescription("description");
-        formRequest.setUrl("url");
+//        formRequest.setUrl("url");
         formRequest.setImage("image");
         formRequest.setDotoli(1000);
         formRequest.setAnswer("정답은answer");

@@ -76,7 +76,7 @@ function createMission(type) {
         + '<td><input type="text" class="description"/></td>'
         + '<td><input type="text" class="keyword"/></td>'
         + '<td><input type="text" class="price"/></td>'
-        + '<td><input type="text" class="mall"/></td>'
+        + '<td>신규 등록 후 입력</td>'
         + '<td><input type="text" class="dotoli"/></td>'
         + '<td><input type="text" class="limitCount"/></td>'
         + `<td><input type="datetime" class="startAt" value="${currentDateTimeString}"/></td>`
