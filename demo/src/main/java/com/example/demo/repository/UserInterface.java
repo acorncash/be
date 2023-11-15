@@ -20,7 +20,7 @@ import java.util.Set;
 @Repository
 public interface UserInterface extends JpaRepository<User, Integer> {
 
-    List<User> findAllUserByDelYn(String delYn);
+    List<User> findAllUserByDelYnAndBlockYn(String delYn, String blockYn);
     Optional<User> findUserBySeqAndDelYn(Integer Seq, String delYn);
     Long countByCreateAtGreaterThanEqual(Date currentDate);
     Long countByBlockYn(String blockYn);

@@ -79,7 +79,7 @@ public class UserApiController {
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Integer id) {
+    public void deleteUser(@PathVariable Integer id) {
         userService.deleteById(id);
     }
 

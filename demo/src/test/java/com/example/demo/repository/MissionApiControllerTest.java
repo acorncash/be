@@ -4,6 +4,7 @@ import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.Mission;
 import com.example.demo.model.form.MissionFormRequest;
 import com.example.demo.service.MissionService;
+import com.example.demo.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -16,11 +17,14 @@ import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
-@Transactional
+//@Transactional
 public class MissionApiControllerTest {
 
     @Autowired
     private MissionService missionService;
+
+    @Autowired
+    private UserService userService;
 
     @Test
     void getSelectTest(){
@@ -32,10 +36,12 @@ public class MissionApiControllerTest {
 //        Optional<Mission> missionByMissionSeq = missionService.getMissionByMissionSeq(502);
 //        System.out.println(missionByMissionSeq.get().getSeq());
 
-        List<Mission> missionListByMissionType = missionService.getMissionByMissionType(809,"A");
-        for (Mission mission : missionListByMissionType) {
-            System.out.println(mission.getSeq());
-        }
+//        List<Mission> missionListByMissionType = missionService.getMissionByMissionType(809,"A");
+//        for (Mission mission : missionListByMissionType) {
+//            System.out.println(mission.getSeq());
+//        }
+
+        userService.deleteById(102);
     }
 
     @Test
