@@ -2,6 +2,7 @@ package com.example.demo.controller.web;
 
 import com.example.demo.service.CaptureMissionService;
 import com.example.demo.service.MissionService;
+import com.example.demo.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MissionController {
     private final MissionService missionService;
+    private final CompanyService companyService;
     private final CaptureMissionService captureMissionService;
 
     @GetMapping("answer")
     public String answerList(Model model) {
         model.addAttribute("missions", missionService.getMissionByMissionType("A"));
-
+        model.addAttribute("companys", companyService.getCompanyAll());
         return "mission/answerList";
     }
 

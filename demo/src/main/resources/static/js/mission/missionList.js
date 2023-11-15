@@ -1,18 +1,22 @@
 async function updateMissions() {
-    if($(".MC_01_chk:checked").length && confirm('선택된 미션을 수정하시겠습니까?')) {
+    if ($(".MC_01_chk:checked").length && confirm('선택된 미션을 수정하시겠습니까?')) {
         const data = new Map();
 
         $($(".MC_01_chk:checked")).each((idx, item) => {
-            const row = $(item).parent().parent();
-            const value = {}
+            const row = $(item).closest('tr');
+            const value = {};
 
             row.find('input[type=text], input[type=datetime], input[type=hidden], input[type=radio]:checked').each((vIdx, vItem) => {
-                value[$(vItem).attr('class')] = $(vItem).val()
-            })
+                value[$(vItem).attr('class')] = $(vItem).val();
+            });
 
-            value['attendCount'] = row.find('.attendCount').text()
-            
-            data.set(row.find('.missionSeq').text(), value)
+            // Handle select elements for 'mall'
+            const selectedMall = row.find('.mall').val();
+            value['mall'] = selectedMall;
+
+            value['attendCount'] = row.find('.attendCount').text();
+
+            data.set(row.find('.missionSeq').text(), value);
         });
 
         let response = await fetch(`/api/mission/rows`, {
@@ -24,11 +28,11 @@ async function updateMissions() {
             },
             body: JSON.stringify(Object.fromEntries(data))
         }).then(() => {
-            alert("수정되었습니다.")
-            location.reload()
+            alert("수정되었습니다.");
+            location.reload();
         }).catch(() => {
-            alert("오류가 발생하였습니다.")
-        })
+            alert("오류가 발생하였습니다.");
+        });
     }
 }
 
