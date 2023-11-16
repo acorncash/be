@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 public class MissionAddFormRequest {
     private String missionType;
+    private String answer;
     private String title;
     private String description;
     private String keyword;

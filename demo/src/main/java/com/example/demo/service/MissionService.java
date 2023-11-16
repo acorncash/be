@@ -50,6 +50,7 @@ public class MissionService {
     public void createMission(MissionAddFormRequest form) {
         Mission mission = Mission.builder()
                 .missionType(form.getMissionType())
+                .answer(form.getAnswer())
                 .title(form.getTitle())
                 .description(form.getDescription())
                 .keyword(form.getKeyword())
@@ -92,6 +93,7 @@ public class MissionService {
             mission.setTitle(form.getTitle());
             mission.setDescription(form.getDescription());
             mission.setKeyword(form.getKeyword());
+            mission.setAnswer(form.getAnswer());
             mission.setPrice(form.getPrice());
             mission.setMall(form.getMall());
             mission.setDotoli(form.getDotoli());
@@ -315,6 +317,7 @@ public class MissionService {
 
             missionOptional.ifPresent(mission -> {
                 mission.setTitle(form.getTitle());
+                mission.setAnswer(form.getAnswer());
                 mission.setDescription(form.getDescription());
                 mission.setKeyword(form.getKeyword());
                 mission.setPrice(form.getPrice());

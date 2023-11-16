@@ -74,6 +74,7 @@ function createMission(type) {
         + `<td class="missionSeq">${lastSeq}</td>`
         + '<td><input type="text" class="title"/></td>'
         + '<td><input type="text" class="description"/></td>'
+        + '<td><input type="text" class="answer"/></td>'
         + '<td><input type="text" class="keyword"/></td>'
         + '<td><input type="text" class="price"/></td>'
         + '<td>신규 등록 후 입력</td>'
