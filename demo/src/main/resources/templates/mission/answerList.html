@@ -160,6 +160,11 @@
 									<col style="width: 130px;">
 									<col style="width: 80px;">
 									<col style="width: 100px;">
+									<col style="width: 80px;">
+									<col style="width: 80px;">
+									<col style="width: 80px;">
+									<col style="width: 300px;">
+									<col style="width: 80px;">
 									<col>
 								</colgroup>
 								<thead>
@@ -189,13 +194,16 @@
 									<td><input type="text" class="answer" th:value="${mission.answer}"/></td>
 									<td><input type="text" class="keyword" th:value="${mission.keyword}"/></td>
 									<td><input type="text" class="price" th:value="${mission.price}"/></td>
-<!--									<td><input type="text" class="mall" th:value="${mission.mall}"/></td>-->
+									<!--<td><input type="text" class="mall" th:value="${mission.mall}"/></td>-->
 									<td>
-										<select class="mall form-control w-md">
-											<option value="">선택</option>
-											<option th:each="mall : ${companys}" th:value="${mall.mall}" th:text="${mall.name}"
-													th:selected="${mission.mall != null and mission.mall == mall.mall}">Mall Name</option>
-										</select>
+										<div>
+											<input type="text" list="list" class="mall" id="numbers" th:value="${mission.mall}"/>
+
+											<datalist id="list" class="mall form-control w-md" style="display: none;">
+												<option th:each="mall : ${companys}" th:value="${mall.mall}" th:text="${mall.name}"
+														th:selected="${mission.mall != null and mission.mall == mall.mall}"></option>
+											</datalist>
+										</div>
 									</td>
 									<td><input type="text" class="dotoli" th:value="${mission.dotoli}"/></td>
 									<td><input type="text" class="limitCount" th:value="${mission.limitCnt}"/></td>
