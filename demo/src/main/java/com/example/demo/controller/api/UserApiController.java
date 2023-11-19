@@ -19,6 +19,7 @@ import com.example.demo.model.form.UserBlockFormRequest;
 import com.example.demo.model.form.UserFormRequest;
 import com.example.demo.model.form.UserUpdateFormRequest;
 import com.example.demo.service.KakaoLoginService;
+import com.example.demo.service.NaverLoginService;
 import com.example.demo.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 public class UserApiController {
     private final UserService userService;
     private final KakaoLoginService kakaoLoginService;
+    private final NaverLoginService naverLoginService;
 
     @GetMapping("")
     public List<User> getAllUser() {
@@ -85,9 +87,13 @@ public class UserApiController {
 
     @GetMapping("/kakao")
     public User kakaoLogin(String code, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println(code);
-
         User user = kakaoLoginService.kakaoLogin(code);
+        return user;
+    }
+
+    @GetMapping("/naver")
+    public User naverLogin(String code, String state, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        User user = naverLoginService.naverLogin(code, state);
         return user;
     }
 }
