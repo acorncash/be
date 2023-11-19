@@ -11,8 +11,8 @@ async function updateMissions() {
             });
 
             // Handle select elements for 'mall'
-//            const selectedMall = row.find('.mall').val();
-//            value['mall'] = selectedMall;
+            // const selectedMall = row.find('.mall').val();
+            // value['mall'] = selectedMall;
 
             value['attendCount'] = row.find('.attendCount').text();
 
