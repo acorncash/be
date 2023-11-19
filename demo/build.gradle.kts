@@ -19,6 +19,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
+	implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.junit.jupiter:junit-jupiter:5.8.1")
 	implementation("org.mariadb.jdbc:mariadb-java-client:3.1.4")
 	implementation("com.zaxxer:HikariCP:5.0.1")

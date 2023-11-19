@@ -29,6 +29,7 @@ public interface UserInterface extends JpaRepository<User, Integer> {
     Optional<User> findBySocialKey(String socialKey);
     Optional<User> findBySeqAndDelYn(Integer seq, @NotNull String delYn);
     Optional<User> findByUserMail(String userMail);
+    Optional<User> findOneById(String id);
 
     @Transactional
     @Modifying(clearAutomatically = true)
