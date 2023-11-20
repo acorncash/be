@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -14,7 +15,6 @@ import com.example.demo.model.dto.naver.NaverUesrResponse;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.form.naver.NaverAccessFormRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.intellij.openapi.components.Service;
 
 import lombok.RequiredArgsConstructor;
 
