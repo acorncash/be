@@ -67,4 +67,8 @@ public class User {
     @Builder.Default
     @Column(length = 1)
     private String blockYn = "N";
+
+    @Builder.Default
+    @Column(length = 1)
+    private String adminYn = "N";
 }

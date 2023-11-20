@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,6 +28,11 @@ public class LoginService implements UserDetailsService {
                 throw new UsernameNotFoundException("사용자 정보를 찾을 수 없습니다.");
         }
         User user = userOptional.get();
+        String adminYn = user.getAdminYn();
+
+        if("N".equals(adminYn)){
+            throw new UsernameNotFoundException("관리자 계정이 아닙니다.");
+        }
 
         return org.springframework.security.core.userdetails.User.builder()
             .username(user.getId())
