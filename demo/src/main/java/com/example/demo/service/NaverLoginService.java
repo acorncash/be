@@ -25,8 +25,8 @@ public class NaverLoginService {
     private String getUserInfoUrl = "https://openapi.naver.com/v1/nid/me";
     private String getAccessTokenUri = "https://nid.naver.com/oauth2.0/token";
     private String grantType = "authorization_code";
-    private String clientId = "";
-    private String clientSecret = "";
+    private String clientId = "JHEetUu7mEdTxaMm1paO";
+    private String clientSecret = "xPwBv3m08Z";
 
     private final UserService userService;
 
@@ -69,7 +69,9 @@ public class NaverLoginService {
 
         final Map<String, String> params = objectMapper.convertValue(body, objectMapper.getTypeFactory().constructParametricType(Map.class, String.class, String.class));
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.setAll(params);
+        if (params != null) {
+            map.setAll(params);   
+        }
 
         return rest.exchange(uri, httpMethod, new HttpEntity<>(map, headers), responseType).getBody();
     }
