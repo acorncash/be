@@ -126,6 +126,36 @@ public class MissionApiController {
         return ResponseEntity.ok(responseBody);
     }
 
+    @GetMapping("getAdPopcornJoin/{campaignKey}/{usn}")
+    public ResponseEntity<String> getAdPopcornJoin(HttpServletRequest request, @PathVariable String campaignKey, @PathVariable String usn) {
+        // 클라이언트의 공인 IP 주소 가져오기
+        String clientIpAddress = getClientIpAddress(request);
+
+        // 나머지 코드는 그대로 유지
+        String apiUrl = "https://apapi-staging.adpopcorn.com/ap/v1/api/mediamix/join?campaignkey=" + campaignKey + "&usn=" + usn + "&ip=" + clientIpAddress + "&mediakey=241494633&adid=00000000-0000-0000-0000-000000000001&country=KR&language=ko";
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
+        String responseBody = responseEntity.getBody();
+
+        return ResponseEntity.ok(responseBody);
+    }
+
+    // 클라이언트의 공인 IP 주소 가져오는 메서드
+    private String getClientIpAddress(HttpServletRequest request) {
+        String clientIpAddress = request.getHeader("X-Forwarded-For");
+        if (clientIpAddress == null || clientIpAddress.isEmpty() || "unknown".equalsIgnoreCase(clientIpAddress)) {
+            clientIpAddress = request.getHeader("Proxy-Client-IP");
+        }
+        if (clientIpAddress == null || clientIpAddress.isEmpty() || "unknown".equalsIgnoreCase(clientIpAddress)) {
+            clientIpAddress = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (clientIpAddress == null || clientIpAddress.isEmpty() || "unknown".equalsIgnoreCase(clientIpAddress)) {
+            clientIpAddress = request.getRemoteAddr();
+        }
+        return clientIpAddress;
+    }
+
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         missionService.deleteById(id);
