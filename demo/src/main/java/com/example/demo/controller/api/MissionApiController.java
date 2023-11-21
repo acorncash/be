@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.Mission;
@@ -110,6 +112,18 @@ public class MissionApiController {
     @PutMapping("{id}")
     public void update(@PathVariable Long id, @Valid @RequestBody MissionFormRequest formRequest) {
         missionService.updateMission(id, formRequest);
+    }
+
+    @GetMapping("getAdPopcornInfo")
+    public ResponseEntity<String> getAdPopcornInfo() {
+        // AdPopcorn API URL
+        String apiUrl = "https://apapi-staging.adpopcorn.com/ap/v1/api/mediamix/meta?mediakey=241494633&country=KR&language=ko";
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
+        String responseBody = responseEntity.getBody();
+
+        return ResponseEntity.ok(responseBody);
     }
 
     @DeleteMapping("{id}")
