@@ -1,21 +1,16 @@
 package com.example.demo.service;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
 import com.example.demo.DTO.DTO;
-import com.example.demo.model.entity.Mission;
-import com.example.demo.model.entity.User;
-import com.example.demo.repository.UserInterface;
-import org.springframework.stereotype.Service;
-
 import com.example.demo.model.entity.Dotoli;
 import com.example.demo.model.entity.Dotoli.DotoliBuilder;
+import com.example.demo.model.entity.User;
 import com.example.demo.repository.DotoliInterface;
-
+import com.example.demo.repository.UserInterface;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -75,4 +70,36 @@ public class DotoliService {
         }
     }
 
+    public DTO.Response updateKakaoGiftUser(Integer userSeq, String ipAddress) {
+        DTO.Response response = new DTO.Response();
+        response.setStatus("Fail");
+
+        try {
+                Optional<User> userOptional = userRepository.findBySeqAndDelYn(userSeq, "N");
+                User user = userOptional.get();
+
+                DotoliBuilder builder = Dotoli.builder();
+
+                Dotoli dotoli = builder.userSeq(userSeq)
+                        .missionTitle("기프티콘 결제")
+                        .missionDotoli(20000)
+                        .userDotoli(user.getDotoli())
+                        .afterDotoli(user.getDotoli() - 20000)
+                        .ipAddress(ipAddress)
+                        .build();
+
+                dotoliRepository.save(dotoli);
+
+                user.setDotoli(dotoli.getAfterDotoli());
+                userRepository.save(user);
+
+                response.setStatus("Success");
+            return response;
+        } catch (Exception e) {
+            response.setStatus("Fail");
+            response.setMessage(e.getMessage());
+
+            return response;
+        }
+    }
 }
