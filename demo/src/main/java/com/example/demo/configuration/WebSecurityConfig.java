@@ -16,6 +16,7 @@ public class WebSecurityConfig {
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests((authorize) -> authorize
             .requestMatchers("/api/**").permitAll()
+            .requestMatchers("/callback/**").permitAll()
             .anyRequest().authenticated()
         )
         .formLogin(formLogin -> formLogin

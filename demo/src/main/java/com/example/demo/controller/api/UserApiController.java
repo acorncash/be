@@ -1,39 +1,35 @@
 package com.example.demo.controller.api;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.example.demo.model.form.NoticeFormRequest;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.form.UserBlockFormRequest;
 import com.example.demo.model.form.UserFormRequest;
 import com.example.demo.model.form.UserUpdateFormRequest;
-import com.example.demo.service.KakaoLoginService;
-import com.example.demo.service.NaverLoginService;
 import com.example.demo.service.UserService;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
 public class UserApiController {
     private final UserService userService;
-    private final KakaoLoginService kakaoLoginService;
-    private final NaverLoginService naverLoginService;
 
     @GetMapping("")
     public List<User> getAllUser() {
@@ -85,17 +81,6 @@ public class UserApiController {
         userService.deleteById(id);
     }
 
-    @GetMapping("/kakao")
-    public User kakaoLogin(String code, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        User user = kakaoLoginService.kakaoLogin(code);
-        return user;
-    }
-
-    @GetMapping("/naver")
-    public User naverLogin(String code, String state, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        User user = naverLoginService.naverLogin(code, state);
-        return user;
-    }
     @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
     @GetMapping("/token")
     public CsrfToken getCsrfToken(CsrfToken csrfToken) {
