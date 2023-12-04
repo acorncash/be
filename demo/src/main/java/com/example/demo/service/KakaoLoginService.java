@@ -12,11 +12,14 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.model.dto.kakao.KakaoTokenResponse;
 import com.example.demo.model.dto.kakao.KakaoUserResponse;
+import com.example.demo.model.dto.kakao.KakaoUserResponse.KakaoAccount;
 import com.example.demo.model.entity.User;
+import com.example.demo.model.form.UserFormRequest;
 import com.example.demo.model.form.kakao.KakaoAccessFormRequest;
 import com.example.demo.model.form.kakao.KakaoUserInfoFormRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -36,9 +39,19 @@ public class KakaoLoginService {
 
     public User kakaoLogin(String code) {
         KakaoTokenResponse kakaoToken = getAccessToken(code);
-        KakaoUserResponse userInfo = getUserInfo(kakaoToken);
+        KakaoAccount userDetail = getUserInfo(kakaoToken).getKakaoUser();
 
-        return userService.findByEmail(userInfo.getKakaoUser().getEmail());
+        try {
+            return userService.findByEmail(userDetail.getEmail());
+        } catch(EntityNotFoundException e) {
+            UserFormRequest form = UserFormRequest.builder()
+                        .email(userDetail.getEmail())
+                        .name(userDetail.getName())
+                        .build();
+
+            return userService.insert(form);
+        }
+        
     }
 
     private KakaoUserResponse getUserInfo(KakaoTokenResponse token) {

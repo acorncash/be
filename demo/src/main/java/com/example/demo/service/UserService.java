@@ -62,9 +62,8 @@ public class UserService {
         return userRepository.findBySocialKey(socialKey);
     }
 
-    public DTO.JoinResponse Join(UserFormRequest form) {
-        DTO.JoinResponse joinResponse = new DTO.JoinResponse();
-        try{
+    public User insert(UserFormRequest form) {
+        try {
             UserBuilder builder = User.builder();
 
             User user = builder.socialKey(form.getSocialKey())
@@ -78,7 +77,17 @@ public class UserService {
                             .dotoli(0)
                             .build();
 
-            userRepository.save(user);
+            return userRepository.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    public DTO.JoinResponse Join(UserFormRequest form) {
+        DTO.JoinResponse joinResponse = new DTO.JoinResponse();
+        try{
+            insert(form);
 
             joinResponse.setStatus("Success");
             return joinResponse;

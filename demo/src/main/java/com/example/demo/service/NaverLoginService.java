@@ -13,9 +13,11 @@ import org.springframework.web.client.RestTemplate;
 import com.example.demo.model.dto.naver.NaverTokenResponse;
 import com.example.demo.model.dto.naver.NaverUesrResponse;
 import com.example.demo.model.entity.User;
+import com.example.demo.model.form.UserFormRequest;
 import com.example.demo.model.form.naver.NaverAccessFormRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -34,9 +36,20 @@ public class NaverLoginService {
 
     public User naverLogin(String code, String state) {
         NaverTokenResponse naverToken = getAccessToken(code, state);
-        NaverUesrResponse userInfo = getUserInfo(naverToken);
+        NaverUesrResponse.User userInfoDetail = getUserInfo(naverToken).getResponse();
 
-        return userService.findByEmail(userInfo.getResponse().getEmail());
+        try {
+            return userService.findByEmail(userInfoDetail.getEmail());
+        } catch (EntityNotFoundException e) {
+            UserFormRequest form = UserFormRequest.builder()
+                .email(userInfoDetail.getEmail())
+                .id(userInfoDetail.getId())
+                .name(userInfoDetail.getName())
+                .nickname(userInfoDetail.getNickname())
+                .build();
+
+            return userService.insert(form);
+        }
     }
 
     private NaverUesrResponse getUserInfo(NaverTokenResponse token) {
