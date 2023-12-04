@@ -41,7 +41,7 @@ public class KakaoGiftController {
         String clientIpAddress = getClientIpAddress(request);
 
         // 발송 요청 바디
-        String requestBodyJson = "{\"receiver_type\":\"PHONE\",\"receivers\":[{\"external_key\":\"" + seq + "\",\"name\":\"" + user.getName() + "\",\"receiver_id\":\""+ user.getPhoneNumber() +"\"}],\"external_order_id\":\"도토리캐시\",\"template_order_name\":\"반반오리지날(한마리)\",\"fail_callback_url\":\"https://your-domain/fail\",\"success_callback_url\":\"https://your-domain/success\",\"template_token\":\""+token+"\"}";
+        String requestBodyJson = "{\"receiver_type\":\"PHONE\",\"receivers\":[{\"external_key\":\"" + seq + "\",\"name\":\"" + user.getName() + "\",\"receiver_id\":\""+ user.getPhoneNumber() +"\"}],\"external_order_id\":\"도토리캐시\",\"template_order_name\":\"도토리캐시\",\"fail_callback_url\":\"https://your-domain/fail\",\"success_callback_url\":\"https://your-domain/success\",\"template_token\":\""+token+"\"}";
 
         RequestBody templateSendRequestBody = RequestBody.create(requestBodyJson, mediaType);
         Request templateSendRequest = new Request.Builder()
@@ -53,9 +53,7 @@ public class KakaoGiftController {
                 .build();
 
         Response templateSendRequestResponse = client.newCall(templateSendRequest).execute();
-
         dotoliService.updateKakaoGiftUser(seq, clientIpAddress);
-
         Thread.sleep(20000L);
 
         // 선물 상태 조회 요청
