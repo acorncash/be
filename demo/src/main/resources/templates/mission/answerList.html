@@ -67,14 +67,14 @@
 							<li id="visitorList" class="menu visitorList"><a href="/users/visitor">적립내역</a></li>
 						</ul>
 					</li>
-					<!--					<li class="upperMenu">-->
-					<!--						<a href="javascript: void(0);" aria-expanded="true"><span></span></a>-->
-					<!--						<ul aria-expanded="false">-->
-					<!--							<li  id="publicList" class="menu publicList"><a href="#" onclick="pageMove('/announcement/publicList')">Public 공고 목록</a></li>-->
-					<!--							<li  id="piList" class="menu piList piListWrite piListUpdate"><a href="#" onclick="pageMove('/announcement/piList')">탭 1</a></li>-->
-					<!--							<li  id="docPiList" class="menu docPiList docPiListWrite"><a href="#" onclick="pageMove('/announcement/docPiList')">탭 2</a></li>-->
-					<!--						</ul>-->
-					<!--					</li>-->
+					<!--<li class="upperMenu">-->
+					<!--	<a href="javascript: void(0);" aria-expanded="true"><span></span></a>-->
+					<!--	<ul aria-expanded="false">-->
+					<!--		<li  id="publicList" class="menu publicList"><a href="#" onclick="pageMove('/announcement/publicList')">Public 공고 목록</a></li>-->
+					<!--		<li  id="piList" class="menu piList piListWrite piListUpdate"><a href="#" onclick="pageMove('/announcement/piList')">탭 1</a></li>-->
+					<!--		<li  id="docPiList" class="menu docPiList docPiListWrite"><a href="#" onclick="pageMove('/announcement/docPiList')">탭 2</a></li>-->
+					<!--	</ul>-->
+					<!--</li>-->
 					<li class="upperMenu">
 						<a href="javascript: void(0);" aria-expanded="true"><span>미션 관리</span></a>
 						<ul aria-expanded="false">
@@ -89,6 +89,7 @@
 						<ul aria-expanded="false">
 							<li id="noticeList" class="menu noticeList noticeDtl"><a href="/config/notice">공지사항 관리</a></li>
 							<li id="questionList" class="menu questionList questionDtl"><a href="/config/withdraw">출금 요청</a></li>
+							<li id="managerList" class="menu managerList managerDtl"><a href="/config/company">등록업체 관리</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -159,6 +160,11 @@
 									<col style="width: 130px;">
 									<col style="width: 80px;">
 									<col style="width: 100px;">
+									<col style="width: 80px;">
+									<col style="width: 80px;">
+									<col style="width: 80px;">
+									<col style="width: 300px;">
+									<col style="width: 80px;">
 									<col>
 								</colgroup>
 								<thead>
@@ -167,7 +173,10 @@
 									<th>번호</th>
 									<th>제목</th>
 									<th>설명글</th>
-									<th>링크</th>
+									<th>정답</th>
+									<th>키워드</th>
+									<th>가격</th>
+									<th>업체명</th>
 									<th>제공포인트</th>
 									<th>갯수제한</th>
 									<th>시작시간</th>
@@ -182,7 +191,20 @@
 									<td class="missionSeq" th:text="${mission.seq}"></td>
 									<td><input type="text" class="title" th:value="${mission.title}"/></td>
 									<td><input type="text" class="description" th:value="${mission.description}"/></td>
-									<td><input type="text" class="url" th:value="${mission.url}"/></td>
+									<td><input type="text" class="answer" th:value="${mission.answer}"/></td>
+									<td><input type="text" class="keyword" th:value="${mission.keyword}"/></td>
+									<td><input type="text" class="price" th:value="${mission.price}"/></td>
+									<!--<td><input type="text" class="mall" th:value="${mission.mall}"/></td>-->
+									<td>
+										<div>
+											<input type="text" list="list" class="mall" id="numbers" th:value="${mission.mall}"/>
+
+											<datalist id="list" class="mall form-control w-md" style="display: none;">
+												<option th:each="mall : ${companys}" th:value="${mall.mall}" th:text="${mall.name}"
+														th:selected="${mission.mall != null and mission.mall == mall.mall}"></option>
+											</datalist>
+										</div>
+									</td>
 									<td><input type="text" class="dotoli" th:value="${mission.dotoli}"/></td>
 									<td><input type="text" class="limitCount" th:value="${mission.limitCnt}"/></td>
 									<td><input type="datetime" class="startAt" th:value="${mission.startAt}"/></td>

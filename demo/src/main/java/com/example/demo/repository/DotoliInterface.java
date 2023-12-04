@@ -24,4 +24,8 @@ public interface DotoliInterface extends JpaRepository<Dotoli, Long> {
 
     @Query(" SELECT d FROM dotoli d WHERE d.userSeq = :userSeq AND d.missionSeq = :missionSeq AND SUBDATE(d.createAt, -:resetCnt) >= date_format(NOW(), '%Y-%m-%d') ORDER BY d.createAt DESC LIMIT 1 ")
     Optional<Dotoli> findTopByUserSeqAndMissionSeqOrderByCreatAtAsc(@Param("userSeq") Integer userSeq, @Param("missionSeq") Integer missionSeq, @Param("resetCnt") Integer resetCnt);
+
+    @Query("SELECT COUNT(d) FROM dotoli d WHERE d.userSeq = :userSeq AND d.missionTitle = '출석 체크 보상' AND DATE(d.createAt) = CURRENT_DATE")
+    Optional<Integer> getCountOfAttendanceCheck(@Param("userSeq") Integer userSeq);
+
 }

@@ -12,11 +12,14 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.model.dto.kakao.KakaoTokenResponse;
 import com.example.demo.model.dto.kakao.KakaoUserResponse;
+import com.example.demo.model.dto.kakao.KakaoUserResponse.KakaoAccount;
 import com.example.demo.model.entity.User;
+import com.example.demo.model.form.UserFormRequest;
 import com.example.demo.model.form.kakao.KakaoAccessFormRequest;
 import com.example.demo.model.form.kakao.KakaoUserInfoFormRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -27,7 +30,7 @@ public class KakaoLoginService {
     private String getAccessTokenUri = "https://kauth.kakao.com/oauth/token";
     private String grantType = "authorization_code";
     private String clientId = "b2f9c8bcb75d5dc1e65936bcffc386d1";
-    private String redirectUri = "http://localhost:8100/login/kakao";
+    private String redirectUri = "http://14.7.33.34:8080/callback/login/kakao";
     private String clientSecret = "EkUMxNxIoTKkBvoNBGv1QwRc0vQ8NpJ0";
 
     private final UserService userService;
@@ -36,9 +39,19 @@ public class KakaoLoginService {
 
     public User kakaoLogin(String code) {
         KakaoTokenResponse kakaoToken = getAccessToken(code);
-        KakaoUserResponse userInfo = getUserInfo(kakaoToken);
+        KakaoAccount userDetail = getUserInfo(kakaoToken).getKakaoUser();
 
-        return userService.findByEmail(userInfo.getKakaoUser().getEmail());
+        try {
+            return userService.findByEmail(userDetail.getEmail());
+        } catch(EntityNotFoundException e) {
+            UserFormRequest form = UserFormRequest.builder()
+                        .email(userDetail.getEmail())
+                        .name(userDetail.getName())
+                        .build();
+
+            return userService.insert(form);
+        }
+        
     }
 
     private KakaoUserResponse getUserInfo(KakaoTokenResponse token) {

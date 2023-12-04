@@ -4,6 +4,7 @@ import com.example.demo.model.entity.Notice;
 import com.example.demo.service.MissionService;
 import com.example.demo.service.NoticeService;
 import com.example.demo.service.WithdrawService;
+import com.example.demo.service.CompanyService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ public class ConfigController {
     private final MissionService missionService;
     private final NoticeService noticeService;
     private final WithdrawService withdrawService;
+    private final CompanyService companyService;
 
     @GetMapping("notice")
     public String noticeList(Model model) {
@@ -49,5 +51,12 @@ public class ConfigController {
         model.addAttribute("waitingWithdrawCount", withdrawService.getCountByWithdraw("N"));
 
         return "config/withdrawList";
+    }
+
+    @GetMapping("company")
+    public String companyList(Model model) {
+        model.addAttribute("companys", companyService.getCompanyAll());
+
+        return "config/companyList";
     }
 }

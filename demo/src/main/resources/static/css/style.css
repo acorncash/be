@@ -7,7 +7,7 @@ caption { display: none; }
 textarea { resize: none; }
 select { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABGCAQAAADbJyoPAAACP0lEQVR42u3YuU7DQBAG4K1AnIGeG3G8A10IEM6OAgmJU9wUv3gEHoiHoKEDKcgoIVCDEDcdRbDBhBmT+NyNQBptFXvj/TSenZ1EldTfGUowghGMYAQjGMEIRjAGMDjAPY6Q8k6AydGLY9xg0YPBPEqfI4eGmmF6cOuuOsIxh+7lEgqcY4zShZfymvscky7fcDhtxjGDhPKOYW/O7BJODq1GMQO4I6vNVdhN2CYTrO+XZSRtH8hKM1W2NlbJpCu0GMEM4pWsMu5TZ7BBJuadl6WZ0o9nssIk/Isei46FRq2UPjyRp2ecawEVmEXnHPXaKN12Wf158sTX1cDjgHEsNGuKCt1B2e/rIc4mbJEvXmiITgeLyvTPnVAHJZbJly8TRqeP7aBRei/kqY0VFp32BJv5wZu2kTE2Z4+lcpOGXJnz3o/Qz7BULsTY6L/qSgKMzVkjDysiFYkyxChjleZEw/DoFNEaISpvv+tKUozCDnnoGepCUTrLrZMzpqrNi45RWGdlsClEVO6DoxIXwxsMuzkNKPw0KrN+c+NheHTyPpwulrZZ/xjGxSgsMU5blRJHKemgFxofw6OTq7DReUM5EZzoSTB8Z1mel8Ubytkwuy4ZhrdfRbSQEscaynDVKCmGNxh5l9PLcmUqbGlMjuFHqGV/TuHR7zg0i1HYJIuf4DRa2urG8DPL92SuBYbnjvuTLGqToQ/Du0FPQ1l7DOVk4nSCejEKC/axeB1c+DVg5D89wQhGMIIRjGAEI5h/ivkALYLMcpqwu0EAAAAASUVORK5CYII=") right 10px center no-repeat; background-size: 10px 10px; }
 .clear { clear:both !important; }
-
+.tab-content {overflow: auto}
 /* 상단메뉴 */
 .header { width: 100%; min-width: 1200px; border-bottom: 1px solid #d9d9d9; display: flex; display: -ms-flexbox; top: 0; }
 .header .logo { width: 250px; display: flex; justify-content: center; align-items: center; }

@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.entity.Mission;
+import com.example.demo.model.entity.Company;
 
 @Repository
 public interface MissionInterface extends JpaRepository<Mission, Long> {

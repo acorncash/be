@@ -30,6 +30,7 @@ public class Mission {
     @NotNull
     private String description;
 
+    @Column(length = 1000)
     private String url;
 
     @Column(columnDefinition = "LONGTEXT")
@@ -80,4 +81,10 @@ public class Mission {
     @NotNull
     @Builder.Default
     private String snsType = SnsType.NAVER.getCode();
+
+    private String keyword;
+
+    private String price;
+
+    private String mall;
 }

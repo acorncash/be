@@ -89,6 +89,7 @@
 						<ul aria-expanded="false">
 							<li id="noticeList" class="menu noticeList noticeDtl"><a href="/config/notice">공지사항 관리</a></li>
 							<li id="questionList" class="menu questionList questionDtl"><a href="/config/withdraw">출금 요청</a></li>
+							<li id="managerList" class="menu managerList managerDtl"><a href="/config/company">등록업체 관리</a></li>
 <!--							<li id="managerList" class="menu managerList managerDtl"><a href="#" onclick="pageMove('/settings/managerList')">관리자 관리</a></li>-->
 <!--							<li id="counselingList" class="menu counselingList counselingDtl counselingWrite"><a href="#" onclick="pageMove('/settings/counselingList')">닥터카운슬링 관리</a></li>-->
 <!--							<li id="advrtList" class="menu advrtList advrtDtl"><a href="#" onclick="pageMove('/settings/advrtList')">광고 관리</a></li>-->
@@ -147,18 +148,6 @@
 										<textarea class="form-control required" rows="10" th:field="*{content}" placeholder="내용을 입력하세요."></textarea>
 									</td>
 								</tr>
-								<!-- <tr>
-									<th>첨부파일</th>
-									<td colspan="7">
-										<div class="file-upload w-full">
-											<input type="hidden" id="fileKey" value="N">
-											<input type="text" readonly="readonly" value="*파일 첨부시 드래그를 통해 파일을 여러개 등록할 수 있습니다.">
-											<label>파일첨부<input id="fileList" type="file" multiple="multiple" onchange="fileSet(this);"></label>
-										</div>
-										<ul class="upload-file">
-										</ul>
-									</td>
-								</tr> -->
 							</tbody>
 						</table>
 					</div>

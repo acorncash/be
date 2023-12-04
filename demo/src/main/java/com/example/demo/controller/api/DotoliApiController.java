@@ -1,9 +1,9 @@
 package com.example.demo.controller.api;
 
+import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.Dotoli;
-import com.example.demo.model.entity.Withdraw;
 import com.example.demo.service.DotoliService;
-import com.example.demo.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,5 +29,10 @@ public class DotoliApiController {
     @GetMapping("dotoliByUser/{userSeq}")
     public List<Dotoli> getDotoliByUser(@PathVariable Integer userSeq) {
         return dotoliService.getDotoliByUser(userSeq);
+    }
+
+    @PostMapping("attendanceCheck/{userSeq}")
+    public DTO.Response attendanceCheck (@PathVariable Integer userSeq, HttpServletRequest request) {
+        return dotoliService.insertAttendanceCheck(userSeq, request.getRemoteAddr());
     }
 }
