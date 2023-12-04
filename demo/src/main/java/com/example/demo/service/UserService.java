@@ -4,14 +4,20 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.DoubleToLongFunction;
 
+import com.example.demo.model.entity.Dotoli;
 import com.example.demo.model.entity.Mission;
+import com.example.demo.model.entity.Recommend;
+import com.example.demo.repository.DotoliInterface;
+import com.example.demo.repository.RecommendInterface;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.entity.User.UserBuilder;
+import com.example.demo.model.entity.Recommend.RecommendBuilder;
 import com.example.demo.model.form.UserBlockFormRequest;
 import com.example.demo.model.form.UserFormRequest;
 import com.example.demo.model.form.UserUpdateFormRequest;
@@ -19,11 +25,14 @@ import com.example.demo.repository.UserInterface;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserInterface userRepository;
+    private final RecommendInterface recommendRepository;
+    private final DotoliInterface dotoliRepository;
 
     public List<User> getAllUser() {
         return userRepository.findAllUserByDelYnAndBlockYn("N", "N");
@@ -138,6 +147,61 @@ public class UserService {
             userRepository.save(user);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public DTO.JoinResponse recommend(Integer userSeq, String email) {
+        DTO.JoinResponse joinResponse = new DTO.JoinResponse();
+        try {
+            User user = userRepository.findById(userSeq).orElseThrow(() -> new EntityNotFoundException(""));
+            User recommendUser = userRepository.findByUserMail(email).orElseThrow(() -> new EntityNotFoundException(email + "사용자를 찾을 수 없습니다."));
+
+            addRecommendDotoli(user);
+            addRecommendDotoli(recommendUser);
+
+            RecommendBuilder builder = Recommend.builder();
+            Recommend recommend = builder.userSeq(user.getSeq())
+                    .recommendUserSeq(recommendUser.getSeq())
+                    .build();
+
+            recommendRepository.save(recommend);
+
+            recommendUser.setRecommendCnt(recommendUser.getRecommendCnt() + 1);
+
+            userRepository.save(recommendUser);
+
+            joinResponse.setStatus("Success");
+            return joinResponse;
+        } catch (Exception e) {
+            e.printStackTrace();
+            joinResponse.setStatus("Fail");
+            joinResponse.setMessage(e.getMessage());
+
+            return joinResponse;
+        }
+    }
+
+    public void addRecommendDotoli(User user) {
+        try {
+            Dotoli.DotoliBuilder builder = Dotoli.builder();
+
+            Dotoli dotoli = builder.userSeq(user.getSeq())
+                    .missionSeq(0)
+                    .missionTitle("추천인 등록")
+                    .missionDotoli(500)
+                    .userDotoli(user.getDotoli())
+                    .afterDotoli(user.getDotoli() + 500)
+                    .ipAddress("")
+                    .build();
+
+            dotoliRepository.save(dotoli);
+
+            user.setDotoli(dotoli.getAfterDotoli());
+
+            userRepository.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 }

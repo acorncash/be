@@ -49,6 +49,10 @@ public class User {
 
     @NotNull
     @Builder.Default
+    private Integer recommendCnt = 0;
+
+    @NotNull
+    @Builder.Default
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createAt = new Date();
 

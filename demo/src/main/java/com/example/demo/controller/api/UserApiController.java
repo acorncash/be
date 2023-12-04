@@ -87,4 +87,12 @@ public class UserApiController {
         return csrfToken;
     }
 
+    @PostMapping("recommend/{userSeq}/{email}")
+    public DTO.JoinResponse recommend(@PathVariable Integer userSeq, @PathVariable String email) {
+        System.out.println(userSeq);
+        System.out.println(email);
+
+        return userService.recommend(userSeq, email);
+    }
+
 }
