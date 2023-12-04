@@ -30,6 +30,7 @@ public class Mission {
     @NotNull
     private String description;
 
+    @Column(length = 1000)
     private String url;
 
     private String image;

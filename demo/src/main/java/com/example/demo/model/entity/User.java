@@ -38,7 +38,6 @@ public class User {
 
     private String name;
 
-    @NotNull
     private String nickname;
 
     private String userMail;
