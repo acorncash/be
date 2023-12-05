@@ -10,7 +10,9 @@ import java.util.List;
 @Repository
 public interface WithdrawInterface extends JpaRepository<Withdraw, Integer> {
     Long countByWithdrawYn(String withdrawYn);
+
     List<Withdraw> findByUserSeq(Integer userSeq);
+
     @Override
     @EntityGraph(attributePaths = {"user"})
     List<Withdraw> findAll();

@@ -28,6 +28,12 @@ public class Recommend {
     private Integer recommendUserSeq;
 
     @NotNull
+    private String userEmail;
+
+    @NotNull
+    private String recommendUserEmail;
+
+    @NotNull
     @Builder.Default
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createAt = new Date();

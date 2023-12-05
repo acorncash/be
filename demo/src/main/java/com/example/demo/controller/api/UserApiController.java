@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.example.demo.model.entity.Recommend;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,6 +47,11 @@ public class UserApiController {
         System.out.println(socialKey + refreshToken);
 
         return userService.getUserBySocialKeyAndUserMail(socialKey, refreshToken);
+    }
+
+    @GetMapping("recommendList/{userSeq}")
+    public List<Recommend> recommendList(@PathVariable Integer userSeq) {
+        return userService.getRecommendList(userSeq);
     }
 
     @PostMapping("join")
@@ -94,5 +100,4 @@ public class UserApiController {
 
         return userService.recommend(userSeq, email);
     }
-
 }

@@ -1,9 +1,6 @@
 package com.example.demo.service;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.DoubleToLongFunction;
 
 import com.example.demo.model.entity.Dotoli;
@@ -69,6 +66,10 @@ public class UserService {
 
     public Optional<User> getUserBySocialKeyAndUserMail(String socialKey, String userMail){
         return userRepository.findBySocialKey(socialKey);
+    }
+
+    public List<Recommend> getRecommendList(Integer userSeq){
+        return recommendRepository.findRecommendByRecommendUserSeq(userSeq);
     }
 
     public User insert(UserFormRequest form) {
@@ -154,7 +155,17 @@ public class UserService {
         DTO.JoinResponse joinResponse = new DTO.JoinResponse();
         try {
             User user = userRepository.findById(userSeq).orElseThrow(() -> new EntityNotFoundException(""));
-            User recommendUser = userRepository.findByUserMail(email).orElseThrow(() -> new EntityNotFoundException(email + "사용자를 찾을 수 없습니다."));
+            User recommendUser = userRepository.findByUserMail(email).orElseThrow(() -> new EntityNotFoundException(email + " 사용자를 찾을 수 없습니다."));
+
+            if(user.getSeq() == recommendUser.getSeq()) {
+                throw new EntityNotFoundException("본인 아이디입니다.");
+            }
+
+            Recommend checkRecommend = recommendRepository.findRecommendByUserSeqAndRecommendUserSeq(user.getSeq(), recommendUser.getSeq());
+
+            if (checkRecommend != null){
+                throw new EntityNotFoundException("이미 추천인을 등록하였습니다.");
+            }
 
             addRecommendDotoli(user);
             addRecommendDotoli(recommendUser);
@@ -162,6 +173,8 @@ public class UserService {
             RecommendBuilder builder = Recommend.builder();
             Recommend recommend = builder.userSeq(user.getSeq())
                     .recommendUserSeq(recommendUser.getSeq())
+                    .userEmail(user.getUserMail())
+                    .recommendUserEmail(recommendUser.getUserMail())
                     .build();
 
             recommendRepository.save(recommend);
