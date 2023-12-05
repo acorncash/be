@@ -1,30 +1,20 @@
 package com.example.demo.controller.api;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import com.example.demo.model.entity.Recommend;
-import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.DTO.DTO;
+import com.example.demo.model.entity.Recommend;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.form.UserBlockFormRequest;
 import com.example.demo.model.form.UserFormRequest;
 import com.example.demo.model.form.UserUpdateFormRequest;
 import com.example.demo.service.UserService;
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -52,6 +42,11 @@ public class UserApiController {
     @GetMapping("recommendList/{userSeq}")
     public List<Recommend> recommendList(@PathVariable Integer userSeq) {
         return userService.getRecommendList(userSeq);
+    }
+
+    @GetMapping("dotoliByUser/{userSeq}")
+    public Optional<User> getDotoliByUser(@PathVariable Integer userSeq) {
+        return userService.getDotoliByUser(userSeq);
     }
 
     @PostMapping("join")

@@ -26,10 +26,6 @@ public class DotoliService {
         return dotoliRepository.findById(Long.valueOf(dotoliSeq));
     }
 
-    public List<Dotoli> getDotoliByUser(Integer userSeq) {
-        return dotoliRepository.findByUserSeq(userSeq);
-    }
-
     public DTO.Response insertAttendanceCheck(Integer userSeq, String ipAddress) {
         DTO.Response response = new DTO.Response();
         response.setStatus("Fail");

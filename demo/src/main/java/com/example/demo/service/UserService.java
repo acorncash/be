@@ -1,28 +1,26 @@
 package com.example.demo.service;
 
-import java.util.*;
-import java.util.function.DoubleToLongFunction;
-
-import com.example.demo.model.entity.Dotoli;
-import com.example.demo.model.entity.Mission;
-import com.example.demo.model.entity.Recommend;
-import com.example.demo.repository.DotoliInterface;
-import com.example.demo.repository.RecommendInterface;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.stereotype.Service;
-
 import com.example.demo.DTO.DTO;
+import com.example.demo.model.entity.Dotoli;
+import com.example.demo.model.entity.Recommend;
+import com.example.demo.model.entity.Recommend.RecommendBuilder;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.entity.User.UserBuilder;
-import com.example.demo.model.entity.Recommend.RecommendBuilder;
 import com.example.demo.model.form.UserBlockFormRequest;
 import com.example.demo.model.form.UserFormRequest;
 import com.example.demo.model.form.UserUpdateFormRequest;
+import com.example.demo.repository.DotoliInterface;
+import com.example.demo.repository.RecommendInterface;
 import com.example.demo.repository.UserInterface;
-
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.stereotype.Service;
+
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -70,6 +68,10 @@ public class UserService {
 
     public List<Recommend> getRecommendList(Integer userSeq){
         return recommendRepository.findRecommendByRecommendUserSeq(userSeq);
+    }
+
+    public Optional<User> getDotoliByUser(Integer userSeq) {
+        return userRepository.findById(userSeq);
     }
 
     public User insert(UserFormRequest form) {
