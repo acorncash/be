@@ -66,7 +66,7 @@ public class DotoliService {
         }
     }
 
-    public DTO.Response updateKakaoGiftUser(Integer userSeq, String ipAddress) {
+    public DTO.Response updateKakaoGiftUser(Integer userSeq, Integer price, String ipAddress) {
         DTO.Response response = new DTO.Response();
         response.setStatus("Fail");
 
@@ -78,9 +78,9 @@ public class DotoliService {
 
                 Dotoli dotoli = builder.userSeq(userSeq)
                         .missionTitle("기프티콘 결제")
-                        .missionDotoli(20000)
+                        .missionDotoli(price)
                         .userDotoli(user.getDotoli())
-                        .afterDotoli(user.getDotoli() - 20000)
+                        .afterDotoli(user.getDotoli() - price)
                         .ipAddress(ipAddress)
                         .build();
 

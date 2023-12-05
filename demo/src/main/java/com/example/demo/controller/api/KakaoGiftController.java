@@ -33,8 +33,8 @@ public class KakaoGiftController {
     private OkHttpClient client = new OkHttpClient();
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    @GetMapping("/sendGift/{seq}/{token}")
-    public Map<String, Object> sendGift(HttpServletRequest request, @PathVariable int seq, @PathVariable String token) throws IOException, InterruptedException {
+    @GetMapping("/sendGift/{seq}/{price}/{token}")
+    public Map<String, Object> sendGift(HttpServletRequest request, @PathVariable int seq, @PathVariable int price, @PathVariable String token) throws IOException, InterruptedException {
         MediaType mediaType = MediaType.parse("application/json");
         User user = userRepository.findById(seq).orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
         // 클라이언트의 공인 IP 주소 가져오기
@@ -53,8 +53,8 @@ public class KakaoGiftController {
                 .build();
 
         Response templateSendRequestResponse = client.newCall(templateSendRequest).execute();
-        dotoliService.updateKakaoGiftUser(seq, clientIpAddress);
-        Thread.sleep(20000L);
+        dotoliService.updateKakaoGiftUser(seq, price, clientIpAddress);
+        // Thread.sleep(20000L);
 
         // 선물 상태 조회 요청
         Long reserveTraceId = 1L; // 선물 발송 요청에서 얻은 reserve_trace_id
