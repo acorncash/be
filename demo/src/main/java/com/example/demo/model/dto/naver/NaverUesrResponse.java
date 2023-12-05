@@ -14,5 +14,6 @@ public class NaverUesrResponse {
         private String nickname;
         private String name;
         private String email;
+        private String mobile;
     }
 }

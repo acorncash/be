@@ -46,6 +46,7 @@ public class NaverLoginService {
                 .id(userInfoDetail.getId())
                 .name(userInfoDetail.getName())
                 .nickname(userInfoDetail.getNickname())
+                .phoneNumber(userInfoDetail.getMobile())
                 .build();
 
             return userService.insert(form);
