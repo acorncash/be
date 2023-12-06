@@ -154,7 +154,7 @@ public class UserService {
     public DTO.JoinResponse recommend(Integer userSeq, String email) {
         DTO.JoinResponse joinResponse = new DTO.JoinResponse();
         try {
-            User user = userRepository.findById(userSeq).orElseThrow(() -> new EntityNotFoundException(""));
+            User user = userRepository.findById(userSeq).orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
             User recommendUser = userRepository.findByUserMail(email).orElseThrow(() -> new EntityNotFoundException(email + " 사용자를 찾을 수 없습니다."));
 
             if(user.getSeq() == recommendUser.getSeq()) {
