@@ -26,10 +26,6 @@ public class DotoliService {
         return dotoliRepository.findById(Long.valueOf(dotoliSeq));
     }
 
-    public List<Dotoli> getDotoliByUser(Integer userSeq) {
-        return dotoliRepository.findByUserSeq(userSeq);
-    }
-
     public DTO.Response insertAttendanceCheck(Integer userSeq, String ipAddress) {
         DTO.Response response = new DTO.Response();
         response.setStatus("Fail");
@@ -70,7 +66,7 @@ public class DotoliService {
         }
     }
 
-    public DTO.Response updateKakaoGiftUser(Integer userSeq, String ipAddress) {
+    public DTO.Response updateKakaoGiftUser(Integer userSeq, Integer price, String ipAddress) {
         DTO.Response response = new DTO.Response();
         response.setStatus("Fail");
 
@@ -82,9 +78,9 @@ public class DotoliService {
 
                 Dotoli dotoli = builder.userSeq(userSeq)
                         .missionTitle("기프티콘 결제")
-                        .missionDotoli(20000)
+                        .missionDotoli(price)
                         .userDotoli(user.getDotoli())
-                        .afterDotoli(user.getDotoli() - 20000)
+                        .afterDotoli(user.getDotoli() - price)
                         .ipAddress(ipAddress)
                         .build();
 

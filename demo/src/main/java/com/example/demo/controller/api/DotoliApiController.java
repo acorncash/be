@@ -26,11 +26,6 @@ public class DotoliApiController {
         return dotoliService.getDotoli(dotoliSeq);
     }
 
-    @GetMapping("dotoliByUser/{userSeq}")
-    public List<Dotoli> getDotoliByUser(@PathVariable Integer userSeq) {
-        return dotoliService.getDotoliByUser(userSeq);
-    }
-
     @PostMapping("attendanceCheck/{userSeq}")
     public DTO.Response attendanceCheck (@PathVariable Integer userSeq, HttpServletRequest request) {
         return dotoliService.insertAttendanceCheck(userSeq, request.getRemoteAddr());
