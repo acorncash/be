@@ -66,4 +66,6 @@ public class Dotoli {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "missionSeq", insertable = false, updatable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Mission mission;
+
+    private String signedValue;
 }

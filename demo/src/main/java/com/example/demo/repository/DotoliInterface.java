@@ -28,4 +28,5 @@ public interface DotoliInterface extends JpaRepository<Dotoli, Long> {
     @Query("SELECT COUNT(d) FROM dotoli d WHERE d.userSeq = :userSeq AND d.missionTitle = '출석 체크 보상' AND DATE(d.createAt) = CURRENT_DATE")
     Optional<Integer> getCountOfAttendanceCheck(@Param("userSeq") Integer userSeq);
 
+    Optional<Dotoli> findBySignedValue(String signedValue);
 }
