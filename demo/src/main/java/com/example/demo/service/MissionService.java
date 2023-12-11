@@ -1,17 +1,5 @@
 package com.example.demo.service;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.CaptureMission;
 import com.example.demo.model.entity.CaptureMission.CaptureMissionBuilder;
@@ -26,8 +14,13 @@ import com.example.demo.repository.CaptureMissionInterface;
 import com.example.demo.repository.DotoliInterface;
 import com.example.demo.repository.MissionInterface;
 import com.example.demo.repository.UserInterface;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.FileNotFoundException;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -184,7 +177,7 @@ public class MissionService {
 
             missionOptional.ifPresent(mission -> userOptional.ifPresent(user -> {
                 if (Objects.equals(mission.getAnswer(), answer)) {
-                    mission.setAttendCnt(+1);
+                    mission.setAttendCnt(mission.getAttendCnt()+1);
 
                     missionRepository.save(mission);
 
