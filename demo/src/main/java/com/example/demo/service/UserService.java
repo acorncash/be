@@ -68,7 +68,7 @@ public class UserService {
                             .id(form.getId())
                             .password(form.getPassword())
                             .name(form.getName())
-                            .nickname(form.getNickname())
+                            .nickname(form.getName())
                             .phoneNumber(form.getPhoneNumber())
                             .userMail(form.getEmail())
                             .dotoli(0)
