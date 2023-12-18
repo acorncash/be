@@ -16,5 +16,7 @@ public class KakaoUserResponse {
         @JsonProperty("is_email_valid")
         private Boolean isEmailValid;
         private String email;
+        @JsonProperty("phone_number")
+        private String phoneNumber;
     }
 }
