@@ -60,7 +60,7 @@ public class KakaoLoginService {
         headers.add("Authorization", "Bearer " + token.getAccessToken());
 
         KakaoUserInfoFormRequest body = KakaoUserInfoFormRequest.builder()
-                .propertyKeys("[\"kakao_account.email\", \"kakao_account.name\", \\\"kakao_account.phone_number\\\"]")
+                .propertyKeys("[\"kakao_account.email\", \"kakao_account.name\", \"kakao_account.phone_number\"]")
                 .build();
 
         return requestKakao(getUserInfoUrl, HttpMethod.POST, body, KakaoUserResponse.class, headers);
