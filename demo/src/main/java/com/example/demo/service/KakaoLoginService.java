@@ -44,10 +44,16 @@ public class KakaoLoginService {
         try {
             return userService.findByEmail(userDetail.getEmail());
         } catch(EntityNotFoundException e) {
+            String phoneNumber = null;
+
+            if (userDetail.getPhoneNumber() != null && userDetail.getPhoneNumber().startsWith("+82")) {
+                phoneNumber = userDetail.getPhoneNumber().replace("+82 ", "0");
+            }
+            
             UserFormRequest form = UserFormRequest.builder()
                         .email(userDetail.getEmail())
                         .name(userDetail.getName())
-                        .phoneNumber(userDetail.getPhoneNumber())
+                        .phoneNumber(phoneNumber != null ? phoneNumber : userDetail.getPhoneNumber())
                         .build();
 
             return userService.insert(form);
