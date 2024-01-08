@@ -1,6 +1,7 @@
 package com.example.demo.controller.api;
 
 import com.example.demo.DTO.DTO;
+import com.example.demo.model.entity.Dotoli;
 import com.example.demo.model.entity.Recommend;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.form.UserBlockFormRequest;
@@ -47,6 +48,11 @@ public class UserApiController {
     @GetMapping("dotoliByUser/{userSeq}")
     public Optional<User> getDotoliByUser(@PathVariable Integer userSeq) {
         return userService.getDotoliByUser(userSeq);
+    }
+
+    @GetMapping("dotoliByDotoli/{userSeq}")
+    public List<Dotoli> getDotoliByDotoli(@PathVariable Integer userSeq) {
+        return userService.getDotoliByDotoli(userSeq);
     }
 
     @PostMapping("join")

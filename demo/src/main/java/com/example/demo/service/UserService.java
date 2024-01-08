@@ -74,6 +74,10 @@ public class UserService {
         return userRepository.findById(userSeq);
     }
 
+    public List<Dotoli> getDotoliByDotoli(Integer userSeq) {
+        return dotoliRepository.findByUserSeq(userSeq);
+    }
+
     public User insert(UserFormRequest form) {
         try {
             UserBuilder builder = User.builder();
