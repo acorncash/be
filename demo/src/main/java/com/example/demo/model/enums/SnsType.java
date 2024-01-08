@@ -15,7 +15,7 @@ public enum SnsType {
         return this.code;
     }
 
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING) 
     public static SnsType parseEnum(String code) {
         for (SnsType snsType : SnsType.values()) {
             if (snsType.getCode().equals(code)) {

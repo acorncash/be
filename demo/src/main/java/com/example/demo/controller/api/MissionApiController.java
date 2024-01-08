@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,16 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.DTO.DTO;
 import com.example.demo.model.entity.Mission;
 import com.example.demo.model.form.CaptureMissionFormRequest;
 import com.example.demo.model.form.MissionAddFormRequest;
 import com.example.demo.model.form.MissionFormRequest;
-import com.example.demo.model.form.AdPopcornFormRequest;
 import com.example.demo.service.CaptureMissionService;
 import com.example.demo.service.MissionService;
 
@@ -160,5 +159,10 @@ public class MissionApiController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         missionService.deleteById(id);
+    }
+
+    @DeleteMapping("rows")
+    public void deleteRows(@RequestBody List<Long> seqs) {
+        missionService.deleteByIds(seqs);
     }
 }

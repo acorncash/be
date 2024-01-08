@@ -331,6 +331,10 @@ public class MissionService {
         missionRepository.deleteById(id);
     }
 
+    public void deleteByIds(List<Long> ids) {
+        missionRepository.deleteAllById(ids);
+    }
+
     private Optional<String> convertImageToBase64(MultipartFile image) {
         Optional<String> result;
         try {

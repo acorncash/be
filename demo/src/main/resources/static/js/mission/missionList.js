@@ -83,10 +83,10 @@ function createMission(type) {
         + `<td><input type="datetime" class="startAt" value="${currentDateTimeString}"/></td>`
         + `<td><input type="datetime" class="endAt" value="${currentDateTimeString}"/></td>`
         + `<td>
-            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0001" checked/>네이버</label>
-            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0002">인스타</label>
-            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0003">카카오</label>
-            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0004">무신사</label>
+            <label><input name="snsType${lastSeq}" class="snsType" type="radio" value="0001" checked/>네이버</label>
+            <label><input name="snsType${lastSeq}" class="snsType" type="radio" value="0002">인스타</label>
+            <label><input name="snsType${lastSeq}" class="snsType" type="radio" value="0003">카카오</label>
+            <label><input name="snsType${lastSeq}" class="snsType" type="radio" value="0004">무신사</label>
         </td>`
         + '<td class="attendCount">0</td>'
         + '</tr>')
@@ -105,10 +105,10 @@ function createMission(type) {
         + `<td><input type="datetime" class="startAt" value="${currentDateTimeString}"/></td>`
         + `<td><input type="datetime" class="endAt" value="${currentDateTimeString}"/></td>`
         + `<td>
-            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0001" checked/>네이버</label>
-            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0002">인스타</label>
-            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0003">카카오</label>
-            <label><input th:name="snsType + ${lastSeq}" class="snsType" type="radio" value="0004">무신사</label>
+            <label><input name="snsType${lastSeq}" class="snsType" type="radio" value="0001" checked/>네이버</label>
+            <label><input name="snsType${lastSeq}" class="snsType" type="radio" value="0002">인스타</label>
+            <label><input name="snsType${lastSeq}" class="snsType" type="radio" value="0003">카카오</label>
+            <label><input name="snsType${lastSeq}" class="snsType" type="radio" value="0004">무신사</label>
         </td>`
         + '<td class="attendCount">0</td>'
         + '</tr>')
@@ -138,5 +138,34 @@ async function confirmMission(confirmYn, missionSeq) {
         }).catch(() => {
             alert("오류가 발생하였습니다.")
         })
+    }
+}
+
+async function deleteMissions() {
+    if ($(".MC_01_chk:checked").length && confirm('선택된 미션을 삭제하시겠습니까?')) {
+        const data = [];
+
+        $($(".MC_01_chk:checked")).each((idx, item) => {
+            const row = $(item).closest('tr');
+
+            data.push(row.find('.missionSeq').text());
+        });
+
+        let response = await fetch(`/api/mission/rows`, {
+            method: "delete",
+            cache: 'no-cache',
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        }).then(() => {
+            alert("삭제되었습니다.");
+            location.reload();
+        }).catch(() => {
+            alert("오류가 발생하였습니다.");
+        });
+    } else {
+        alert('삭제할 미션을 선택해 주세요.')
     }
 }
