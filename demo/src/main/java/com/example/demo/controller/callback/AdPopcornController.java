@@ -30,4 +30,16 @@ public class AdPopcornController {
         return ResponseEntity.ok(rewardIsSuccessfullyProcessed);
     }
 
+    @PostMapping("adPopcornCallBackIphone")
+    public ResponseEntity<String> adPopcornCallBackIphone(@ModelAttribute AdPopcornFormRequest requestDTO, HttpServletRequest request) {
+        String rewardIsSuccessfullyProcessed = adPopcornService.processAdPopcornCallbackIphone(
+                requestDTO.getUsn(),
+                requestDTO.getReward_key(),
+                requestDTO.getSigned_value(),
+                requestDTO.getCampaign_key(),
+                requestDTO.getQuantity(),
+                request.getRemoteAddr()
+        );
+        return ResponseEntity.ok(rewardIsSuccessfullyProcessed);
+    }
 }
