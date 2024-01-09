@@ -180,7 +180,7 @@
 								</tr>
 								</thead>
 								<tbody id="MC_01_tbody">
-									<tr th:each="mission : ${missions}">
+									<tr th:each="mission : ${page.content}">
 										<td><input type="checkbox" class="MC_01_chk"></td>
 										<td class="missionSeq" th:text="${mission.seq}"></td>
 										<td><input type="text" class="title" th:value="${mission.title}"/></td>
@@ -201,6 +201,53 @@
 									</tr>
 								</tbody>
 							</table>
+
+                            <!-- 페이지 영역 -->
+                            <nav th:if="${page.totalPage != 0}">
+                                <div class="container">
+                                    <ul class="pagination pagination-primary m-4">
+
+                                        <li class="page-item ">
+                                            <!-- 첫 페이지로 이동 -->
+                                            <a class="page-link" th:href="@{/mission/photo(searchType = ${searchType}, searchContent = ${searchContent}, page=0)}" aria-level="First">
+                                                &lsaquo;&lsaquo;
+                                            </a>
+                                        </li>
+
+                                        <li class="page-item active">
+                                            <!-- 이전 페이지 -->
+                                            <li th:if="${page.hasPrev} ? 'disabled'">
+                                            <a class="page-link" th:href="@{/mission/photo(searchType = ${searchType}, searchContent = ${searchContent}, page=${page.prevIndex})}" aria-level="Previous">&lsaquo;</a>
+                                            <span aria-hidden="true"></span>
+                                            <li>
+                                        </li>
+
+                                        <!-- 페이지 번호 -->
+                                        <li th:each="page: ${#numbers.sequence(page.startPage, page.endPage)}"
+                                            th:class="(page == ${pageNo}) ? 'page-item active'">
+                                            <a class="page-link" th:text="${page + 1}"
+                                            th:href="@{/mission/photo(searchType = ${searchType}, searchContent = ${searchContent}, page=${page})}"></a>
+                                        </li>
+
+                                        <li class="page-item">
+                                            <!-- 다음 페이지 -->
+                                            <li th:if="${page.hasNext} ? 'disabled'">
+                                            <a class="page-link" th:href="@{/mission/photo(searchType = ${searchType}, searchContent = ${searchContent}, page=${page.nextIndex})}" aria-level="Next">&rsaquo;</a>
+                                            <span aria-hidden="true"></span>
+                                            </li>
+                                        </li>
+
+                                        <li class="page-item">
+                                            <!-- 마지막 페이지 -->
+                                            <a class="page-link" th:href="@{/mission/photo(searchType = ${searchType}, searchContent = ${searchContent}, page=${page.totalPage - 1})}" aria-level="Last">
+                                                &rsaquo;&rsaquo;
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </nav>
+                            <!-- 페이징 영역 끝 -->
 						</div>
 					</div>
 				</div>

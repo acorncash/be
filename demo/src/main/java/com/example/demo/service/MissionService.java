@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.DTO.DTO;
+import com.example.demo.model.dto.PageDTO;
 import com.example.demo.model.entity.CaptureMission;
 import com.example.demo.model.entity.CaptureMission.CaptureMissionBuilder;
 import com.example.demo.model.entity.Dotoli;
@@ -15,6 +16,9 @@ import com.example.demo.repository.DotoliInterface;
 import com.example.demo.repository.MissionInterface;
 import com.example.demo.repository.UserInterface;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -102,8 +106,20 @@ public class MissionService {
         }
     }
 
-    public List<Mission> getMissionByMissionType(String type) {
-        return missionRepository.findByMissionTypeAndDelYn(type, "N");
+    public PageDTO<Mission> getMissionByMissionType(String type, Pageable pageable) {
+        Page<Mission> page = missionRepository.findByMissionTypeAndDelYn(type, "N", pageable);
+        
+        return PageDTO.<Mission>builder()
+            .content(page.getContent())
+            .size(page.getSize())
+            .startPage(page.getNumber() - 5 > 0 ? page.getNumber() - 5 : 0)
+            .currentPage(page.getNumber())
+            .endPage(page.getNumber() + 5 < page.getTotalPages() ? page.getNumber() + 5 : page.getTotalPages() - 1)
+            .hasPrev(page.hasPrevious())
+            .prevIndex(page.previousOrFirstPageable().getPageNumber())
+            .hasNext(page.hasNext())
+            .nextIndex(page.nextOrLastPageable().getPageNumber())
+            .totalPage(page.getTotalPages()).build();
     }
 
     public List<Mission> getMissionByMissionType(Integer userSeq, String type) {
