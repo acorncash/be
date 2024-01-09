@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import com.example.demo.model.entity.User.UserBuilder;
 import com.example.demo.model.form.UserBlockFormRequest;
 import com.example.demo.model.form.UserFormRequest;
 import com.example.demo.model.form.UserUpdateFormRequest;
+import com.example.demo.model.spec.UserSpec;
 import com.example.demo.repository.DotoliInterface;
 import com.example.demo.repository.RecommendInterface;
 import com.example.demo.repository.UserInterface;
@@ -37,8 +39,15 @@ public class UserService {
         return userRepository.findAllUserByDelYnAndBlockYn("N", "N");
     }
 
-    public PageDTO<User> getAllUser(Pageable pageable) {
-        return new PageDTO<User>(userRepository.findAllUserByDelYnAndBlockYn("N", "N", pageable));
+    public PageDTO<User> getAllUser(String searchType, String searchContent, Pageable pageable) {
+        Specification<User> spec = UserSpec.equalBlockYn("N")
+               .and(UserSpec.equalDelYN("N"));
+
+        if (searchContent != null && !searchContent.equals("")) {
+            spec = spec.and(UserSpec.search(searchType, searchContent));
+        }
+
+        return new PageDTO<User>(userRepository.findAll(spec, pageable));
     }
 
     public Optional<User> getUser(Integer userSeq) {

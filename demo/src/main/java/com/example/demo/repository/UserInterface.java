@@ -7,7 +7,9 @@ import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,10 +21,10 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 
 @Repository
-public interface UserInterface extends JpaRepository<User, Integer> {
+public interface UserInterface extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
 
     List<User> findAllUserByDelYnAndBlockYn(String delYn, String blockYn);
-    Page<User> findAllUserByDelYnAndBlockYn(String delYn, String blockYn, Pageable pageable);
+    Page<User> findAll(Specification<User> spec, Pageable pageable);
     Optional<User> findUserBySeqAndDelYn(Integer Seq, String delYn);
     Long countByCreateAtGreaterThanEqual(Date currentDate);
     Long countByBlockYn(String blockYn);
