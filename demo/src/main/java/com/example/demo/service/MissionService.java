@@ -118,17 +118,7 @@ public class MissionService {
 
         Page<Mission> page = missionRepository.findAll(spec, pageable);
         
-        return PageDTO.<Mission>builder()
-            .content(page.getContent())
-            .size(page.getSize())
-            .startPage(page.getNumber() - 5 > 0 ? page.getNumber() - 5 : 0)
-            .currentPage(page.getNumber())
-            .endPage(page.getNumber() + 5 < page.getTotalPages() ? page.getNumber() + 5 : page.getTotalPages() - 1)
-            .hasPrev(page.hasPrevious())
-            .prevIndex(page.previousOrFirstPageable().getPageNumber())
-            .hasNext(page.hasNext())
-            .nextIndex(page.nextOrLastPageable().getPageNumber())
-            .totalPage(page.getTotalPages()).build();
+        return new PageDTO<Mission>(page);
     }
 
     public List<Mission> getMissionByMissionType(Integer userSeq, String type) {

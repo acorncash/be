@@ -2,12 +2,15 @@ package com.example.demo.controller.web;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.model.dto.PageDTO;
 import com.example.demo.model.entity.Dotoli;
 import com.example.demo.model.entity.User;
 import com.example.demo.service.DotoliService;
@@ -23,9 +26,9 @@ public class UserController {
     private final DotoliService dotoliService;
 
     @GetMapping("user")
-    public String list(Model model) {
-        List<User> users = userService.getAllUser();
-        model.addAttribute("users", users);
+    public String list(Model model, @PageableDefault() Pageable pageable) {
+        PageDTO<User> users = userService.getAllUser(pageable);
+        model.addAttribute("page", users);
         model.addAttribute("allUserCount", userService.getAllUserCount());
         model.addAttribute("todayRegisterUserCount", userService.getTodayRegisterUserCount());
         model.addAttribute("blockUserCount", userService.getBlockUserCount());

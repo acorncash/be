@@ -1,6 +1,16 @@
 package com.example.demo.service;
 
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.stereotype.Service;
+
 import com.example.demo.DTO.DTO;
+import com.example.demo.model.dto.PageDTO;
 import com.example.demo.model.entity.Dotoli;
 import com.example.demo.model.entity.Recommend;
 import com.example.demo.model.entity.Recommend.RecommendBuilder;
@@ -12,15 +22,9 @@ import com.example.demo.model.form.UserUpdateFormRequest;
 import com.example.demo.repository.DotoliInterface;
 import com.example.demo.repository.RecommendInterface;
 import com.example.demo.repository.UserInterface;
+
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.stereotype.Service;
-
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +35,10 @@ public class UserService {
 
     public List<User> getAllUser() {
         return userRepository.findAllUserByDelYnAndBlockYn("N", "N");
+    }
+
+    public PageDTO<User> getAllUser(Pageable pageable) {
+        return new PageDTO<User>(userRepository.findAllUserByDelYnAndBlockYn("N", "N", pageable));
     }
 
     public Optional<User> getUser(Integer userSeq) {
