@@ -11,6 +11,7 @@ import com.example.demo.model.entity.Mission.MissionBuilder;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.form.MissionAddFormRequest;
 import com.example.demo.model.form.MissionFormRequest;
+import com.example.demo.model.spec.MissionSpec;
 import com.example.demo.repository.CaptureMissionInterface;
 import com.example.demo.repository.DotoliInterface;
 import com.example.demo.repository.MissionInterface;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -106,8 +108,15 @@ public class MissionService {
         }
     }
 
-    public PageDTO<Mission> getMissionByMissionType(String type, Pageable pageable) {
-        Page<Mission> page = missionRepository.findByMissionTypeAndDelYn(type, "N", pageable);
+    public PageDTO<Mission> getMissionByMissionType(String type, String searchType, String searchContent, Pageable pageable) {
+       Specification<Mission> spec = MissionSpec.equalMissionType(type)
+               .and(MissionSpec.equalDelYN("N"));
+
+        if (searchContent != null && !searchContent.equals("")) {
+            spec = spec.and(MissionSpec.search(searchType, searchContent));
+        }
+
+        Page<Mission> page = missionRepository.findAll(spec, pageable);
         
         return PageDTO.<Mission>builder()
             .content(page.getContent())
