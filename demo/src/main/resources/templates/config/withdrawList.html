@@ -79,9 +79,9 @@
 						<a href="javascript: void(0);" aria-expanded="true"><span>미션 관리</span></a>
 						<ul aria-expanded="false">
 							<li  id="svcApplyList" class="menu svcApplyList"><a  href="/mission/answer">정답미션</a></li>
-							<li  id="svcDocApplyList" class="menu svcDocApplyList"><a  href="/mission/doit">수행미션</a></li>
+							<!--							<li  id="svcDocApplyList" class="menu svcDocApplyList"><a  href="/mission/doit">수행미션</a></li>-->
 							<li  id="inquiry" class="menu inquiry"><a href="/mission/photo">캡쳐미션</a></li>
-							<li  id="docInquiry" class="menu docInquiry"><a href="/mission/content">미션수행 관리</a></li>
+							<li  id="docInquiry" class="menu docInquiry"><a href="/mission/content">수행 캡쳐미션 관리</a></li>
 						</ul>
 					</li>
 					<li class="upperMenu">
@@ -125,39 +125,39 @@
                     </ul>
                 </div>
 
-                <div class="search-condition">
-                    <h4 class="skip">검색조건</h4>
-                    <div class="wrap">
-                        <div class="div">
-                            <div class="form-group">
-                                <div class="tit">구분</div>
-                                <div class="flex">
-                                    <select class="form-control w-md" id="searchSe" onchange="searchSeChange(this);">
-                                        <option value="00">선택</option>
-                                        <option value="01">회원 ID</option>
-                                        <option value="02">회원상태</option>
-                                        <option value="03">전공과목</option>
-                                        <option value="04">회원명</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="tit">검색어</div>
-                                <div class="flex autosize">
-                                	<input type="text" class="form-control w-lg" id="searchContent">
-                                	<select class="form-control w-md" id="searchUseYn" style="display:none;">
-                                		<option value="">선택</option>
-                                		<option value="Y">정상</option>
-                                		<option value="N">차단</option>
-                                	</select>
-                                	<select class="form-control w-md" id="searchMajor" style="display:none;">
-                                	</select>
-                                    <button type="button" class="btn btn-primary" onclick="memberSearch();">검색</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="search-condition">-->
+<!--                    <h4 class="skip">검색조건</h4>-->
+<!--                    <div class="wrap">-->
+<!--                        <div class="div">-->
+<!--                            <div class="form-group">-->
+<!--                                <div class="tit">구분</div>-->
+<!--                                <div class="flex">-->
+<!--                                    <select class="form-control w-md" id="searchSe" onchange="searchSeChange(this);">-->
+<!--                                        <option value="00">선택</option>-->
+<!--                                        <option value="01">회원 ID</option>-->
+<!--                                        <option value="02">회원상태</option>-->
+<!--                                        <option value="03">전공과목</option>-->
+<!--                                        <option value="04">회원명</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <div class="tit">검색어</div>-->
+<!--                                <div class="flex autosize">-->
+<!--                                	<input type="text" class="form-control w-lg" id="searchContent">-->
+<!--                                	<select class="form-control w-md" id="searchUseYn" style="display:none;">-->
+<!--                                		<option value="">선택</option>-->
+<!--                                		<option value="Y">정상</option>-->
+<!--                                		<option value="N">차단</option>-->
+<!--                                	</select>-->
+<!--                                	<select class="form-control w-md" id="searchMajor" style="display:none;">-->
+<!--                                	</select>-->
+<!--                                    <button type="button" class="btn btn-primary" onclick="memberSearch();">검색</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <div class="utility">
                     <div class="left"><div class="txt count"></div></div>

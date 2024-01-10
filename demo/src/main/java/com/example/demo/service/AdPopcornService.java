@@ -70,7 +70,7 @@ public class AdPopcornService {
 
     public String processAdPopcornCallbackIphone(Integer userSeq, String reward_key, String signedValue, String campaignKey, Integer quantity, String ipAddress) {
         try {
-            String hmacMd5 = this.calculateHMACMD5(userSeq + reward_key + quantity + campaignKey, "9242095fbd53416d");
+            String hmacMd5 = this.calculateHMACMD5(userSeq + reward_key + quantity + campaignKey, "cf827c68dfbb4532");
 
             // signedValue와 변환한 HMAC-MD5 값을 비교
             if (!signedValue.equals(hmacMd5)) {

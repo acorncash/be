@@ -1,8 +1,11 @@
 package com.example.demo.controller.web;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-
+import com.example.demo.model.dto.PageDTO;
+import com.example.demo.model.entity.Dotoli;
+import com.example.demo.model.entity.User;
+import com.example.demo.service.DotoliService;
+import com.example.demo.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -12,13 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.model.dto.PageDTO;
-import com.example.demo.model.entity.Dotoli;
-import com.example.demo.model.entity.User;
-import com.example.demo.service.DotoliService;
-import com.example.demo.service.UserService;
-
-import lombok.RequiredArgsConstructor;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("users")
@@ -28,7 +26,7 @@ public class UserController {
     private final DotoliService dotoliService;
 
     @GetMapping("user")
-    public String list(Model model, @RequestParam String searchType, @RequestParam String searchContent, @PageableDefault() Pageable pageable) {
+    public String list(Model model, @RequestParam(defaultValue = "name") String searchType, @RequestParam(defaultValue = "") String searchContent, @PageableDefault() Pageable pageable) {
         PageDTO<User> users = userService.getAllUser(searchType, searchContent, pageable);
 
         LinkedHashMap<String, String> searchTypes = new LinkedHashMap<>();
